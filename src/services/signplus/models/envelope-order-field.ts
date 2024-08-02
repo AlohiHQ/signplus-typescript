@@ -1,0 +1,9 @@
+import { z } from 'zod';
+
+export enum EnvelopeOrderField {
+  CREATIONDATE = 'CREATION_DATE',
+  MODIFICATIONDATE = 'MODIFICATION_DATE',
+  NAME = 'NAME',
+  STATUS = 'STATUS',
+  LASTDOCUMENTCHANGE = 'LAST_DOCUMENT_CHANGE',
+}
