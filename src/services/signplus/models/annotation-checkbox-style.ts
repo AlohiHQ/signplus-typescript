@@ -1,0 +1,10 @@
+import { z } from 'zod';
+
+export enum AnnotationCheckboxStyle {
+  CIRCLECHECK = 'CIRCLE_CHECK',
+  CIRCLEFULL = 'CIRCLE_FULL',
+  SQUARECHECK = 'SQUARE_CHECK',
+  SQUAREFULL = 'SQUARE_FULL',
+  CHECKMARK = 'CHECK_MARK',
+  TIMESSQUARE = 'TIMES_SQUARE',
+}
