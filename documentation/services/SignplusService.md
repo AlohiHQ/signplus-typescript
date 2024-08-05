@@ -66,7 +66,8 @@ Create new envelope
 **Example Usage Code Snippet**
 
 ```typescript
-import { CreateEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { CreateEnvelopeRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -113,7 +114,8 @@ Create new envelope from template
 **Example Usage Code Snippet**
 
 ```typescript
-import { CreateEnvelopeFromTemplateRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { CreateEnvelopeFromTemplateRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -152,7 +154,8 @@ List envelopes
 **Example Usage Code Snippet**
 
 ```typescript
-import { ListEnvelopesRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { ListEnvelopesRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -171,11 +174,11 @@ import { ListEnvelopesRequest, Signplus } from '@alohi/signplus-typescript';
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 123,
-    dateTo: 123,
+    dateFrom: 1,
+    dateTo: 4,
     uid: 'uid',
-    first: 7,
-    last: 6,
+    first: 1,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -339,7 +342,8 @@ Add envelope document
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddEnvelopeDocumentRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { AddEnvelopeDocumentRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -377,7 +381,11 @@ Set envelope dynamic fields
 **Example Usage Code Snippet**
 
 ```typescript
-import { DynamicField, SetEnvelopeDynamicFieldsRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import {
+  DynamicField,
+  SetEnvelopeDynamicFieldsRequest,
+} from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -420,7 +428,11 @@ Add envelope signing steps
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddEnvelopeSigningStepsRequest, SigningStep, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import {
+  AddEnvelopeSigningStepsRequest,
+  SigningStep,
+} from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -579,7 +591,8 @@ Rename envelope
 **Example Usage Code Snippet**
 
 ```typescript
-import { RenameEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { RenameEnvelopeRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -617,7 +630,8 @@ Set envelope comment
 **Example Usage Code Snippet**
 
 ```typescript
-import { SetEnvelopeCommentRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { SetEnvelopeCommentRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -655,7 +669,8 @@ Set envelope notification
 **Example Usage Code Snippet**
 
 ```typescript
-import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { EnvelopeNotification } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -665,7 +680,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const input: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 123,
   };
 
   const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', input);
@@ -695,7 +710,8 @@ Set envelope expiration date
 **Example Usage Code Snippet**
 
 ```typescript
-import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { SetEnvelopeExpirationRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -703,7 +719,7 @@ import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescri
   });
 
   const input: SetEnvelopeExpirationRequest = {
-    expiresAt: 3,
+    expiresAt: 8,
   };
 
   const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', input);
@@ -733,7 +749,8 @@ Set envelope legality level
 **Example Usage Code Snippet**
 
 ```typescript
-import { SetEnvelopeLegalityLevelRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { SetEnvelopeLegalityLevelRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -840,6 +857,7 @@ Add envelope annotation
 **Example Usage Code Snippet**
 
 ```typescript
+import { Signplus } from '@alohi/signplus-typescript';
 import {
   AddAnnotationRequest,
   AnnotationCheckbox,
@@ -847,8 +865,7 @@ import {
   AnnotationInitials,
   AnnotationSignature,
   AnnotationText,
-  Signplus,
-} from '@alohi/signplus-typescript';
+} from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -874,8 +891,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.7,
-    color: 7.26,
+    size: 9.27,
+    color: 3.32,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -885,12 +902,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 7.51,
+    size: 5.54,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 10,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -904,11 +921,11 @@ import {
   const input: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 7,
-    x: 7.25,
-    y: 7.35,
-    width: 6.25,
-    height: 9.77,
+    page: 6,
+    x: 4.19,
+    y: 8.41,
+    width: 8.25,
+    height: 9.18,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -974,7 +991,8 @@ Create new template
 **Example Usage Code Snippet**
 
 ```typescript
-import { CreateTemplateRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { CreateTemplateRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1011,7 +1029,8 @@ List templates
 **Example Usage Code Snippet**
 
 ```typescript
-import { ListTemplatesRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { ListTemplatesRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1024,8 +1043,8 @@ import { ListTemplatesRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 2,
-    last: 123,
+    first: 8,
+    last: 7,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
@@ -1154,7 +1173,8 @@ Add template document
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddTemplateDocumentRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { AddTemplateDocumentRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1259,7 +1279,11 @@ Add template signing steps
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddTemplateSigningStepsRequest, Signplus, TemplateSigningStep } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import {
+  AddTemplateSigningStepsRequest,
+  TemplateSigningStep,
+} from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1311,7 +1335,8 @@ Rename template
 **Example Usage Code Snippet**
 
 ```typescript
-import { RenameTemplateRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { RenameTemplateRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1349,7 +1374,8 @@ Set template comment
 **Example Usage Code Snippet**
 
 ```typescript
-import { SetTemplateCommentRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { SetTemplateCommentRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1387,7 +1413,8 @@ Set template notification
 **Example Usage Code Snippet**
 
 ```typescript
-import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { EnvelopeNotification } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1397,7 +1424,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const input: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 123,
   };
 
   const { data } = await signplus.signplus.setTemplateNotification('template_id', input);
@@ -1494,6 +1521,7 @@ Add template annotation
 **Example Usage Code Snippet**
 
 ```typescript
+import { Signplus } from '@alohi/signplus-typescript';
 import {
   AddAnnotationRequest,
   AnnotationCheckbox,
@@ -1501,8 +1529,7 @@ import {
   AnnotationInitials,
   AnnotationSignature,
   AnnotationText,
-  Signplus,
-} from '@alohi/signplus-typescript';
+} from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1528,8 +1555,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.7,
-    color: 7.26,
+    size: 9.27,
+    color: 3.32,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1539,12 +1566,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 7.51,
+    size: 5.54,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 10,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -1558,11 +1585,11 @@ import {
   const input: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 7,
-    x: 7.25,
-    y: 7.35,
-    width: 6.25,
-    height: 9.77,
+    page: 6,
+    x: 4.19,
+    y: 8.41,
+    width: 8.25,
+    height: 9.18,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1628,7 +1655,8 @@ Create webhook
 **Example Usage Code Snippet**
 
 ```typescript
-import { CreateWebhookRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { CreateWebhookRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
@@ -1668,7 +1696,8 @@ List webhooks
 **Example Usage Code Snippet**
 
 ```typescript
-import { ListWebhooksRequest, Signplus } from '@alohi/signplus-typescript';
+import { Signplus } from '@alohi/signplus-typescript';
+import { ListWebhooksRequest } from '@alohi/signplus-typescript/services/src/services/signplus/models';
 
 (async () => {
   const signplus = new Signplus({
