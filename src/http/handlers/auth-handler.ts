@@ -1,5 +1,6 @@
 import { Request } from '../transport/request';
 import { HttpResponse, RequestHandler } from '../types';
+import { SerializationStyle } from '../serialization/base-serializer';
 
 export class AuthHandler implements RequestHandler {
   next?: RequestHandler;
@@ -20,7 +21,13 @@ export class AuthHandler implements RequestHandler {
       return request;
     }
 
-    request.addHeaderParam('Authorization', `Bearer ${token}`);
+    request.addHeaderParam('Authorization', {
+      key: 'Authorization',
+      value: `Bearer ${token}`,
+      explode: false,
+      encode: false,
+      style: SerializationStyle.SIMPLE,
+    });
 
     return request;
   }
