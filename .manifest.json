@@ -1,10 +1,10 @@
 {
-  "liblabVersion": "2.1.24",
-  "date": "2024-08-02T14:47:08.739Z",
+  "liblabVersion": "2.1.28",
+  "date": "2024-08-17T11:02:04.008Z",
   "config": {
     "apiId": 947,
     "sdkName": "signplus",
-    "sdkVersion": "2.0.0",
+    "sdkVersion": "1.0.0",
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
     "languages": ["typescript"],
@@ -18,31 +18,35 @@
         "githubRepoName": "signplus-sharp",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.0.0"
       },
       "go": {
         "goModuleName": "github.com/alohihq/signplus-go",
+        "additionalConstructorParameters": [],
         "githubRepoName": "signplus-go",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.0.0"
       },
       "java": {
         "groupId": "alohi.signplus",
+        "additionalConstructorParameters": [],
         "githubRepoName": "signplus-java",
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.0.0"
       },
       "python": {
         "alwaysInitializeOptionals": false,
+        "additionalConstructorParameters": [],
         "pypiPackageName": "signplus-python",
         "githubRepoName": "signplus-python",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.0.0"
       },
       "php": {
         "packageName": "alohi/signplus",
+        "additionalConstructorParameters": [],
         "githubRepoName": "signplus-php",
         "ignoreFiles": [],
         "liblabVersion": "2",
@@ -54,10 +58,11 @@
         "httpClient": "axios",
         "npmName": "signplus-typescript",
         "npmOrg": "alohi",
+        "additionalConstructorParameters": [],
         "githubRepoName": "signplus-typescript",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.0.0"
       }
     },
     "publishing": {
@@ -91,7 +96,7 @@
       "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
     },
     "multiTenant": true,
-    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/947/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240802%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240802T144659Z&X-Amz-Expires=43200&X-Amz-Signature=d40852fad5b0585cd81c33b96446050f5962001285feb78369f2edb87450abf7&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/947/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240817%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240817T110159Z&X-Amz-Expires=43200&X-Amz-Signature=99a1f1ca5ab8266f8f2dcc5236509f5ad8e1378eea6fe4448cf6fd8181028a1c&X-Amz-SignedHeaders=host&x-id=GetObject",
     "includeWatermark": false,
     "language": "typescript",
     "deliveryMethod": "zip",
@@ -104,13 +109,14 @@
     "httpClient": "axios",
     "npmName": "signplus-typescript",
     "npmOrg": "alohi",
+    "additionalConstructorParameters": [],
     "githubRepoName": "signplus-typescript",
     "ignoreFiles": [],
     "typescriptVersion": "5.3.3",
     "zodVersion": "3.22.0",
     "compilerOptions": {
       "target": "es6",
-      "module": "commonjs",
+      "module": "Node16",
       "lib": ["es2017", "dom"]
     },
     "usesFormData": false,
@@ -119,7 +125,7 @@
     "httpLibrary": {
       "name": "axios",
       "packages": {
-        "axios": "^1.6.8"
+        "axios": "^1.7.4"
       },
       "languages": ["typescript"]
     },
@@ -137,7 +143,6 @@
     "examples/README.md",
     "examples/src/index.ts",
     "src/http/client.ts",
-    "src/http/serializer.ts",
     "src/services/signplus/models/create-envelope-request.ts",
     "src/services/signplus/models/envelope.ts",
     "src/services/signplus/models/create-envelope-from-template-request.ts",
@@ -203,6 +208,7 @@
     "src/index.ts",
     "src/services/signplus/models/index.ts",
     "src/services/signplus/index.ts",
+    "src/http/index.ts",
     "src/http/handlers/handler-chain.ts",
     "src/http/types.ts",
     "src/http/error.ts",
@@ -277,6 +283,12 @@
     "src/http/handlers/request-validation-handler.ts",
     "src/http/transport/request.ts",
     "src/http/transport/request-builder.ts",
+    "src/http/serialization/base-serializer.ts",
+    "src/http/serialization/query-serializer.ts",
+    "src/http/serialization/path-serializer.ts",
+    "src/http/serialization/header-serializer.ts",
+    "src/http/transport/request-fetch-adapter.ts",
+    "src/http/transport/transport-hook-adapter.ts",
     "README.md",
     "documentation/services/SignplusService.md"
   ]
