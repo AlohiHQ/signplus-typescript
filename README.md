@@ -1,11 +1,11 @@
-# Signplus TypeScript SDK 2.0.0
+# Signplus TypeScript SDK 1.0.0
 
 Welcome to the Signplus SDK documentation. This guide will help you get started with integrating and using the Signplus SDK in your project.
 
 ## Versions
 
 - API version: `2.0.0`
-- SDK version: `2.0.0`
+- SDK version: `1.0.0`
 
 ## About the API
 
@@ -18,7 +18,7 @@ Integrate legally-binding electronic signature to your workflow
   - [Installation](#installation)
 - [Authentication](#authentication)
   - [Access Token Authentication](#access-token-authentication)
-- [Setting a custom Timeout](#setting-a-custom-timeout)
+- [Setting a Custom Timeout](#setting-a-custom-timeout)
 - [Services](#services)
 - [Models](#models)
 - [License](#license)
@@ -60,7 +60,7 @@ const sdk = new Signplus();
 sdk.token = 'YOUR_TOKEN';
 ```
 
-## Setting a custom Timeout
+## Setting a Custom Timeout
 
 You can set a custom timeout for the SDK's HTTP requests as follows:
 
@@ -123,7 +123,7 @@ The SDK includes several models that represent the data structures used in API r
 | [Webhook](documentation/models/Webhook.md)                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | [ListWebhooksRequest](documentation/models/ListWebhooksRequest.md)                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | [ListWebhooksResponse](documentation/models/ListWebhooksResponse.md)                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [EnvelopeFlowType](documentation/models/EnvelopeFlowType.md)                                               | Flow type of the envelope (REQUEST_SIGNATURE is a request for signature, SIGN_MYSELF is a self-signing flow)                                                                                                                                                                                                                                                                                                                                                                              |
+| [EnvelopeFlowType](documentation/models/EnvelopeFlowType.md)                                               | Flow type of the envelope (REQUEST_SIGNATURE is a request for signature)                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | [EnvelopeLegalityLevel](documentation/models/EnvelopeLegalityLevel.md)                                     | Legal level of the envelope (SES is Simple Electronic Signature, QES_EIDAS is Qualified Electronic Signature, QES_ZERTES is Qualified Electronic Signature with Zertes)                                                                                                                                                                                                                                                                                                                   |
 | [EnvelopeStatus](documentation/models/EnvelopeStatus.md)                                                   | Status of the envelope                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | [SigningStep](documentation/models/SigningStep.md)                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
