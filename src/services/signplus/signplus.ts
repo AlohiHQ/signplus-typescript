@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
+import { SerializationStyle } from '../../http/serialization/base-serializer';
 import { CreateEnvelopeRequest, createEnvelopeRequestRequest } from './models/create-envelope-request';
 import { Envelope, envelopeResponse } from './models/envelope';
 import {
@@ -87,7 +88,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -115,8 +116,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -142,7 +146,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<ListEnvelopesResponse>(request);
@@ -166,7 +170,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<Envelope>(request);
   }
@@ -189,7 +196,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<undefined>(request);
   }
@@ -217,8 +227,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addPathParam('document_id', documentId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addPathParam({
+        key: 'document_id',
+        value: documentId,
+      })
       .build();
     return this.client.call<Document>(request);
   }
@@ -244,7 +260,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<ListEnvelopeDocumentsResponse>(request);
   }
@@ -271,8 +290,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'multipart/form-data')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'multipart/form-data' })
       .addBody(body)
       .build();
     return this.client.call<Document>(request);
@@ -300,8 +322,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -329,8 +354,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -354,7 +382,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<Envelope>(request);
   }
@@ -377,7 +408,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<Envelope>(request);
   }
@@ -400,7 +434,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<Envelope>(request);
   }
@@ -427,8 +464,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -456,8 +496,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -485,8 +528,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -514,8 +560,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -543,8 +592,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
@@ -568,7 +620,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
       .build();
     return this.client.call<Annotation[]>(request);
   }
@@ -596,8 +651,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addPathParam('document_id', documentId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addPathParam({
+        key: 'document_id',
+        value: documentId,
+      })
       .build();
     return this.client.call<ListEnvelopeDocumentAnnotationsResponse>(request);
   }
@@ -624,8 +685,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Annotation>(request);
@@ -654,8 +718,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('envelope_id', envelopeId)
-      .addPathParam('annotation_id', annotationId)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addPathParam({
+        key: 'annotation_id',
+        value: annotationId,
+      })
       .build();
     return this.client.call<undefined>(request);
   }
@@ -677,7 +747,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Template>(request);
@@ -703,7 +773,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<ListTemplatesResponse>(request);
@@ -727,7 +797,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
       .build();
     return this.client.call<Template>(request);
   }
@@ -750,7 +823,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
       .build();
     return this.client.call<undefined>(request);
   }
@@ -773,7 +849,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
       .build();
     return this.client.call<Template>(request);
   }
@@ -800,8 +879,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'multipart/form-data')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'multipart/form-data' })
       .addBody(body)
       .build();
     return this.client.call<Document>(request);
@@ -830,8 +912,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addPathParam('document_id', documentId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addPathParam({
+        key: 'document_id',
+        value: documentId,
+      })
       .build();
     return this.client.call<Document>(request);
   }
@@ -857,7 +945,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
       .build();
     return this.client.call<ListTemplateDocumentsResponse>(request);
   }
@@ -884,8 +975,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Template>(request);
@@ -913,8 +1007,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Template>(request);
@@ -942,8 +1039,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Template>(request);
@@ -971,8 +1071,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Template>(request);
@@ -999,7 +1102,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
       .build();
     return this.client.call<ListTemplateAnnotationsResponse>(request);
   }
@@ -1027,8 +1133,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addPathParam('document_id', documentId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addPathParam({
+        key: 'document_id',
+        value: documentId,
+      })
       .build();
     return this.client.call<ListTemplateDocumentAnnotationsResponse>(request);
   }
@@ -1055,8 +1167,11 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Annotation>(request);
@@ -1085,8 +1200,14 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('template_id', templateId)
-      .addPathParam('annotation_id', annotationId)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addPathParam({
+        key: 'annotation_id',
+        value: annotationId,
+      })
       .build();
     return this.client.call<undefined>(request);
   }
@@ -1108,7 +1229,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<Webhook>(request);
@@ -1134,7 +1255,7 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addHeaderParam('Content-Type', 'application/json')
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
       .addBody(body)
       .build();
     return this.client.call<ListWebhooksResponse>(request);
@@ -1158,7 +1279,10 @@ export class SignplusService extends BaseService {
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
-      .addPathParam('webhook_id', webhookId)
+      .addPathParam({
+        key: 'webhook_id',
+        value: webhookId,
+      })
       .build();
     return this.client.call<undefined>(request);
   }
