@@ -2,7 +2,9 @@ import { Environment } from './http/environment';
 import { SdkConfig } from './http/types';
 import { SignplusService } from './services/signplus';
 
-export * as Signplus from './services/signplus';
+export * from './services/signplus';
+
+export type * from './http';
 
 export class Signplus {
   public readonly signplus: SignplusService;
