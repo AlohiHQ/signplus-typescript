@@ -78,7 +78,7 @@ import { CreateEnvelopeRequest, EnvelopeLegalityLevel, Signplus } from '@alohi/s
   const createEnvelopeRequest: CreateEnvelopeRequest = {
     name: 'name',
     legalityLevel: envelopeLegalityLevel,
-    expiresAt: 8,
+    expiresAt: 5,
     comment: 'comment',
     sandbox: true,
   };
@@ -168,11 +168,11 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 4,
-    dateTo: 7,
+    dateFrom: 1,
+    dateTo: 4,
     uid: 'uid',
-    first: 8,
-    last: 9,
+    first: 1,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -662,7 +662,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 123,
   };
 
   const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', input);
@@ -700,7 +700,7 @@ import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescri
   });
 
   const setEnvelopeExpirationRequest: SetEnvelopeExpirationRequest = {
-    expiresAt: 6,
+    expiresAt: 8,
   };
 
   const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', input);
@@ -872,8 +872,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 9.27,
+    color: 3.32,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -883,12 +883,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 5.54,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -902,11 +902,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 6,
+    x: 4.19,
+    y: 8.41,
+    width: 8.25,
+    height: 9.18,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1022,8 +1022,8 @@ import { ListTemplatesRequest, Signplus, TemplateOrderField } from '@alohi/signp
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 2,
-    last: 123,
+    first: 8,
+    last: 7,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
@@ -1395,7 +1395,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 123,
   };
 
   const { data } = await signplus.signplus.setTemplateNotification('template_id', input);
@@ -1527,8 +1527,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 9.27,
+    color: 3.32,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1538,12 +1538,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 5.54,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -1557,11 +1557,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 6,
+    x: 4.19,
+    y: 8.41,
+    width: 8.25,
+    height: 9.18,
     required: true,
     type: annotationType,
     signature: annotationSignature,

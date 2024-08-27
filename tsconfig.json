@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "Node16",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,6 +11,7 @@
     "noImplicitAny": true,
     "baseUrl": "./",
     "declaration": true,
+    "moduleResolution": "Node16",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "declarationMap": true,
