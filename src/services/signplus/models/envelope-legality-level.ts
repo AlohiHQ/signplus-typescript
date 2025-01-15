@@ -2,6 +2,6 @@ import { z } from 'zod';
 
 export enum EnvelopeLegalityLevel {
   SES = 'SES',
-  QESEIDAS = 'QES_EIDAS',
-  QESZERTES = 'QES_ZERTES',
+  QES_EIDAS = 'QES_EIDAS',
+  QES_ZERTES = 'QES_ZERTES',
 }

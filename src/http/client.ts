@@ -1,5 +1,4 @@
-import { SerializationStyle } from './serialization/base-serializer';
-import { HttpMethod, HttpResponse, Options, RetryOptions, SdkConfig } from './types';
+import { HttpResponse, SdkConfig } from './types';
 import { RequestHandlerChain } from './handlers/handler-chain';
 import { HookHandler } from './handlers/hook-handler';
 import { ResponseValidationHandler } from './handlers/response-validation-handler';
@@ -25,8 +24,25 @@ export class HttpClient {
     this.requestHandlerChain.addHandler(new TerminatingHandler());
   }
 
-  call<T>(request: Request<T>): Promise<HttpResponse<T>> {
+  call<T>(request: Request): Promise<HttpResponse<T>> {
     return this.requestHandlerChain.callChain(request);
+  }
+
+  async *stream<T>(request: Request): AsyncGenerator<HttpResponse<T>> {
+    yield* this.requestHandlerChain.streamChain(request);
+  }
+
+  public async callPaginated<FullResponse, Page>(request: Request<Page>): Promise<HttpResponse<Page>> {
+    const response = await this.call<FullResponse>(request as any);
+
+    if (!response.data) {
+      throw new Error('no response data to paginate through');
+    }
+
+    return {
+      ...response,
+      data: this.getPage<FullResponse, Page>(request, response.data),
+    };
   }
 
   setBaseUrl(url: string): void {
@@ -35,5 +51,24 @@ export class HttpClient {
 
   setConfig(config: SdkConfig): void {
     this.config = config;
+  }
+
+  private getPage<FullResponse, Page>(request: Request<Page>, data: FullResponse): Page {
+    if (!request.pagination) {
+      throw new Error('getPage called for request without pagination property');
+    }
+
+    let curr: any = data;
+    for (const segment of request.pagination?.pagePath || []) {
+      curr = curr[segment];
+    }
+
+    const page = request.pagination?.pageSchema?.parse(curr);
+    if (!page) {
+      throw new Error(
+        `error getting page data. Curr: ${JSON.stringify(curr)}. PagePath: ${request.pagination?.pagePath}. Data: ${JSON.stringify(data)}`,
+      );
+    }
+    return page;
   }
 }

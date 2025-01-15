@@ -2,12 +2,12 @@ import { ZodType } from 'zod';
 import { Environment } from './environment';
 import { Request } from './transport/request';
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
 export interface SdkConfig {
   baseUrl?: string;
   environment?: Environment;
-  timeout?: number;
+  timeoutMs?: number;
   token?: string;
   retry?: RetryOptions;
   validation?: ValidationOptions;
@@ -19,7 +19,7 @@ export interface HttpMetadata {
   headers: Record<string, string>;
 }
 
-export interface HttpResponse<T> {
+export interface HttpResponse<T = unknown> {
   data?: T;
   metadata: HttpMetadata;
   raw: ArrayBuffer;
@@ -28,7 +28,8 @@ export interface HttpResponse<T> {
 export interface RequestHandler {
   next?: RequestHandler;
 
-  handle<T>(request: Request<T>): Promise<HttpResponse<T>>;
+  handle<T>(request: Request): Promise<HttpResponse<T>>;
+  stream<T>(request: Request): AsyncGenerator<HttpResponse<T>>;
 }
 
 export enum ContentType {
@@ -41,6 +42,8 @@ export enum ContentType {
   FormUrlEncoded = 'form',
   Text = 'text',
   MultipartFormData = 'multipartFormData',
+  EventStream = 'eventStream',
+  NoContent = 'noContent',
 }
 
 export interface Options<T> {
