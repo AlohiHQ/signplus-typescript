@@ -6,7 +6,13 @@ import { HeaderSerializer } from '../serialization/header-serializer';
 import { HttpRequest } from '../hooks/hook';
 import { SerializationStyle } from '../serialization/base-serializer';
 
-export interface CreateRequestParameters<T> {
+export interface ResponseDefinition {
+  schema: ZodType;
+  contentType: ContentType;
+  status: number;
+}
+
+export interface CreateRequestParameters<Page = unknown[]> {
   baseUrl: string;
   method: HttpMethod;
   body?: any;
@@ -15,12 +21,12 @@ export interface CreateRequestParameters<T> {
   pathParams: Map<string, RequestParameter>;
   path: string;
   config: SdkConfig;
-  responseSchema: ZodType<T, any, any>;
+  responses: ResponseDefinition[];
   requestSchema: ZodType;
   requestContentType: ContentType;
-  responseContentType: ContentType;
   validation: ValidationOptions;
   retry: RetryOptions;
+  pagination?: RequestPagination<Page>;
 }
 
 export interface RequestParameter {
@@ -29,9 +35,17 @@ export interface RequestParameter {
   explode: boolean;
   encode: boolean;
   style: SerializationStyle;
+  isLimit: boolean;
+  isOffset: boolean;
 }
 
-export class Request<T> {
+export interface RequestPagination<Page> {
+  pageSize: number;
+  pagePath: string[];
+  pageSchema?: ZodType<Page, any, any>;
+}
+
+export class Request<PageSchema = unknown[]> {
   public baseUrl: string = '';
 
   public headers: Map<string, RequestParameter> = new Map();
@@ -48,21 +62,21 @@ export class Request<T> {
 
   public config: SdkConfig;
 
-  public responseSchema: ZodType<T, any, any>;
+  public responses: ResponseDefinition[];
 
   public requestSchema: ZodType;
 
   public requestContentType: ContentType;
 
-  public responseContentType: ContentType;
-
   public validation: ValidationOptions = {} as any;
 
   public retry: RetryOptions = {} as any;
 
+  public pagination?: RequestPagination<PageSchema>;
+
   private readonly pathPattern: string;
 
-  constructor(params: CreateRequestParameters<T>) {
+  constructor(params: CreateRequestParameters<PageSchema>) {
     this.baseUrl = params.baseUrl;
     this.method = params.method;
     this.pathPattern = params.path;
@@ -72,12 +86,12 @@ export class Request<T> {
     this.pathParams = params.pathParams;
     this.headers = params.headers;
     this.queryParams = params.queryParams;
-    this.responseSchema = params.responseSchema;
+    this.responses = params.responses;
     this.requestSchema = params.requestSchema;
     this.requestContentType = params.requestContentType;
-    this.responseContentType = params.responseContentType;
     this.retry = params.retry;
     this.validation = params.validation;
+    this.pagination = params.pagination;
   }
 
   addHeaderParam(key: string, param: RequestParameter): void {
@@ -155,25 +169,16 @@ export class Request<T> {
     this.body = hookRequest.body;
   }
 
-  public toHookRequest(): HttpRequest {
-    return {
-      baseUrl: this.baseUrl,
-      method: this.method,
-      path: this.path,
-      headers: this.headers,
-      body: this.body,
-      queryParams: this.queryParams,
-    };
-  }
-
   public constructFullUrl(): string {
     const queryString = new QuerySerializer().serialize(this.queryParams);
     const path = this.constructPath();
-    return `${this.baseUrl}${path}${queryString}`;
+    let baseUrl = this.baseUrl;
+
+    return `${baseUrl}${path}${queryString}`;
   }
 
-  public copy(overrides?: Partial<CreateRequestParameters<T>>) {
-    const createRequestParams: CreateRequestParameters<T> = {
+  public copy(overrides?: Partial<CreateRequestParameters>) {
+    const createRequestParams: CreateRequestParameters = {
       baseUrl: overrides?.baseUrl ?? this.baseUrl,
       method: overrides?.method ?? this.method,
       path: overrides?.path ?? this.path,
@@ -182,14 +187,13 @@ export class Request<T> {
       pathParams: overrides?.pathParams ?? this.pathParams,
       queryParams: overrides?.queryParams ?? this.queryParams,
       headers: overrides?.headers ?? this.headers,
-      responseSchema: overrides?.responseSchema ?? this.responseSchema,
+      responses: overrides?.responses ?? this.responses,
       requestSchema: overrides?.requestSchema ?? this.requestSchema,
       requestContentType: overrides?.requestContentType ?? this.requestContentType,
-      responseContentType: overrides?.responseContentType ?? this.responseContentType,
       retry: overrides?.retry ?? this.retry,
       validation: overrides?.validation ?? this.validation,
     };
-    return new Request<T>({
+    return new Request({
       ...createRequestParams,
       ...overrides,
     });
@@ -203,7 +207,43 @@ export class Request<T> {
     return new HeaderSerializer().serialize(this.headers);
   }
 
+  public nextPage(): void {
+    if (!this.pagination) {
+      return;
+    }
+
+    const offsetParam = this.getOffsetParam();
+    if (!offsetParam) {
+      return;
+    }
+
+    offsetParam.value = Number(offsetParam.value) + this.pagination.pageSize;
+  }
+
   private constructPath(): string {
     return new PathSerializer().serialize(this.pathPattern, this.pathParams);
+  }
+
+  private getOffsetParam(): RequestParameter | undefined {
+    const offsetParam = this.getAllParams().find((param) => param.isOffset);
+    return offsetParam;
+  }
+
+  private getAllParams(): RequestParameter[] {
+    const allParams: RequestParameter[] = [];
+
+    this.headers.forEach((val, _) => {
+      allParams.push(val);
+    });
+
+    this.queryParams.forEach((val, _) => {
+      allParams.push(val);
+    });
+
+    this.pathParams.forEach((val, _) => {
+      allParams.push(val);
+    });
+
+    return allParams;
   }
 }

@@ -2,51 +2,51 @@
 
 A list of all methods in the `SignplusService` service. Click on the method name to view detailed information about that method.
 
-| Methods                                                                 | Description                       |
-| :---------------------------------------------------------------------- | :-------------------------------- |
-| [create_envelope](#create_envelope)                                     | Create new envelope               |
-| [create_envelope_from_template](#create_envelope_from_template)         | Create new envelope from template |
-| [list_envelopes](#list_envelopes)                                       | List envelopes                    |
-| [get_envelope](#get_envelope)                                           | Get envelope                      |
-| [delete_envelope](#delete_envelope)                                     | Delete envelope                   |
-| [get_envelope_document](#get_envelope_document)                         | Get envelope document             |
-| [get_envelope_documents](#get_envelope_documents)                       | Get envelope documents            |
-| [add_envelope_document](#add_envelope_document)                         | Add envelope document             |
-| [set_envelope_dynamic_fields](#set_envelope_dynamic_fields)             | Set envelope dynamic fields       |
-| [add_envelope_signing_steps](#add_envelope_signing_steps)               | Add envelope signing steps        |
-| [send_envelope](#send_envelope)                                         | Send envelope for signature       |
-| [duplicate_envelope](#duplicate_envelope)                               | Duplicate envelope                |
-| [void_envelope](#void_envelope)                                         | Void envelope                     |
-| [rename_envelope](#rename_envelope)                                     | Rename envelope                   |
-| [set_envelope_comment](#set_envelope_comment)                           | Set envelope comment              |
-| [set_envelope_notification](#set_envelope_notification)                 | Set envelope notification         |
-| [set_envelope_expiration_date](#set_envelope_expiration_date)           | Set envelope expiration date      |
-| [set_envelope_legality_level](#set_envelope_legality_level)             | Set envelope legality level       |
-| [get_envelope_annotations](#get_envelope_annotations)                   | Get envelope annotations          |
-| [get_envelope_document_annotations](#get_envelope_document_annotations) | Get envelope document annotations |
-| [add_envelope_annotation](#add_envelope_annotation)                     | Add envelope annotation           |
-| [delete_envelope_annotation](#delete_envelope_annotation)               | Delete envelope annotation        |
-| [create_template](#create_template)                                     | Create new template               |
-| [list_templates](#list_templates)                                       | List templates                    |
-| [get_template](#get_template)                                           | Get template                      |
-| [delete_template](#delete_template)                                     | Delete template                   |
-| [duplicate_template](#duplicate_template)                               | Duplicate template                |
-| [add_template_document](#add_template_document)                         | Add template document             |
-| [get_template_document](#get_template_document)                         | Get template document             |
-| [get_template_documents](#get_template_documents)                       | Get template documents            |
-| [add_template_signing_steps](#add_template_signing_steps)               | Add template signing steps        |
-| [rename_template](#rename_template)                                     | Rename template                   |
-| [set_template_comment](#set_template_comment)                           | Set template comment              |
-| [set_template_notification](#set_template_notification)                 | Set template notification         |
-| [get_template_annotations](#get_template_annotations)                   | Get template annotations          |
-| [get_document_template_annotations](#get_document_template_annotations) | Get document template annotations |
-| [add_template_annotation](#add_template_annotation)                     | Add template annotation           |
-| [delete_template_annotation](#delete_template_annotation)               | Delete template annotation        |
-| [create_webhook](#create_webhook)                                       | Create webhook                    |
-| [list_webhooks](#list_webhooks)                                         | List webhooks                     |
-| [delete_webhook](#delete_webhook)                                       | Delete webhook                    |
+| Methods                                                           | Description                       |
+| :---------------------------------------------------------------- | :-------------------------------- |
+| [createEnvelope](#createenvelope)                                 | Create new envelope               |
+| [createEnvelopeFromTemplate](#createenvelopefromtemplate)         | Create new envelope from template |
+| [listEnvelopes](#listenvelopes)                                   | List envelopes                    |
+| [getEnvelope](#getenvelope)                                       | Get envelope                      |
+| [deleteEnvelope](#deleteenvelope)                                 | Delete envelope                   |
+| [getEnvelopeDocument](#getenvelopedocument)                       | Get envelope document             |
+| [getEnvelopeDocuments](#getenvelopedocuments)                     | Get envelope documents            |
+| [addEnvelopeDocument](#addenvelopedocument)                       | Add envelope document             |
+| [setEnvelopeDynamicFields](#setenvelopedynamicfields)             | Set envelope dynamic fields       |
+| [addEnvelopeSigningSteps](#addenvelopesigningsteps)               | Add envelope signing steps        |
+| [sendEnvelope](#sendenvelope)                                     | Send envelope for signature       |
+| [duplicateEnvelope](#duplicateenvelope)                           | Duplicate envelope                |
+| [voidEnvelope](#voidenvelope)                                     | Void envelope                     |
+| [renameEnvelope](#renameenvelope)                                 | Rename envelope                   |
+| [setEnvelopeComment](#setenvelopecomment)                         | Set envelope comment              |
+| [setEnvelopeNotification](#setenvelopenotification)               | Set envelope notification         |
+| [setEnvelopeExpirationDate](#setenvelopeexpirationdate)           | Set envelope expiration date      |
+| [setEnvelopeLegalityLevel](#setenvelopelegalitylevel)             | Set envelope legality level       |
+| [getEnvelopeAnnotations](#getenvelopeannotations)                 | Get envelope annotations          |
+| [getEnvelopeDocumentAnnotations](#getenvelopedocumentannotations) | Get envelope document annotations |
+| [addEnvelopeAnnotation](#addenvelopeannotation)                   | Add envelope annotation           |
+| [deleteEnvelopeAnnotation](#deleteenvelopeannotation)             | Delete envelope annotation        |
+| [createTemplate](#createtemplate)                                 | Create new template               |
+| [listTemplates](#listtemplates)                                   | List templates                    |
+| [getTemplate](#gettemplate)                                       | Get template                      |
+| [deleteTemplate](#deletetemplate)                                 | Delete template                   |
+| [duplicateTemplate](#duplicatetemplate)                           | Duplicate template                |
+| [addTemplateDocument](#addtemplatedocument)                       | Add template document             |
+| [getTemplateDocument](#gettemplatedocument)                       | Get template document             |
+| [getTemplateDocuments](#gettemplatedocuments)                     | Get template documents            |
+| [addTemplateSigningSteps](#addtemplatesigningsteps)               | Add template signing steps        |
+| [renameTemplate](#renametemplate)                                 | Rename template                   |
+| [setTemplateComment](#settemplatecomment)                         | Set template comment              |
+| [setTemplateNotification](#settemplatenotification)               | Set template notification         |
+| [getTemplateAnnotations](#gettemplateannotations)                 | Get template annotations          |
+| [getDocumentTemplateAnnotations](#getdocumenttemplateannotations) | Get document template annotations |
+| [addTemplateAnnotation](#addtemplateannotation)                   | Add template annotation           |
+| [deleteTemplateAnnotation](#deletetemplateannotation)             | Delete template annotation        |
+| [createWebhook](#createwebhook)                                   | Create webhook                    |
+| [listWebhooks](#listwebhooks)                                     | List webhooks                     |
+| [deleteWebhook](#deletewebhook)                                   | Delete webhook                    |
 
-## create_envelope
+## createEnvelope
 
 Create new envelope
 
@@ -78,18 +78,18 @@ import { CreateEnvelopeRequest, EnvelopeLegalityLevel, Signplus } from '@alohi/s
   const createEnvelopeRequest: CreateEnvelopeRequest = {
     name: 'name',
     legalityLevel: envelopeLegalityLevel,
-    expiresAt: 8,
+    expiresAt: 1,
     comment: 'comment',
     sandbox: true,
   };
 
-  const { data } = await signplus.signplus.createEnvelope(input);
+  const { data } = await signplus.signplus.createEnvelope(createEnvelopeRequest);
 
   console.log(data);
 })();
 ```
 
-## create_envelope_from_template
+## createEnvelopeFromTemplate
 
 Create new envelope from template
 
@@ -123,13 +123,13 @@ import { CreateEnvelopeFromTemplateRequest, Signplus } from '@alohi/signplus-typ
     sandbox: true,
   };
 
-  const { data } = await signplus.signplus.createEnvelopeFromTemplate('template_id', input);
+  const { data } = await signplus.signplus.createEnvelopeFromTemplate('template_id', createEnvelopeFromTemplateRequest);
 
   console.log(data);
 })();
 ```
 
-## list_envelopes
+## listEnvelopes
 
 List envelopes
 
@@ -158,7 +158,7 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
 
   const envelopeStatus = EnvelopeStatus.DRAFT;
 
-  const envelopeOrderField = EnvelopeOrderField.CREATIONDATE;
+  const envelopeOrderField = EnvelopeOrderField.CREATION_DATE;
 
   const listEnvelopesRequest: ListEnvelopesRequest = {
     name: 'name',
@@ -168,11 +168,11 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 4,
-    dateTo: 7,
+    dateFrom: 10,
+    dateTo: 10,
     uid: 'uid',
-    first: 8,
-    last: 9,
+    first: 3,
+    last: 10,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -180,13 +180,13 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     includeTrash: true,
   };
 
-  const { data } = await signplus.signplus.listEnvelopes(input);
+  const { data } = await signplus.signplus.listEnvelopes(listEnvelopesRequest);
 
   console.log(data);
 })();
 ```
 
-## get_envelope
+## getEnvelope
 
 Get envelope
 
@@ -219,7 +219,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## delete_envelope
+## deleteEnvelope
 
 Delete envelope
 
@@ -248,7 +248,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## get_envelope_document
+## getEnvelopeDocument
 
 Get envelope document
 
@@ -282,7 +282,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## get_envelope_documents
+## getEnvelopeDocuments
 
 Get envelope documents
 
@@ -315,7 +315,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## add_envelope_document
+## addEnvelopeDocument
 
 Add envelope document
 
@@ -344,16 +344,16 @@ import { AddEnvelopeDocumentRequest, Signplus } from '@alohi/signplus-typescript
   });
 
   const addEnvelopeDocumentRequest: AddEnvelopeDocumentRequest = {
-    file: file,
+    file: new ArrayBuffer(0),
   };
 
-  const { data } = await signplus.signplus.addEnvelopeDocument('envelope_id', input);
+  const { data } = await signplus.signplus.addEnvelopeDocument('envelope_id', addEnvelopeDocumentRequest);
 
   console.log(data);
 })();
 ```
 
-## set_envelope_dynamic_fields
+## setEnvelopeDynamicFields
 
 Set envelope dynamic fields
 
@@ -390,13 +390,13 @@ import { DynamicField, SetEnvelopeDynamicFieldsRequest, Signplus } from '@alohi/
     dynamicFields: [dynamicField],
   };
 
-  const { data } = await signplus.signplus.setEnvelopeDynamicFields('envelope_id', input);
+  const { data } = await signplus.signplus.setEnvelopeDynamicFields('envelope_id', setEnvelopeDynamicFieldsRequest);
 
   console.log(data);
 })();
 ```
 
-## add_envelope_signing_steps
+## addEnvelopeSigningSteps
 
 Add envelope signing steps
 
@@ -450,13 +450,13 @@ import { AddEnvelopeSigningStepsRequest, SigningStep, Signplus } from '@alohi/si
     signingSteps: [signingStep],
   };
 
-  const { data } = await signplus.signplus.addEnvelopeSigningSteps('envelope_id', input);
+  const { data } = await signplus.signplus.addEnvelopeSigningSteps('envelope_id', addEnvelopeSigningStepsRequest);
 
   console.log(data);
 })();
 ```
 
-## send_envelope
+## sendEnvelope
 
 Send envelope for signature
 
@@ -489,7 +489,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## duplicate_envelope
+## duplicateEnvelope
 
 Duplicate envelope
 
@@ -522,7 +522,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## void_envelope
+## voidEnvelope
 
 Void envelope
 
@@ -555,7 +555,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## rename_envelope
+## renameEnvelope
 
 Rename envelope
 
@@ -587,13 +587,13 @@ import { RenameEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.renameEnvelope('envelope_id', input);
+  const { data } = await signplus.signplus.renameEnvelope('envelope_id', renameEnvelopeRequest);
 
   console.log(data);
 })();
 ```
 
-## set_envelope_comment
+## setEnvelopeComment
 
 Set envelope comment
 
@@ -625,13 +625,13 @@ import { SetEnvelopeCommentRequest, Signplus } from '@alohi/signplus-typescript'
     comment: 'comment',
   };
 
-  const { data } = await signplus.signplus.setEnvelopeComment('envelope_id', input);
+  const { data } = await signplus.signplus.setEnvelopeComment('envelope_id', setEnvelopeCommentRequest);
 
   console.log(data);
 })();
 ```
 
-## set_envelope_notification
+## setEnvelopeNotification
 
 Set envelope notification
 
@@ -662,16 +662,16 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 7,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', input);
+  const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', envelopeNotification);
 
   console.log(data);
 })();
 ```
 
-## set_envelope_expiration_date
+## setEnvelopeExpirationDate
 
 Set envelope expiration date
 
@@ -700,16 +700,16 @@ import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescri
   });
 
   const setEnvelopeExpirationRequest: SetEnvelopeExpirationRequest = {
-    expiresAt: 6,
+    expiresAt: 5,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', input);
+  const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', setEnvelopeExpirationRequest);
 
   console.log(data);
 })();
 ```
 
-## set_envelope_legality_level
+## setEnvelopeLegalityLevel
 
 Set envelope legality level
 
@@ -743,13 +743,13 @@ import { EnvelopeLegalityLevel, SetEnvelopeLegalityLevelRequest, Signplus } from
     legalityLevel: envelopeLegalityLevel,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeLegalityLevel('envelope_id', input);
+  const { data } = await signplus.signplus.setEnvelopeLegalityLevel('envelope_id', setEnvelopeLegalityLevelRequest);
 
   console.log(data);
 })();
 ```
 
-## get_envelope_annotations
+## getEnvelopeAnnotations
 
 Get envelope annotations
 
@@ -782,7 +782,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## get_envelope_document_annotations
+## getEnvelopeDocumentAnnotations
 
 Get envelope document annotations
 
@@ -816,7 +816,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## add_envelope_annotation
+## addEnvelopeAnnotation
 
 Add envelope annotation
 
@@ -872,27 +872,27 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 8.23,
+    color: 6.65,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
     font: annotationFont,
   };
 
-  const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
+  const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 7.59,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 1,
     format: annotationDateTimeFormat,
   };
 
-  const annotationCheckboxStyle = AnnotationCheckboxStyle.CIRCLECHECK;
+  const annotationCheckboxStyle = AnnotationCheckboxStyle.CIRCLE_CHECK;
 
   const annotationCheckbox: AnnotationCheckbox = {
     checked: true,
@@ -902,11 +902,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 3,
+    x: 6.88,
+    y: 5.04,
+    width: 5.47,
+    height: 5.87,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -916,13 +916,13 @@ import {
     checkbox: annotationCheckbox,
   };
 
-  const { data } = await signplus.signplus.addEnvelopeAnnotation('envelope_id', input);
+  const { data } = await signplus.signplus.addEnvelopeAnnotation('envelope_id', addAnnotationRequest);
 
   console.log(data);
 })();
 ```
 
-## delete_envelope_annotation
+## deleteEnvelopeAnnotation
 
 Delete envelope annotation
 
@@ -952,7 +952,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## create_template
+## createTemplate
 
 Create new template
 
@@ -983,13 +983,13 @@ import { CreateTemplateRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.createTemplate(input);
+  const { data } = await signplus.signplus.createTemplate(createTemplateRequest);
 
   console.log(data);
 })();
 ```
 
-## list_templates
+## listTemplates
 
 List templates
 
@@ -1016,27 +1016,27 @@ import { ListTemplatesRequest, Signplus, TemplateOrderField } from '@alohi/signp
     token: 'YOUR_TOKEN',
   });
 
-  const templateOrderField = TemplateOrderField.TEMPLATEID;
+  const templateOrderField = TemplateOrderField.TEMPLATE_ID;
 
   const listTemplatesRequest: ListTemplatesRequest = {
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 2,
-    last: 123,
+    first: 9,
+    last: 4,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
     ascending: true,
   };
 
-  const { data } = await signplus.signplus.listTemplates(input);
+  const { data } = await signplus.signplus.listTemplates(listTemplatesRequest);
 
   console.log(data);
 })();
 ```
 
-## get_template
+## getTemplate
 
 Get template
 
@@ -1069,7 +1069,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## delete_template
+## deleteTemplate
 
 Delete template
 
@@ -1098,7 +1098,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## duplicate_template
+## duplicateTemplate
 
 Duplicate template
 
@@ -1131,7 +1131,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## add_template_document
+## addTemplateDocument
 
 Add template document
 
@@ -1160,16 +1160,16 @@ import { AddTemplateDocumentRequest, Signplus } from '@alohi/signplus-typescript
   });
 
   const addTemplateDocumentRequest: AddTemplateDocumentRequest = {
-    file: file,
+    file: new ArrayBuffer(0),
   };
 
-  const { data } = await signplus.signplus.addTemplateDocument('template_id', input);
+  const { data } = await signplus.signplus.addTemplateDocument('template_id', addTemplateDocumentRequest);
 
   console.log(data);
 })();
 ```
 
-## get_template_document
+## getTemplateDocument
 
 Get template document
 
@@ -1203,7 +1203,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## get_template_documents
+## getTemplateDocuments
 
 Get template documents
 
@@ -1236,7 +1236,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## add_template_signing_steps
+## addTemplateSigningSteps
 
 Add template signing steps
 
@@ -1282,13 +1282,13 @@ import { AddTemplateSigningStepsRequest, Signplus, TemplateSigningStep } from '@
     signingSteps: [templateSigningStep],
   };
 
-  const { data } = await signplus.signplus.addTemplateSigningSteps('template_id', input);
+  const { data } = await signplus.signplus.addTemplateSigningSteps('template_id', addTemplateSigningStepsRequest);
 
   console.log(data);
 })();
 ```
 
-## rename_template
+## renameTemplate
 
 Rename template
 
@@ -1320,13 +1320,13 @@ import { RenameTemplateRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.renameTemplate('template_id', input);
+  const { data } = await signplus.signplus.renameTemplate('template_id', renameTemplateRequest);
 
   console.log(data);
 })();
 ```
 
-## set_template_comment
+## setTemplateComment
 
 Set template comment
 
@@ -1358,13 +1358,13 @@ import { SetTemplateCommentRequest, Signplus } from '@alohi/signplus-typescript'
     comment: 'comment',
   };
 
-  const { data } = await signplus.signplus.setTemplateComment('template_id', input);
+  const { data } = await signplus.signplus.setTemplateComment('template_id', setTemplateCommentRequest);
 
   console.log(data);
 })();
 ```
 
-## set_template_notification
+## setTemplateNotification
 
 Set template notification
 
@@ -1395,16 +1395,16 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 7,
   };
 
-  const { data } = await signplus.signplus.setTemplateNotification('template_id', input);
+  const { data } = await signplus.signplus.setTemplateNotification('template_id', envelopeNotification);
 
   console.log(data);
 })();
 ```
 
-## get_template_annotations
+## getTemplateAnnotations
 
 Get template annotations
 
@@ -1437,7 +1437,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## get_document_template_annotations
+## getDocumentTemplateAnnotations
 
 Get document template annotations
 
@@ -1471,7 +1471,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## add_template_annotation
+## addTemplateAnnotation
 
 Add template annotation
 
@@ -1527,27 +1527,27 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 8.23,
+    color: 6.65,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
     font: annotationFont,
   };
 
-  const annotationDateTimeFormat = AnnotationDateTimeFormat.DMYNUMERICSLASH;
+  const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 7.59,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 1,
     format: annotationDateTimeFormat,
   };
 
-  const annotationCheckboxStyle = AnnotationCheckboxStyle.CIRCLECHECK;
+  const annotationCheckboxStyle = AnnotationCheckboxStyle.CIRCLE_CHECK;
 
   const annotationCheckbox: AnnotationCheckbox = {
     checked: true,
@@ -1557,11 +1557,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 3,
+    x: 6.88,
+    y: 5.04,
+    width: 5.47,
+    height: 5.87,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1571,13 +1571,13 @@ import {
     checkbox: annotationCheckbox,
   };
 
-  const { data } = await signplus.signplus.addTemplateAnnotation('template_id', input);
+  const { data } = await signplus.signplus.addTemplateAnnotation('template_id', addAnnotationRequest);
 
   console.log(data);
 })();
 ```
 
-## delete_template_annotation
+## deleteTemplateAnnotation
 
 Delete template annotation
 
@@ -1607,7 +1607,7 @@ import { Signplus } from '@alohi/signplus-typescript';
 })();
 ```
 
-## create_webhook
+## createWebhook
 
 Create webhook
 
@@ -1634,20 +1634,20 @@ import { CreateWebhookRequest, Signplus, WebhookEvent } from '@alohi/signplus-ty
     token: 'YOUR_TOKEN',
   });
 
-  const webhookEvent = WebhookEvent.ENVELOPEEXPIRED;
+  const webhookEvent = WebhookEvent.ENVELOPE_EXPIRED;
 
   const createWebhookRequest: CreateWebhookRequest = {
     event: webhookEvent,
     target: 'target',
   };
 
-  const { data } = await signplus.signplus.createWebhook(input);
+  const { data } = await signplus.signplus.createWebhook(createWebhookRequest);
 
   console.log(data);
 })();
 ```
 
-## list_webhooks
+## listWebhooks
 
 List webhooks
 
@@ -1674,20 +1674,20 @@ import { ListWebhooksRequest, Signplus, WebhookEvent } from '@alohi/signplus-typ
     token: 'YOUR_TOKEN',
   });
 
-  const webhookEvent = WebhookEvent.ENVELOPEEXPIRED;
+  const webhookEvent = WebhookEvent.ENVELOPE_EXPIRED;
 
   const listWebhooksRequest: ListWebhooksRequest = {
     webhookId: 'webhook_id',
     event: webhookEvent,
   };
 
-  const { data } = await signplus.signplus.listWebhooks(input);
+  const { data } = await signplus.signplus.listWebhooks(listWebhooksRequest);
 
   console.log(data);
 })();
 ```
 
-## delete_webhook
+## deleteWebhook
 
 Delete webhook
 

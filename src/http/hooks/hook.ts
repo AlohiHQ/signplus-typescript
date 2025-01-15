@@ -1,4 +1,4 @@
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
 export interface HttpRequest {
   baseUrl: string;
@@ -8,6 +8,7 @@ export interface HttpRequest {
   body?: BodyInit;
   abortSignal?: AbortSignal;
   queryParams: Map<string, unknown>;
+  pathParams: Map<string, unknown>;
 }
 
 interface HttpMetadata {

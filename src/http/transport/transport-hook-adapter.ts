@@ -7,7 +7,7 @@ import { Request, RequestParameter } from './request';
 export class TransportHookAdapter<T> {
   private hook: CustomHook = new CustomHook();
 
-  public async beforeRequest(request: Request<T>, params: Map<string, string>): Promise<Request<T>> {
+  public async beforeRequest(request: Request, params: Map<string, string>): Promise<Request> {
     const hookRequest = this.requestToHookRequest(request);
 
     const newRequest = await this.hook.beforeRequest(hookRequest, params);
@@ -19,13 +19,14 @@ export class TransportHookAdapter<T> {
       body: newRequest.body,
       queryParams: this.hookParamsToTransportParams(newRequest.queryParams, request.queryParams, true),
       headers: this.hookParamsToTransportParams(newRequest.headers, request.headers, false),
+      pathParams: this.hookParamsToTransportParams(newRequest.pathParams, request.headers, false),
     });
 
     return newTransportRequest;
   }
 
   public async afterResponse(
-    request: Request<T>,
+    request: Request,
     response: HttpResponse<T>,
     params: Map<string, string>,
   ): Promise<HttpResponse<T>> {
@@ -33,16 +34,12 @@ export class TransportHookAdapter<T> {
     return this.hook.afterResponse(hookRequest, response, params);
   }
 
-  public async onError(
-    request: Request<T>,
-    response: HttpResponse<T>,
-    params: Map<string, string>,
-  ): Promise<HttpError> {
+  public async onError(request: Request, response: HttpResponse<T>, params: Map<string, string>): Promise<HttpError> {
     const hookRequest = this.requestToHookRequest(request);
     return this.hook.onError(hookRequest, response, params);
   }
 
-  private requestToHookRequest(request: Request<T>): HttpRequest {
+  private requestToHookRequest(request: Request): HttpRequest {
     const hookHeaders: Map<string, unknown> = new Map();
     request.headers.forEach((header, key) => {
       hookHeaders.set(key, header.value);
@@ -53,6 +50,11 @@ export class TransportHookAdapter<T> {
       hookQueryParams.set(key, queryParam.value);
     });
 
+    const hookPathParams: Map<string, unknown> = new Map();
+    request.pathParams.forEach((pathParam, key) => {
+      hookPathParams.set(key, pathParam.value);
+    });
+
     const hookRequest: HttpRequest = {
       baseUrl: request.baseUrl,
       method: request.method,
@@ -60,6 +62,7 @@ export class TransportHookAdapter<T> {
       headers: hookHeaders,
       body: request.body,
       queryParams: hookQueryParams,
+      pathParams: hookPathParams,
     };
     return hookRequest;
   }
@@ -78,6 +81,8 @@ export class TransportHookAdapter<T> {
         encode: requestParam?.encode ?? false,
         style: requestParam?.style || SerializationStyle.NONE,
         explode: requestParam?.explode ?? false,
+        isLimit: requestParam?.isLimit ?? false,
+        isOffset: requestParam?.isOffset ?? false,
       });
     });
     return transportParams;

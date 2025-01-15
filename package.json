@@ -1,19 +1,16 @@
 {
   "name": "@alohi/signplus-typescript",
-  "version": "2.0.0",
+  "version": "1.1.0",
   "description": "Integrate legally-binding electronic signature to your workflow",
   "source": "./src/index.ts",
-  "main": "./dist/commonjs/index.js",
-  "module": "./dist/esm/index.js",
-  "browser": "./dist/index.umd.js",
-  "unpkg": "./dist/index.umd.js",
-  "types": "./dist/commonjs/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/index.js",
+  "unpkg": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run build:all",
-    "build:cjs": "tsc --module commonjs --outDir dist/commonjs",
-    "build:esm": "tsc --module esnext --outDir dist/esm",
-    "build:umd": "tsc --module umd --outDir dist/umd",
-    "build:all": "npm run build:cjs && npm run build:esm && npm run build:umd",
+    "test": "tsc --noEmit",
+    "build": "tsc --outDir dist",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -32,7 +29,8 @@
     "typescript": "5.3.3"
   },
   "dependencies": {
-    "zod": "3.22.0"
+    "zod": "3.22.0",
+    "axios": "^1.7.4"
   },
   "exports": {
     ".": {

@@ -2,6 +2,6 @@ import { z } from 'zod';
 
 export enum RecipientRole {
   SIGNER = 'SIGNER',
-  RECEIVESCOPY = 'RECEIVES_COPY',
-  INPERSONSIGNER = 'IN_PERSON_SIGNER',
+  RECEIVES_COPY = 'RECEIVES_COPY',
+  IN_PERSON_SIGNER = 'IN_PERSON_SIGNER',
 }

@@ -26,8 +26,8 @@ export class Signplus {
     this.signplus.baseUrl = environment;
   }
 
-  set timeout(timeout: number) {
-    this.signplus.timeout = timeout;
+  set timeoutMs(timeoutMs: number) {
+    this.signplus.timeoutMs = timeoutMs;
   }
 
   set token(token: string) {
