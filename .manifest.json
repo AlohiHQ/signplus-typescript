@@ -1,24 +1,24 @@
 {
-  "liblabVersion": "2.1.28",
-  "date": "2024-08-21T16:17:52.733Z",
+  "liblabVersion": "2.10.9",
+  "date": "2025-01-15T12:59:45.690Z",
   "config": {
-    "apiId": 947,
+    "apiId": 1666,
     "sdkName": "signplus",
-    "sdkVersion": "2.0.0",
+    "sdkVersion": "1.1.0",
+    "languages": ["typescript"],
+    "auth": ["bearer"],
     "liblabVersion": "2",
     "deliveryMethods": ["zip"],
-    "languages": ["typescript"],
-    "apiVersion": "2.0.0",
+    "apiVersion": "2.1.0",
     "apiName": "signplus-api",
     "specFilePath": "openapi.yaml",
-    "auth": ["bearer"],
     "languageOptions": {
       "csharp": {
         "packageId": "Alohi.Signplus",
         "githubRepoName": "signplus-sharp",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0"
       },
       "go": {
         "goModuleName": "github.com/alohihq/signplus-go",
@@ -26,7 +26,7 @@
         "githubRepoName": "signplus-go",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0"
       },
       "java": {
         "groupId": "com.alohi",
@@ -42,7 +42,7 @@
         "additionalConstructorParameters": [],
         "githubRepoName": "signplus-java",
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0"
       },
       "python": {
         "alwaysInitializeOptionals": false,
@@ -51,7 +51,7 @@
         "githubRepoName": "signplus-python",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0"
       },
       "php": {
         "packageName": "alohi/signplus",
@@ -59,7 +59,7 @@
         "githubRepoName": "signplus-php",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0"
       },
       "typescript": {
         "bundle": false,
@@ -71,7 +71,8 @@
         "githubRepoName": "signplus-typescript",
         "ignoreFiles": [],
         "liblabVersion": "2",
-        "sdkVersion": "2.0.0"
+        "sdkVersion": "1.1.0",
+        "generateEnumAs": "enum"
       }
     },
     "publishing": {
@@ -105,7 +106,6 @@
       "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
     },
     "multiTenant": true,
-    "specUrl": "https://prod-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/947/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5P3QKKDKGVNIJ2H7%2F20240821%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240821T161747Z&X-Amz-Expires=43200&X-Amz-Signature=7cd3dd73691b6e954924f6e70d23937eda90cbefc4d61b27b5ea3cae8365739b&X-Amz-SignedHeaders=host&x-id=GetObject",
     "includeWatermark": false,
     "language": "typescript",
     "deliveryMethod": "zip",
@@ -121,20 +121,22 @@
     "additionalConstructorParameters": [],
     "githubRepoName": "signplus-typescript",
     "ignoreFiles": [],
+    "generateEnumAs": "enum",
     "typescriptVersion": "5.3.3",
     "zodVersion": "3.22.0",
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
-      "lib": ["es2017", "dom"]
+      "lib": ["es2018", "dom"]
     },
+    "namingStrategy": "base",
     "usesFormData": false,
     "environmentVariables": [],
     "fileOutput": "/tmp",
     "httpLibrary": {
       "name": "axios",
       "packages": {
-        "axios": "^1.7.4"
+        "axios": "^1.7.7"
       },
       "languages": ["typescript"]
     },
@@ -142,7 +144,8 @@
       "paths": [],
       "rawQueries": [],
       "queriesData": []
-    }
+    },
+    "ai": false
   },
   "files": [
     "package.json",
@@ -296,8 +299,10 @@
     "src/http/serialization/query-serializer.ts",
     "src/http/serialization/path-serializer.ts",
     "src/http/serialization/header-serializer.ts",
-    "src/http/transport/request-fetch-adapter.ts",
+    "src/http/transport/request-axios-adapter.ts",
     "src/http/transport/transport-hook-adapter.ts",
+    "src/http/utils/line-decoder.ts",
+    "src/http/utils/response-matcher.ts",
     "README.md",
     "documentation/services/SignplusService.md"
   ]

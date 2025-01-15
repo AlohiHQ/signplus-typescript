@@ -76,15 +76,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Envelope>>} Envelope created successfully
    */
   async createEnvelope(body: CreateEnvelopeRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope')
       .setRequestSchema(createEnvelopeRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -104,15 +107,18 @@ export class SignplusService extends BaseService {
     body: CreateEnvelopeFromTemplateRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/from_template/{template_id}')
       .setRequestSchema(createEnvelopeFromTemplateRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -134,15 +140,18 @@ export class SignplusService extends BaseService {
     body: ListEnvelopesRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopesResponse>> {
-    const request = new RequestBuilder<ListEnvelopesResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelopes')
       .setRequestSchema(listEnvelopesRequestRequest)
-      .setResponseSchema(listEnvelopesResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listEnvelopesResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -158,15 +167,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Envelope>>} Envelope details retrieved successfully
    */
   async getEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -183,16 +195,19 @@ export class SignplusService extends BaseService {
    * @param {string} envelopeId -
    * @returns {Promise<HttpResponse<any>>} Envelope deleted successfully
    */
-  async deleteEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<undefined>> {
-    const request = new RequestBuilder<undefined>()
-      .setConfig(this.config)
+  async deleteEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/envelope/{envelope_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.undefined())
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.undefined(),
+        contentType: ContentType.NoContent,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -201,7 +216,7 @@ export class SignplusService extends BaseService {
         value: envelopeId,
       })
       .build();
-    return this.client.call<undefined>(request);
+    return this.client.call<void>(request);
   }
 
   /**
@@ -215,15 +230,18 @@ export class SignplusService extends BaseService {
     documentId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
-    const request = new RequestBuilder<Document>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/document/{document_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(documentResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: documentResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -248,15 +266,18 @@ export class SignplusService extends BaseService {
     envelopeId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopeDocumentsResponse>> {
-    const request = new RequestBuilder<ListEnvelopeDocumentsResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/documents')
       .setRequestSchema(z.any())
-      .setResponseSchema(listEnvelopeDocumentsResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listEnvelopeDocumentsResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -278,15 +299,18 @@ export class SignplusService extends BaseService {
     body: AddEnvelopeDocumentRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
-    const request = new RequestBuilder<Document>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/document')
       .setRequestSchema(addEnvelopeDocumentRequestRequest)
-      .setResponseSchema(documentResponse)
       .setRequestContentType(ContentType.MultipartFormData)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: documentResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -310,15 +334,18 @@ export class SignplusService extends BaseService {
     body: SetEnvelopeDynamicFieldsRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/dynamic_fields')
       .setRequestSchema(setEnvelopeDynamicFieldsRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -342,15 +369,18 @@ export class SignplusService extends BaseService {
     body: AddEnvelopeSigningStepsRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/signing_steps')
       .setRequestSchema(addEnvelopeSigningStepsRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -370,15 +400,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Envelope>>} Envelope sent successfully
    */
   async sendEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/send')
       .setRequestSchema(z.any())
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -396,15 +429,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Envelope>>} Envelope duplicated successfully
    */
   async duplicateEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/duplicate')
       .setRequestSchema(z.any())
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -422,15 +458,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Envelope>>} Envelope voided successfully
    */
   async voidEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/void')
       .setRequestSchema(z.any())
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -452,15 +491,18 @@ export class SignplusService extends BaseService {
     body: RenameEnvelopeRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/rename')
       .setRequestSchema(renameEnvelopeRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -484,15 +526,18 @@ export class SignplusService extends BaseService {
     body: SetEnvelopeCommentRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_comment')
       .setRequestSchema(setEnvelopeCommentRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -516,15 +561,18 @@ export class SignplusService extends BaseService {
     body: EnvelopeNotification,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_notification')
       .setRequestSchema(envelopeNotificationRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -548,15 +596,18 @@ export class SignplusService extends BaseService {
     body: SetEnvelopeExpirationRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_expiration_date')
       .setRequestSchema(setEnvelopeExpirationRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -580,15 +631,18 @@ export class SignplusService extends BaseService {
     body: SetEnvelopeLegalityLevelRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
-    const request = new RequestBuilder<Envelope>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_legality_level')
       .setRequestSchema(setEnvelopeLegalityLevelRequestRequest)
-      .setResponseSchema(envelopeResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -608,15 +662,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Annotation[]>>} List of annotations retrieved successfully
    */
   async getEnvelopeAnnotations(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Annotation[]>> {
-    const request = new RequestBuilder<Annotation[]>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/annotations')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.array(annotationResponse))
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.array(annotationResponse),
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -639,15 +696,18 @@ export class SignplusService extends BaseService {
     documentId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopeDocumentAnnotationsResponse>> {
-    const request = new RequestBuilder<ListEnvelopeDocumentAnnotationsResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/annotations/{document_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(listEnvelopeDocumentAnnotationsResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listEnvelopeDocumentAnnotationsResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -673,15 +733,18 @@ export class SignplusService extends BaseService {
     body: AddAnnotationRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Annotation>> {
-    const request = new RequestBuilder<Annotation>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/annotation')
       .setRequestSchema(addAnnotationRequestRequest)
-      .setResponseSchema(annotationResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: annotationResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -705,16 +768,19 @@ export class SignplusService extends BaseService {
     envelopeId: string,
     annotationId: string,
     requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<undefined>> {
-    const request = new RequestBuilder<undefined>()
-      .setConfig(this.config)
+  ): Promise<HttpResponse<void>> {
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/envelope/{envelope_id}/annotation/{annotation_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.undefined())
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.undefined(),
+        contentType: ContentType.NoContent,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -727,7 +793,7 @@ export class SignplusService extends BaseService {
         value: annotationId,
       })
       .build();
-    return this.client.call<undefined>(request);
+    return this.client.call<void>(request);
   }
 
   /**
@@ -735,15 +801,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Template>>} Envelope created successfully
    */
   async createTemplate(body: CreateTemplateRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template')
       .setRequestSchema(createTemplateRequestRequest)
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -761,15 +830,18 @@ export class SignplusService extends BaseService {
     body: ListTemplatesRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplatesResponse>> {
-    const request = new RequestBuilder<ListTemplatesResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/templates')
       .setRequestSchema(listTemplatesRequestRequest)
-      .setResponseSchema(listTemplatesResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listTemplatesResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -785,15 +857,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Template>>} Template details retrieved successfully
    */
   async getTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -810,16 +885,19 @@ export class SignplusService extends BaseService {
    * @param {string} templateId -
    * @returns {Promise<HttpResponse<any>>} Template deleted successfully
    */
-  async deleteTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<undefined>> {
-    const request = new RequestBuilder<undefined>()
-      .setConfig(this.config)
+  async deleteTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/template/{template_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.undefined())
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.undefined(),
+        contentType: ContentType.NoContent,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -828,7 +906,7 @@ export class SignplusService extends BaseService {
         value: templateId,
       })
       .build();
-    return this.client.call<undefined>(request);
+    return this.client.call<void>(request);
   }
 
   /**
@@ -837,15 +915,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Template>>} Template duplicated successfully
    */
   async duplicateTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/duplicate')
       .setRequestSchema(z.any())
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -867,15 +948,18 @@ export class SignplusService extends BaseService {
     body: AddTemplateDocumentRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
-    const request = new RequestBuilder<Document>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/document')
       .setRequestSchema(addTemplateDocumentRequestRequest)
-      .setResponseSchema(documentResponse)
       .setRequestContentType(ContentType.MultipartFormData)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: documentResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -900,15 +984,18 @@ export class SignplusService extends BaseService {
     documentId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
-    const request = new RequestBuilder<Document>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/document/{document_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(documentResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: documentResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -933,15 +1020,18 @@ export class SignplusService extends BaseService {
     templateId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateDocumentsResponse>> {
-    const request = new RequestBuilder<ListTemplateDocumentsResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/documents')
       .setRequestSchema(z.any())
-      .setResponseSchema(listTemplateDocumentsResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listTemplateDocumentsResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -963,15 +1053,18 @@ export class SignplusService extends BaseService {
     body: AddTemplateSigningStepsRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/signing_steps')
       .setRequestSchema(addTemplateSigningStepsRequestRequest)
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -995,15 +1088,18 @@ export class SignplusService extends BaseService {
     body: RenameTemplateRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/rename')
       .setRequestSchema(renameTemplateRequestRequest)
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1027,15 +1123,18 @@ export class SignplusService extends BaseService {
     body: SetTemplateCommentRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/set_comment')
       .setRequestSchema(setTemplateCommentRequestRequest)
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1059,15 +1158,18 @@ export class SignplusService extends BaseService {
     body: EnvelopeNotification,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
-    const request = new RequestBuilder<Template>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/set_notification')
       .setRequestSchema(envelopeNotificationRequest)
-      .setResponseSchema(templateResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: templateResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1090,15 +1192,18 @@ export class SignplusService extends BaseService {
     templateId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateAnnotationsResponse>> {
-    const request = new RequestBuilder<ListTemplateAnnotationsResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/annotations')
       .setRequestSchema(z.any())
-      .setResponseSchema(listTemplateAnnotationsResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listTemplateAnnotationsResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1121,15 +1226,18 @@ export class SignplusService extends BaseService {
     documentId: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateDocumentAnnotationsResponse>> {
-    const request = new RequestBuilder<ListTemplateDocumentAnnotationsResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/annotations/{document_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(listTemplateDocumentAnnotationsResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listTemplateDocumentAnnotationsResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1155,15 +1263,18 @@ export class SignplusService extends BaseService {
     body: AddAnnotationRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Annotation>> {
-    const request = new RequestBuilder<Annotation>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/annotation')
       .setRequestSchema(addAnnotationRequestRequest)
-      .setResponseSchema(annotationResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: annotationResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1187,16 +1298,19 @@ export class SignplusService extends BaseService {
     templateId: string,
     annotationId: string,
     requestConfig?: RequestConfig,
-  ): Promise<HttpResponse<undefined>> {
-    const request = new RequestBuilder<undefined>()
-      .setConfig(this.config)
+  ): Promise<HttpResponse<void>> {
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/template/{template_id}/annotation/{annotation_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.undefined())
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.undefined(),
+        contentType: ContentType.NoContent,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1209,7 +1323,7 @@ export class SignplusService extends BaseService {
         value: annotationId,
       })
       .build();
-    return this.client.call<undefined>(request);
+    return this.client.call<void>(request);
   }
 
   /**
@@ -1217,15 +1331,18 @@ export class SignplusService extends BaseService {
    * @returns {Promise<HttpResponse<Webhook>>} Webhook event received successfully
    */
   async createWebhook(body: CreateWebhookRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Webhook>> {
-    const request = new RequestBuilder<Webhook>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/webhook')
       .setRequestSchema(createWebhookRequestRequest)
-      .setResponseSchema(webhookResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: webhookResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1243,15 +1360,18 @@ export class SignplusService extends BaseService {
     body: ListWebhooksRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListWebhooksResponse>> {
-    const request = new RequestBuilder<ListWebhooksResponse>()
-      .setConfig(this.config)
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('POST')
       .setPath('/webhooks')
       .setRequestSchema(listWebhooksRequestRequest)
-      .setResponseSchema(listWebhooksResponseResponse)
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: listWebhooksResponseResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1266,16 +1386,19 @@ export class SignplusService extends BaseService {
    * @param {string} webhookId -
    * @returns {Promise<HttpResponse<any>>} Webhook deleted successfully
    */
-  async deleteWebhook(webhookId: string, requestConfig?: RequestConfig): Promise<HttpResponse<undefined>> {
-    const request = new RequestBuilder<undefined>()
-      .setConfig(this.config)
+  async deleteWebhook(webhookId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
+    const request = new RequestBuilder()
       .setBaseUrl(this.config)
+      .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/webhook/{webhook_id}')
       .setRequestSchema(z.any())
-      .setResponseSchema(z.undefined())
       .setRequestContentType(ContentType.Json)
-      .setResponseContentType(ContentType.Json)
+      .addResponse({
+        schema: z.undefined(),
+        contentType: ContentType.NoContent,
+        status: 200,
+      })
       .setRetryAttempts(this.config, requestConfig)
       .setRetryDelayMs(this.config, requestConfig)
       .setResponseValidation(this.config, requestConfig)
@@ -1284,6 +1407,6 @@ export class SignplusService extends BaseService {
         value: webhookId,
       })
       .build();
-    return this.client.call<undefined>(request);
+    return this.client.call<void>(request);
   }
 }
