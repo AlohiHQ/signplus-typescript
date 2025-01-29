@@ -78,7 +78,7 @@ import { CreateEnvelopeRequest, EnvelopeLegalityLevel, Signplus } from '@alohi/s
   const createEnvelopeRequest: CreateEnvelopeRequest = {
     name: 'name',
     legalityLevel: envelopeLegalityLevel,
-    expiresAt: 8,
+    expiresAt: 1,
     comment: 'comment',
     sandbox: true,
   };
@@ -168,11 +168,11 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 4,
-    dateTo: 7,
+    dateFrom: 6,
+    dateTo: 5,
     uid: 'uid',
-    first: 8,
-    last: 9,
+    first: 6,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -662,7 +662,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 10,
   };
 
   const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', envelopeNotification);
@@ -700,7 +700,7 @@ import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescri
   });
 
   const setEnvelopeExpirationRequest: SetEnvelopeExpirationRequest = {
-    expiresAt: 6,
+    expiresAt: 5,
   };
 
   const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', setEnvelopeExpirationRequest);
@@ -872,8 +872,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 4.75,
+    color: 6.85,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -883,12 +883,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 0.27,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -902,11 +902,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 123,
+    x: 6.35,
+    y: 5.61,
+    width: 2.3,
+    height: 3.29,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1022,8 +1022,8 @@ import { ListTemplatesRequest, Signplus, TemplateOrderField } from '@alohi/signp
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 2,
-    last: 123,
+    first: 8,
+    last: 8,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
@@ -1395,7 +1395,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 10,
   };
 
   const { data } = await signplus.signplus.setTemplateNotification('template_id', envelopeNotification);
@@ -1527,8 +1527,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 0.75,
-    color: 0.4,
+    size: 4.75,
+    color: 6.85,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1538,12 +1538,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 2.34,
+    size: 0.27,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 6,
+    timestamp: 8,
     format: annotationDateTimeFormat,
   };
 
@@ -1557,11 +1557,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 5,
-    x: 2.83,
-    y: 1.27,
-    width: 5.18,
-    height: 4.34,
+    page: 123,
+    x: 6.35,
+    y: 5.61,
+    width: 2.3,
+    height: 3.29,
     required: true,
     type: annotationType,
     signature: annotationSignature,
