@@ -53,11 +53,11 @@ export const templateRecipientResponse = z.lazy(() => {
 export const templateRecipientRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      uid: z.string().nullish(),
-      name: z.string().nullish(),
-      email: z.string().nullish(),
-      role: z.string().nullish(),
+      id: z.string().optional(),
+      uid: z.string().optional(),
+      name: z.string().optional(),
+      email: z.string().optional(),
+      role: z.string().optional(),
     })
     .transform((data) => ({
       id: data['id'],

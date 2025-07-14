@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { annotationFont, annotationFontRequest, annotationFontResponse } from './annotation-font';
+import { AnnotationFont, annotationFont, annotationFontRequest, annotationFontResponse } from './annotation-font';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -62,13 +62,13 @@ export const annotationDateTimeResponse = z.lazy(() => {
 export const annotationDateTimeRequest = z.lazy(() => {
   return z
     .object({
-      size: z.number().nullish(),
-      font: annotationFontRequest.nullish(),
-      color: z.string().nullish(),
-      autoFill: z.boolean().nullish(),
-      timezone: z.string().nullish(),
-      timestamp: z.number().nullish(),
-      format: z.string().nullish(),
+      size: z.number().optional(),
+      font: annotationFontRequest.optional(),
+      color: z.string().optional(),
+      autoFill: z.boolean().optional(),
+      timezone: z.string().optional(),
+      timestamp: z.number().optional(),
+      format: z.string().optional(),
     })
     .transform((data) => ({
       size: data['size'],

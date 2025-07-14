@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { recipient, recipientRequest, recipientResponse } from './recipient';
+import { Recipient, recipient, recipientRequest, recipientResponse } from './recipient';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const signingStepResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const signingStepRequest = z.lazy(() => {
-  return z.object({ recipients: z.array(recipientRequest).nullish() }).transform((data) => ({
-    recipients: data['recipients'],
-  }));
+  return z
+    .object({
+      recipients: z.array(recipientRequest).optional(),
+    })
+    .transform((data) => ({
+      recipients: data['recipients'],
+    }));
 });

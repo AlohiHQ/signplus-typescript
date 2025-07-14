@@ -5,45 +5,13 @@ import { QuerySerializer } from '../serialization/query-serializer';
 import { HeaderSerializer } from '../serialization/header-serializer';
 import { HttpRequest } from '../hooks/hook';
 import { SerializationStyle } from '../serialization/base-serializer';
-
-export interface ResponseDefinition {
-  schema: ZodType;
-  contentType: ContentType;
-  status: number;
-}
-
-export interface CreateRequestParameters<Page = unknown[]> {
-  baseUrl: string;
-  method: HttpMethod;
-  body?: any;
-  headers: Map<string, RequestParameter>;
-  queryParams: Map<string, RequestParameter>;
-  pathParams: Map<string, RequestParameter>;
-  path: string;
-  config: SdkConfig;
-  responses: ResponseDefinition[];
-  requestSchema: ZodType;
-  requestContentType: ContentType;
-  validation: ValidationOptions;
-  retry: RetryOptions;
-  pagination?: RequestPagination<Page>;
-}
-
-export interface RequestParameter {
-  key: string | undefined;
-  value: unknown;
-  explode: boolean;
-  encode: boolean;
-  style: SerializationStyle;
-  isLimit: boolean;
-  isOffset: boolean;
-}
-
-export interface RequestPagination<Page> {
-  pageSize: number;
-  pagePath: string[];
-  pageSchema?: ZodType<Page, any, any>;
-}
+import {
+  CreateRequestParameters,
+  RequestParameter,
+  RequestPagination,
+  ResponseDefinition,
+  ErrorDefinition,
+} from './types';
 
 export class Request<PageSchema = unknown[]> {
   public baseUrl: string = '';
@@ -63,6 +31,8 @@ export class Request<PageSchema = unknown[]> {
   public config: SdkConfig;
 
   public responses: ResponseDefinition[];
+
+  public errors: ErrorDefinition[];
 
   public requestSchema: ZodType;
 
@@ -87,6 +57,7 @@ export class Request<PageSchema = unknown[]> {
     this.headers = params.headers;
     this.queryParams = params.queryParams;
     this.responses = params.responses;
+    this.errors = params.errors;
     this.requestSchema = params.requestSchema;
     this.requestContentType = params.requestContentType;
     this.retry = params.retry;
@@ -180,6 +151,7 @@ export class Request<PageSchema = unknown[]> {
   public copy(overrides?: Partial<CreateRequestParameters>) {
     const createRequestParams: CreateRequestParameters = {
       baseUrl: overrides?.baseUrl ?? this.baseUrl,
+      errors: overrides?.errors ?? this.errors,
       method: overrides?.method ?? this.method,
       path: overrides?.path ?? this.path,
       body: overrides?.body ?? this.body,

@@ -44,7 +44,11 @@ export const webhookResponse = z.lazy(() => {
  */
 export const webhookRequest = z.lazy(() => {
   return z
-    .object({ id: z.string().nullish(), event: z.string().nullish(), target: z.string().nullish() })
+    .object({
+      id: z.string().optional(),
+      event: z.string().optional(),
+      target: z.string().optional(),
+    })
     .transform((data) => ({
       id: data['id'],
       event: data['event'],

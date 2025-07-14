@@ -1,9 +1,29 @@
 import { z } from 'zod';
-import { annotationSignature, annotationSignatureRequest, annotationSignatureResponse } from './annotation-signature';
-import { annotationInitials, annotationInitialsRequest, annotationInitialsResponse } from './annotation-initials';
-import { annotationText, annotationTextRequest, annotationTextResponse } from './annotation-text';
-import { annotationDateTime, annotationDateTimeRequest, annotationDateTimeResponse } from './annotation-date-time';
-import { annotationCheckbox, annotationCheckboxRequest, annotationCheckboxResponse } from './annotation-checkbox';
+import {
+  AnnotationSignature,
+  annotationSignature,
+  annotationSignatureRequest,
+  annotationSignatureResponse,
+} from './annotation-signature';
+import {
+  AnnotationInitials,
+  annotationInitials,
+  annotationInitialsRequest,
+  annotationInitialsResponse,
+} from './annotation-initials';
+import { AnnotationText, annotationText, annotationTextRequest, annotationTextResponse } from './annotation-text';
+import {
+  AnnotationDateTime,
+  annotationDateTime,
+  annotationDateTimeRequest,
+  annotationDateTimeResponse,
+} from './annotation-date-time';
+import {
+  AnnotationCheckbox,
+  annotationCheckbox,
+  annotationCheckboxRequest,
+  annotationCheckboxResponse,
+} from './annotation-checkbox';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -98,21 +118,21 @@ export const annotationResponse = z.lazy(() => {
 export const annotationRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      recipientId: z.string().nullish(),
-      documentId: z.string().nullish(),
-      page: z.number().nullish(),
-      x: z.number().nullish(),
-      y: z.number().nullish(),
-      width: z.number().nullish(),
-      height: z.number().nullish(),
-      required: z.boolean().nullish(),
-      type: z.string().nullish(),
-      signature: annotationSignatureRequest.nullish(),
-      initials: annotationInitialsRequest.nullish(),
-      text: annotationTextRequest.nullish(),
-      datetime: annotationDateTimeRequest.nullish(),
-      checkbox: annotationCheckboxRequest.nullish(),
+      id: z.string().optional(),
+      recipientId: z.string().optional(),
+      documentId: z.string().optional(),
+      page: z.number().optional(),
+      x: z.number().optional(),
+      y: z.number().optional(),
+      width: z.number().optional(),
+      height: z.number().optional(),
+      required: z.boolean().optional(),
+      type: z.string().optional(),
+      signature: annotationSignatureRequest.optional(),
+      initials: annotationInitialsRequest.optional(),
+      text: annotationTextRequest.optional(),
+      datetime: annotationDateTimeRequest.optional(),
+      checkbox: annotationCheckboxRequest.optional(),
     })
     .transform((data) => ({
       id: data['id'],

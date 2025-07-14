@@ -35,7 +35,11 @@ export const setEnvelopeExpirationRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const setEnvelopeExpirationRequestRequest = z.lazy(() => {
-  return z.object({ expiresAt: z.number().nullish() }).transform((data) => ({
-    expires_at: data['expiresAt'],
-  }));
+  return z
+    .object({
+      expiresAt: z.number(),
+    })
+    .transform((data) => ({
+      expires_at: data['expiresAt'],
+    }));
 });

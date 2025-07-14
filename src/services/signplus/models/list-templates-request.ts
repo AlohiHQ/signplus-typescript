@@ -69,15 +69,15 @@ export const listTemplatesRequestResponse = z.lazy(() => {
 export const listTemplatesRequestRequest = z.lazy(() => {
   return z
     .object({
-      name: z.string().nullish(),
-      tags: z.array(z.string()).nullish(),
-      ids: z.array(z.string()).nullish(),
-      first: z.number().nullish(),
-      last: z.number().nullish(),
-      after: z.string().nullish(),
-      before: z.string().nullish(),
-      orderField: z.string().nullish(),
-      ascending: z.boolean().nullish(),
+      name: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+      ids: z.array(z.string()).optional(),
+      first: z.number().optional(),
+      last: z.number().optional(),
+      after: z.string().optional(),
+      before: z.string().optional(),
+      orderField: z.string().optional(),
+      ascending: z.boolean().optional(),
     })
     .transform((data) => ({
       name: data['name'],

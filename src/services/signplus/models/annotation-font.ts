@@ -44,7 +44,11 @@ export const annotationFontResponse = z.lazy(() => {
  */
 export const annotationFontRequest = z.lazy(() => {
   return z
-    .object({ family: z.string().nullish(), italic: z.boolean().nullish(), bold: z.boolean().nullish() })
+    .object({
+      family: z.string().optional(),
+      italic: z.boolean().optional(),
+      bold: z.boolean().optional(),
+    })
     .transform((data) => ({
       family: data['family'],
       italic: data['italic'],

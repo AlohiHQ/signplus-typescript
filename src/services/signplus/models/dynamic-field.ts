@@ -39,8 +39,13 @@ export const dynamicFieldResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const dynamicFieldRequest = z.lazy(() => {
-  return z.object({ name: z.string().nullish(), value: z.string().nullish() }).transform((data) => ({
-    name: data['name'],
-    value: data['value'],
-  }));
+  return z
+    .object({
+      name: z.string().optional(),
+      value: z.string().optional(),
+    })
+    .transform((data) => ({
+      name: data['name'],
+      value: data['value'],
+    }));
 });

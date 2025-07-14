@@ -35,7 +35,11 @@ export const setTemplateCommentRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const setTemplateCommentRequestRequest = z.lazy(() => {
-  return z.object({ comment: z.string().nullish() }).transform((data) => ({
-    comment: data['comment'],
-  }));
+  return z
+    .object({
+      comment: z.string(),
+    })
+    .transform((data) => ({
+      comment: data['comment'],
+    }));
 });

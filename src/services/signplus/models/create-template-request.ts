@@ -5,7 +5,11 @@ import { z } from 'zod';
  */
 export const createTemplateRequest = z.lazy(() => {
   return z.object({
-    name: z.string(),
+    name: z
+      .string()
+      .min(2)
+      .max(256)
+      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
   });
 });
 
@@ -23,7 +27,11 @@ export type CreateTemplateRequest = z.infer<typeof createTemplateRequest>;
 export const createTemplateRequestResponse = z.lazy(() => {
   return z
     .object({
-      name: z.string(),
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
     })
     .transform((data) => ({
       name: data['name'],
@@ -35,7 +43,15 @@ export const createTemplateRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const createTemplateRequestRequest = z.lazy(() => {
-  return z.object({ name: z.string().nullish() }).transform((data) => ({
-    name: data['name'],
-  }));
+  return z
+    .object({
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
+    })
+    .transform((data) => ({
+      name: data['name'],
+    }));
 });

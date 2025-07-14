@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { annotation, annotationRequest, annotationResponse } from './annotation';
+import { Annotation, annotation, annotationRequest, annotationResponse } from './annotation';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const listEnvelopeDocumentAnnotationsResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const listEnvelopeDocumentAnnotationsResponseRequest = z.lazy(() => {
-  return z.object({ annotations: z.array(annotationRequest).nullish() }).transform((data) => ({
-    annotations: data['annotations'],
-  }));
+  return z
+    .object({
+      annotations: z.array(annotationRequest).optional(),
+    })
+    .transform((data) => ({
+      annotations: data['annotations'],
+    }));
 });

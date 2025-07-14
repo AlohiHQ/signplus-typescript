@@ -1,7 +1,13 @@
 import { z } from 'zod';
-import { templateSigningStep, templateSigningStepRequest, templateSigningStepResponse } from './template-signing-step';
-import { document, documentRequest, documentResponse } from './document';
 import {
+  TemplateSigningStep,
+  templateSigningStep,
+  templateSigningStepRequest,
+  templateSigningStepResponse,
+} from './template-signing-step';
+import { Document, document, documentRequest, documentResponse } from './document';
+import {
+  EnvelopeNotification,
   envelopeNotification,
   envelopeNotificationRequest,
   envelopeNotificationResponse,
@@ -92,19 +98,19 @@ export const templateResponse = z.lazy(() => {
 export const templateRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      name: z.string().nullish(),
-      comment: z.string().nullish(),
-      pages: z.number().nullish(),
-      legalityLevel: z.string().nullish(),
-      createdAt: z.number().nullish(),
-      updatedAt: z.number().nullish(),
-      expirationDelay: z.number().nullish(),
-      numRecipients: z.number().nullish(),
-      signingSteps: z.array(templateSigningStepRequest).nullish(),
-      documents: z.array(documentRequest).nullish(),
-      notification: envelopeNotificationRequest.nullish(),
-      dynamicFields: z.array(z.string()).nullish(),
+      id: z.string().optional(),
+      name: z.string().optional(),
+      comment: z.string().optional(),
+      pages: z.number().optional(),
+      legalityLevel: z.string().optional(),
+      createdAt: z.number().optional(),
+      updatedAt: z.number().optional(),
+      expirationDelay: z.number().optional(),
+      numRecipients: z.number().optional(),
+      signingSteps: z.array(templateSigningStepRequest).optional(),
+      documents: z.array(documentRequest).optional(),
+      notification: envelopeNotificationRequest.optional(),
+      dynamicFields: z.array(z.string()).optional(),
     })
     .transform((data) => ({
       id: data['id'],

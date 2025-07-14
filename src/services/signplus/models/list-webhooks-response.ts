@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { webhook, webhookRequest, webhookResponse } from './webhook';
+import { Webhook, webhook, webhookRequest, webhookResponse } from './webhook';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const listWebhooksResponseResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const listWebhooksResponseRequest = z.lazy(() => {
-  return z.object({ webhooks: z.array(webhookRequest).nullish() }).transform((data) => ({
-    webhooks: data['webhooks'],
-  }));
+  return z
+    .object({
+      webhooks: z.array(webhookRequest).optional(),
+    })
+    .transform((data) => ({
+      webhooks: data['webhooks'],
+    }));
 });

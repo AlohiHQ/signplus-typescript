@@ -5,7 +5,11 @@ import { z } from 'zod';
  */
 export const createEnvelopeFromTemplateRequest = z.lazy(() => {
   return z.object({
-    name: z.string(),
+    name: z
+      .string()
+      .min(2)
+      .max(256)
+      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
     comment: z.string().optional(),
     sandbox: z.boolean().optional(),
   });
@@ -27,7 +31,11 @@ export type CreateEnvelopeFromTemplateRequest = z.infer<typeof createEnvelopeFro
 export const createEnvelopeFromTemplateRequestResponse = z.lazy(() => {
   return z
     .object({
-      name: z.string(),
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
       comment: z.string().optional(),
       sandbox: z.boolean().optional(),
     })
@@ -44,7 +52,15 @@ export const createEnvelopeFromTemplateRequestResponse = z.lazy(() => {
  */
 export const createEnvelopeFromTemplateRequestRequest = z.lazy(() => {
   return z
-    .object({ name: z.string().nullish(), comment: z.string().nullish(), sandbox: z.boolean().nullish() })
+    .object({
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
+      comment: z.string().optional(),
+      sandbox: z.boolean().optional(),
+    })
     .transform((data) => ({
       name: data['name'],
       comment: data['comment'],

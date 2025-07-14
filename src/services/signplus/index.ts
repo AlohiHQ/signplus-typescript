@@ -1,2 +1,2 @@
-export { SignplusService } from './signplus';
+export { SignplusService } from './signplus-service';
 export * from './models';
