@@ -3,6 +3,8 @@ import { BaseService } from '../base-service';
 import { ContentType, HttpResponse, RequestConfig } from '../../http/types';
 import { RequestBuilder } from '../../http/transport/request-builder';
 import { SerializationStyle } from '../../http/serialization/base-serializer';
+import { ThrowableError } from '../../http/errors/throwable-error';
+import { Environment } from '../../http/environment';
 import { CreateEnvelopeRequest, createEnvelopeRequestRequest } from './models/create-envelope-request';
 import { Envelope, envelopeResponse } from './models/envelope';
 import {
@@ -11,6 +13,7 @@ import {
 } from './models/create-envelope-from-template-request';
 import { ListEnvelopesRequest, listEnvelopesRequestRequest } from './models/list-envelopes-request';
 import { ListEnvelopesResponse, listEnvelopesResponseResponse } from './models/list-envelopes-response';
+import { DownloadEnvelopeSignedDocumentsParams } from './request-params';
 import { Document, documentResponse } from './models/document';
 import {
   ListEnvelopeDocumentsResponse,
@@ -73,15 +76,17 @@ import { ListWebhooksResponse, listWebhooksResponseResponse } from './models/lis
 export class SignplusService extends BaseService {
   /**
    * Create new envelope
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope created successfully
    */
   async createEnvelope(body: CreateEnvelopeRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope')
       .setRequestSchema(createEnvelopeRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -100,6 +105,7 @@ export class SignplusService extends BaseService {
   /**
    * Create new envelope from template
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope created successfully
    */
   async createEnvelopeFromTemplate(
@@ -108,11 +114,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/from_template/{template_id}')
       .setRequestSchema(createEnvelopeFromTemplateRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -134,6 +141,7 @@ export class SignplusService extends BaseService {
 
   /**
    * List envelopes
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListEnvelopesResponse>>} List of envelopes retrieved successfully
    */
   async listEnvelopes(
@@ -141,11 +149,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopesResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelopes')
       .setRequestSchema(listEnvelopesRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listEnvelopesResponseResponse,
@@ -164,15 +173,17 @@ export class SignplusService extends BaseService {
   /**
    * Get envelope
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope details retrieved successfully
    */
   async getEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -193,15 +204,17 @@ export class SignplusService extends BaseService {
   /**
    * Delete envelope
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<any>>} Envelope deleted successfully
    */
   async deleteEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/envelope/{envelope_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.undefined(),
@@ -220,9 +233,84 @@ export class SignplusService extends BaseService {
   }
 
   /**
+   * Download signed documents for an envelope
+   * @param {string} envelopeId - ID of the envelope
+   * @param {boolean} [params.certificateOfCompletion] - Whether to include the certificate of completion in the downloaded file
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<ArrayBuffer>>} Combined signed documents downloaded successfully
+   */
+  async downloadEnvelopeSignedDocuments(
+    envelopeId: string,
+    params?: DownloadEnvelopeSignedDocumentsParams,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<ArrayBuffer>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('GET')
+      .setPath('/envelope/{envelope_id}/signed_documents')
+      .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: z.instanceof(ArrayBuffer),
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addQueryParam({
+        key: 'certificate_of_completion',
+        value: params?.certificateOfCompletion,
+      })
+      .build();
+    return this.client.call<ArrayBuffer>(request);
+  }
+
+  /**
+   * Download certificate of completion for an envelope
+   * @param {string} envelopeId - ID of the envelope
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<ArrayBuffer>>} Certificate of completion downloaded successfully
+   */
+  async downloadEnvelopeCertificate(
+    envelopeId: string,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<ArrayBuffer>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('GET')
+      .setPath('/envelope/{envelope_id}/certificate')
+      .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: z.instanceof(ArrayBuffer),
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .build();
+    return this.client.call<ArrayBuffer>(request);
+  }
+
+  /**
    * Get envelope document
    * @param {string} envelopeId -
    * @param {string} documentId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Document>>} Document details retrieved successfully
    */
   async getEnvelopeDocument(
@@ -231,11 +319,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/document/{document_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: documentResponse,
@@ -260,6 +349,7 @@ export class SignplusService extends BaseService {
   /**
    * Get envelope documents
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListEnvelopeDocumentsResponse>>} Documents of envelope retrieved successfully
    */
   async getEnvelopeDocuments(
@@ -267,11 +357,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopeDocumentsResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/documents')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listEnvelopeDocumentsResponseResponse,
@@ -292,6 +383,7 @@ export class SignplusService extends BaseService {
   /**
    * Add envelope document
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Document>>} Document added to envelope successfully
    */
   async addEnvelopeDocument(
@@ -300,11 +392,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/document')
       .setRequestSchema(addEnvelopeDocumentRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.MultipartFormData)
       .addResponse({
         schema: documentResponse,
@@ -327,6 +420,7 @@ export class SignplusService extends BaseService {
   /**
    * Set envelope dynamic fields
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Dynamic fields added successfully
    */
   async setEnvelopeDynamicFields(
@@ -335,11 +429,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/dynamic_fields')
       .setRequestSchema(setEnvelopeDynamicFieldsRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -362,6 +457,7 @@ export class SignplusService extends BaseService {
   /**
    * Add envelope signing steps
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Signing steps added successfully
    */
   async addEnvelopeSigningSteps(
@@ -370,11 +466,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/signing_steps')
       .setRequestSchema(addEnvelopeSigningStepsRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -397,15 +494,17 @@ export class SignplusService extends BaseService {
   /**
    * Send envelope for signature
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope sent successfully
    */
   async sendEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/send')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -426,15 +525,17 @@ export class SignplusService extends BaseService {
   /**
    * Duplicate envelope
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope duplicated successfully
    */
   async duplicateEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/duplicate')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -455,15 +556,17 @@ export class SignplusService extends BaseService {
   /**
    * Void envelope
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope voided successfully
    */
   async voidEnvelope(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/void')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -484,6 +587,7 @@ export class SignplusService extends BaseService {
   /**
    * Rename envelope
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope renamed successfully
    */
   async renameEnvelope(
@@ -492,11 +596,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/rename')
       .setRequestSchema(renameEnvelopeRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -519,6 +624,7 @@ export class SignplusService extends BaseService {
   /**
    * Set envelope comment
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope comment changed successfully
    */
   async setEnvelopeComment(
@@ -527,11 +633,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_comment')
       .setRequestSchema(setEnvelopeCommentRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -554,6 +661,7 @@ export class SignplusService extends BaseService {
   /**
    * Set envelope notification
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope notification changed successfully
    */
   async setEnvelopeNotification(
@@ -562,11 +670,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_notification')
       .setRequestSchema(envelopeNotificationRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -589,6 +698,7 @@ export class SignplusService extends BaseService {
   /**
    * Set envelope expiration date
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope expiration date changed successfully
    */
   async setEnvelopeExpirationDate(
@@ -597,11 +707,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_expiration_date')
       .setRequestSchema(setEnvelopeExpirationRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -624,6 +735,7 @@ export class SignplusService extends BaseService {
   /**
    * Set envelope legality level
    * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Envelope>>} Envelope legality level changed successfully
    */
   async setEnvelopeLegalityLevel(
@@ -632,11 +744,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Envelope>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/envelope/{envelope_id}/set_legality_level')
       .setRequestSchema(setEnvelopeLegalityLevelRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: envelopeResponse,
@@ -659,15 +772,17 @@ export class SignplusService extends BaseService {
   /**
    * Get envelope annotations
    * @param {string} envelopeId - ID of the envelope
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Annotation[]>>} List of annotations retrieved successfully
    */
   async getEnvelopeAnnotations(envelopeId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Annotation[]>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/annotations')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.array(annotationResponse),
@@ -689,6 +804,7 @@ export class SignplusService extends BaseService {
    * Get envelope document annotations
    * @param {string} envelopeId - ID of the envelope
    * @param {string} documentId - ID of document
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListEnvelopeDocumentAnnotationsResponse>>} List of document annotations retrieved successfully
    */
   async getEnvelopeDocumentAnnotations(
@@ -697,11 +813,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListEnvelopeDocumentAnnotationsResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/envelope/{envelope_id}/annotations/{document_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listEnvelopeDocumentAnnotationsResponseResponse,
@@ -726,6 +843,7 @@ export class SignplusService extends BaseService {
   /**
    * Add envelope annotation
    * @param {string} envelopeId - ID of the envelope
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Annotation>>} Annotation added successfully
    */
   async addEnvelopeAnnotation(
@@ -734,11 +852,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Annotation>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/envelope/{envelope_id}/annotation')
       .setRequestSchema(addAnnotationRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: annotationResponse,
@@ -762,6 +881,7 @@ export class SignplusService extends BaseService {
    * Delete envelope annotation
    * @param {string} envelopeId - ID of the envelope
    * @param {string} annotationId - ID of the annotation to delete
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<any>>} Annotation deleted successfully
    */
   async deleteEnvelopeAnnotation(
@@ -770,11 +890,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<void>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/envelope/{envelope_id}/annotation/{annotation_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.undefined(),
@@ -798,15 +919,17 @@ export class SignplusService extends BaseService {
 
   /**
    * Create new template
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Envelope created successfully
    */
   async createTemplate(body: CreateTemplateRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template')
       .setRequestSchema(createTemplateRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -824,6 +947,7 @@ export class SignplusService extends BaseService {
 
   /**
    * List templates
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListTemplatesResponse>>} List of templates retrieved successfully
    */
   async listTemplates(
@@ -831,11 +955,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplatesResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/templates')
       .setRequestSchema(listTemplatesRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listTemplatesResponseResponse,
@@ -854,15 +979,17 @@ export class SignplusService extends BaseService {
   /**
    * Get template
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Template details retrieved successfully
    */
   async getTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -883,15 +1010,17 @@ export class SignplusService extends BaseService {
   /**
    * Delete template
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<any>>} Template deleted successfully
    */
   async deleteTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/template/{template_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.undefined(),
@@ -912,15 +1041,17 @@ export class SignplusService extends BaseService {
   /**
    * Duplicate template
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Template duplicated successfully
    */
   async duplicateTemplate(templateId: string, requestConfig?: RequestConfig): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/duplicate')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -941,6 +1072,7 @@ export class SignplusService extends BaseService {
   /**
    * Add template document
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Document>>} Document added to envelope successfully
    */
   async addTemplateDocument(
@@ -949,11 +1081,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/document')
       .setRequestSchema(addTemplateDocumentRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.MultipartFormData)
       .addResponse({
         schema: documentResponse,
@@ -977,6 +1110,7 @@ export class SignplusService extends BaseService {
    * Get template document
    * @param {string} templateId -
    * @param {string} documentId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Document>>} Document details retrieved successfully
    */
   async getTemplateDocument(
@@ -985,11 +1119,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/document/{document_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: documentResponse,
@@ -1014,6 +1149,7 @@ export class SignplusService extends BaseService {
   /**
    * Get template documents
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListTemplateDocumentsResponse>>} Documents of template retrieved successfully
    */
   async getTemplateDocuments(
@@ -1021,11 +1157,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateDocumentsResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/documents')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listTemplateDocumentsResponseResponse,
@@ -1046,6 +1183,7 @@ export class SignplusService extends BaseService {
   /**
    * Add template signing steps
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Signing steps added successfully
    */
   async addTemplateSigningSteps(
@@ -1054,11 +1192,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/signing_steps')
       .setRequestSchema(addTemplateSigningStepsRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -1081,6 +1220,7 @@ export class SignplusService extends BaseService {
   /**
    * Rename template
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Template renamed successfully
    */
   async renameTemplate(
@@ -1089,11 +1229,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/rename')
       .setRequestSchema(renameTemplateRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -1116,6 +1257,7 @@ export class SignplusService extends BaseService {
   /**
    * Set template comment
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Template comment changed successfully
    */
   async setTemplateComment(
@@ -1124,11 +1266,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/set_comment')
       .setRequestSchema(setTemplateCommentRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -1151,6 +1294,7 @@ export class SignplusService extends BaseService {
   /**
    * Set template notification
    * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Template>>} Template notification changed successfully
    */
   async setTemplateNotification(
@@ -1159,11 +1303,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Template>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('PUT')
       .setPath('/template/{template_id}/set_notification')
       .setRequestSchema(envelopeNotificationRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: templateResponse,
@@ -1186,6 +1331,7 @@ export class SignplusService extends BaseService {
   /**
    * Get template annotations
    * @param {string} templateId - ID of the template
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListTemplateAnnotationsResponse>>} List of annotations retrieved successfully
    */
   async getTemplateAnnotations(
@@ -1193,11 +1339,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateAnnotationsResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/annotations')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listTemplateAnnotationsResponseResponse,
@@ -1219,6 +1366,7 @@ export class SignplusService extends BaseService {
    * Get document template annotations
    * @param {string} templateId - ID of the template
    * @param {string} documentId - ID of document
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListTemplateDocumentAnnotationsResponse>>} List of document annotations retrieved successfully
    */
   async getDocumentTemplateAnnotations(
@@ -1227,11 +1375,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListTemplateDocumentAnnotationsResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('GET')
       .setPath('/template/{template_id}/annotations/{document_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listTemplateDocumentAnnotationsResponseResponse,
@@ -1256,6 +1405,7 @@ export class SignplusService extends BaseService {
   /**
    * Add template annotation
    * @param {string} templateId - ID of the template
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Annotation>>} Annotation added successfully
    */
   async addTemplateAnnotation(
@@ -1264,11 +1414,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Annotation>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/template/{template_id}/annotation')
       .setRequestSchema(addAnnotationRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: annotationResponse,
@@ -1292,6 +1443,7 @@ export class SignplusService extends BaseService {
    * Delete template annotation
    * @param {string} templateId - ID of the template
    * @param {string} annotationId - ID of the annotation to delete
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<any>>} Annotation deleted successfully
    */
   async deleteTemplateAnnotation(
@@ -1300,11 +1452,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<void>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/template/{template_id}/annotation/{annotation_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.undefined(),
@@ -1328,15 +1481,17 @@ export class SignplusService extends BaseService {
 
   /**
    * Create webhook
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<Webhook>>} Webhook event received successfully
    */
   async createWebhook(body: CreateWebhookRequest, requestConfig?: RequestConfig): Promise<HttpResponse<Webhook>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/webhook')
       .setRequestSchema(createWebhookRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: webhookResponse,
@@ -1354,6 +1509,7 @@ export class SignplusService extends BaseService {
 
   /**
    * List webhooks
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<ListWebhooksResponse>>} List of webhooks retrieved successfully
    */
   async listWebhooks(
@@ -1361,11 +1517,12 @@ export class SignplusService extends BaseService {
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<ListWebhooksResponse>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('POST')
       .setPath('/webhooks')
       .setRequestSchema(listWebhooksRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: listWebhooksResponseResponse,
@@ -1384,15 +1541,17 @@ export class SignplusService extends BaseService {
   /**
    * Delete webhook
    * @param {string} webhookId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
    * @returns {Promise<HttpResponse<any>>} Webhook deleted successfully
    */
   async deleteWebhook(webhookId: string, requestConfig?: RequestConfig): Promise<HttpResponse<void>> {
     const request = new RequestBuilder()
-      .setBaseUrl(this.config)
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
       .setConfig(this.config)
       .setMethod('DELETE')
       .setPath('/webhook/{webhook_id}')
       .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.undefined(),

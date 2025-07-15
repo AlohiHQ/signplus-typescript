@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { envelope, envelopeRequest, envelopeResponse } from './envelope';
+import { Envelope, envelope, envelopeRequest, envelopeResponse } from './envelope';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -46,9 +46,9 @@ export const listEnvelopesResponseResponse = z.lazy(() => {
 export const listEnvelopesResponseRequest = z.lazy(() => {
   return z
     .object({
-      hasNextPage: z.boolean().nullish(),
-      hasPreviousPage: z.boolean().nullish(),
-      envelopes: z.array(envelopeRequest).nullish(),
+      hasNextPage: z.boolean().optional(),
+      hasPreviousPage: z.boolean().optional(),
+      envelopes: z.array(envelopeRequest).optional(),
     })
     .transform((data) => ({
       has_next_page: data['hasNextPage'],

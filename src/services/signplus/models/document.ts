@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { page, pageRequest, pageResponse } from './page';
+import { Page, page, pageRequest, pageResponse } from './page';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -54,11 +54,11 @@ export const documentResponse = z.lazy(() => {
 export const documentRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      name: z.string().nullish(),
-      filename: z.string().nullish(),
-      pageCount: z.number().nullish(),
-      pages: z.array(pageRequest).nullish(),
+      id: z.string().optional(),
+      name: z.string().optional(),
+      filename: z.string().optional(),
+      pageCount: z.number().optional(),
+      pages: z.array(pageRequest).optional(),
     })
     .transform((data) => ({
       id: data['id'],

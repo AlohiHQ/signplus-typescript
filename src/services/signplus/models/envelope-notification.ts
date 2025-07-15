@@ -44,7 +44,11 @@ export const envelopeNotificationResponse = z.lazy(() => {
  */
 export const envelopeNotificationRequest = z.lazy(() => {
   return z
-    .object({ subject: z.string().nullish(), message: z.string().nullish(), reminderInterval: z.number().nullish() })
+    .object({
+      subject: z.string().optional(),
+      message: z.string().optional(),
+      reminderInterval: z.number().optional(),
+    })
     .transform((data) => ({
       subject: data['subject'],
       message: data['message'],

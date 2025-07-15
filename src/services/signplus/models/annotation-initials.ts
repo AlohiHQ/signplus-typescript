@@ -35,7 +35,11 @@ export const annotationInitialsResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const annotationInitialsRequest = z.lazy(() => {
-  return z.object({ id: z.string().nullish() }).transform((data) => ({
-    id: data['id'],
-  }));
+  return z
+    .object({
+      id: z.string().optional(),
+    })
+    .transform((data) => ({
+      id: data['id'],
+    }));
 });

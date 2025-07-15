@@ -35,7 +35,11 @@ export const addTemplateDocumentRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const addTemplateDocumentRequestRequest = z.lazy(() => {
-  return z.object({ file: z.instanceof(ArrayBuffer).nullish() }).transform((data) => ({
-    file: data['file'],
-  }));
+  return z
+    .object({
+      file: z.instanceof(ArrayBuffer),
+    })
+    .transform((data) => ({
+      file: data['file'],
+    }));
 });

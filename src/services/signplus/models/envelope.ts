@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { signingStep, signingStepRequest, signingStepResponse } from './signing-step';
-import { document, documentRequest, documentResponse } from './document';
+import { SigningStep, signingStep, signingStepRequest, signingStepResponse } from './signing-step';
+import { Document, document, documentRequest, documentResponse } from './document';
 import {
+  EnvelopeNotification,
   envelopeNotification,
   envelopeNotificationRequest,
   envelopeNotificationResponse,
@@ -100,21 +101,21 @@ export const envelopeResponse = z.lazy(() => {
 export const envelopeRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      name: z.string().nullish(),
-      comment: z.string().nullish(),
-      pages: z.number().nullish(),
-      flowType: z.string().nullish(),
-      legalityLevel: z.string().nullish(),
-      status: z.string().nullish(),
-      createdAt: z.number().nullish(),
-      updatedAt: z.number().nullish(),
-      expiresAt: z.number().nullish(),
-      numRecipients: z.number().nullish(),
-      isDuplicable: z.boolean().nullish(),
-      signingSteps: z.array(signingStepRequest).nullish(),
-      documents: z.array(documentRequest).nullish(),
-      notification: envelopeNotificationRequest.nullish(),
+      id: z.string().optional(),
+      name: z.string().optional(),
+      comment: z.string().optional(),
+      pages: z.number().optional(),
+      flowType: z.string().optional(),
+      legalityLevel: z.string().optional(),
+      status: z.string().optional(),
+      createdAt: z.number().optional(),
+      updatedAt: z.number().optional(),
+      expiresAt: z.number().optional(),
+      numRecipients: z.number().optional(),
+      isDuplicable: z.boolean().optional(),
+      signingSteps: z.array(signingStepRequest).optional(),
+      documents: z.array(documentRequest).optional(),
+      notification: envelopeNotificationRequest.optional(),
     })
     .transform((data) => ({
       id: data['id'],

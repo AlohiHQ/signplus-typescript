@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  RecipientVerification,
   recipientVerification,
   recipientVerificationRequest,
   recipientVerificationResponse,
@@ -62,12 +63,12 @@ export const recipientResponse = z.lazy(() => {
 export const recipientRequest = z.lazy(() => {
   return z
     .object({
-      id: z.string().nullish(),
-      uid: z.string().nullish(),
-      name: z.string().nullish(),
-      email: z.string().nullish(),
-      role: z.string().nullish(),
-      verification: recipientVerificationRequest.nullish(),
+      id: z.string().optional(),
+      uid: z.string().optional(),
+      name: z.string(),
+      email: z.string(),
+      role: z.string(),
+      verification: recipientVerificationRequest.optional(),
     })
     .transform((data) => ({
       id: data['id'],

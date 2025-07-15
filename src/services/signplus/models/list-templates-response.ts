@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { template, templateRequest, templateResponse } from './template';
+import { Template, template, templateRequest, templateResponse } from './template';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -46,9 +46,9 @@ export const listTemplatesResponseResponse = z.lazy(() => {
 export const listTemplatesResponseRequest = z.lazy(() => {
   return z
     .object({
-      hasNextPage: z.boolean().nullish(),
-      hasPreviousPage: z.boolean().nullish(),
-      templates: z.array(templateRequest).nullish(),
+      hasNextPage: z.boolean().optional(),
+      hasPreviousPage: z.boolean().optional(),
+      templates: z.array(templateRequest).optional(),
     })
     .transform((data) => ({
       has_next_page: data['hasNextPage'],

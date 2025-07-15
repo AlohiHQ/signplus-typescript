@@ -4,17 +4,13 @@ import { SignplusService } from './services/signplus';
 
 export * from './services/signplus';
 
-export type * from './http';
+export * from './http';
+export { Environment } from './http/environment';
 
 export class Signplus {
   public readonly signplus: SignplusService;
 
   constructor(public config: SdkConfig) {
-    const baseUrl = config.environment || config.baseUrl || Environment.DEFAULT;
-    this.config = {
-      ...config,
-      baseUrl,
-    };
     this.signplus = new SignplusService(this.config);
   }
 

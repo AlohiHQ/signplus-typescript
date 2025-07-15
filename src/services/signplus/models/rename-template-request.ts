@@ -35,7 +35,11 @@ export const renameTemplateRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const renameTemplateRequestRequest = z.lazy(() => {
-  return z.object({ name: z.string().nullish() }).transform((data) => ({
-    name: data['name'],
-  }));
+  return z
+    .object({
+      name: z.string(),
+    })
+    .transform((data) => ({
+      name: data['name'],
+    }));
 });

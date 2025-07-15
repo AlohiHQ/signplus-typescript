@@ -2,49 +2,51 @@
 
 A list of all methods in the `SignplusService` service. Click on the method name to view detailed information about that method.
 
-| Methods                                                           | Description                       |
-| :---------------------------------------------------------------- | :-------------------------------- |
-| [createEnvelope](#createenvelope)                                 | Create new envelope               |
-| [createEnvelopeFromTemplate](#createenvelopefromtemplate)         | Create new envelope from template |
-| [listEnvelopes](#listenvelopes)                                   | List envelopes                    |
-| [getEnvelope](#getenvelope)                                       | Get envelope                      |
-| [deleteEnvelope](#deleteenvelope)                                 | Delete envelope                   |
-| [getEnvelopeDocument](#getenvelopedocument)                       | Get envelope document             |
-| [getEnvelopeDocuments](#getenvelopedocuments)                     | Get envelope documents            |
-| [addEnvelopeDocument](#addenvelopedocument)                       | Add envelope document             |
-| [setEnvelopeDynamicFields](#setenvelopedynamicfields)             | Set envelope dynamic fields       |
-| [addEnvelopeSigningSteps](#addenvelopesigningsteps)               | Add envelope signing steps        |
-| [sendEnvelope](#sendenvelope)                                     | Send envelope for signature       |
-| [duplicateEnvelope](#duplicateenvelope)                           | Duplicate envelope                |
-| [voidEnvelope](#voidenvelope)                                     | Void envelope                     |
-| [renameEnvelope](#renameenvelope)                                 | Rename envelope                   |
-| [setEnvelopeComment](#setenvelopecomment)                         | Set envelope comment              |
-| [setEnvelopeNotification](#setenvelopenotification)               | Set envelope notification         |
-| [setEnvelopeExpirationDate](#setenvelopeexpirationdate)           | Set envelope expiration date      |
-| [setEnvelopeLegalityLevel](#setenvelopelegalitylevel)             | Set envelope legality level       |
-| [getEnvelopeAnnotations](#getenvelopeannotations)                 | Get envelope annotations          |
-| [getEnvelopeDocumentAnnotations](#getenvelopedocumentannotations) | Get envelope document annotations |
-| [addEnvelopeAnnotation](#addenvelopeannotation)                   | Add envelope annotation           |
-| [deleteEnvelopeAnnotation](#deleteenvelopeannotation)             | Delete envelope annotation        |
-| [createTemplate](#createtemplate)                                 | Create new template               |
-| [listTemplates](#listtemplates)                                   | List templates                    |
-| [getTemplate](#gettemplate)                                       | Get template                      |
-| [deleteTemplate](#deletetemplate)                                 | Delete template                   |
-| [duplicateTemplate](#duplicatetemplate)                           | Duplicate template                |
-| [addTemplateDocument](#addtemplatedocument)                       | Add template document             |
-| [getTemplateDocument](#gettemplatedocument)                       | Get template document             |
-| [getTemplateDocuments](#gettemplatedocuments)                     | Get template documents            |
-| [addTemplateSigningSteps](#addtemplatesigningsteps)               | Add template signing steps        |
-| [renameTemplate](#renametemplate)                                 | Rename template                   |
-| [setTemplateComment](#settemplatecomment)                         | Set template comment              |
-| [setTemplateNotification](#settemplatenotification)               | Set template notification         |
-| [getTemplateAnnotations](#gettemplateannotations)                 | Get template annotations          |
-| [getDocumentTemplateAnnotations](#getdocumenttemplateannotations) | Get document template annotations |
-| [addTemplateAnnotation](#addtemplateannotation)                   | Add template annotation           |
-| [deleteTemplateAnnotation](#deletetemplateannotation)             | Delete template annotation        |
-| [createWebhook](#createwebhook)                                   | Create webhook                    |
-| [listWebhooks](#listwebhooks)                                     | List webhooks                     |
-| [deleteWebhook](#deletewebhook)                                   | Delete webhook                    |
+| Methods                                                             | Description                                        |
+| :------------------------------------------------------------------ | :------------------------------------------------- |
+| [createEnvelope](#createenvelope)                                   | Create new envelope                                |
+| [createEnvelopeFromTemplate](#createenvelopefromtemplate)           | Create new envelope from template                  |
+| [listEnvelopes](#listenvelopes)                                     | List envelopes                                     |
+| [getEnvelope](#getenvelope)                                         | Get envelope                                       |
+| [deleteEnvelope](#deleteenvelope)                                   | Delete envelope                                    |
+| [downloadEnvelopeSignedDocuments](#downloadenvelopesigneddocuments) | Download signed documents for an envelope          |
+| [downloadEnvelopeCertificate](#downloadenvelopecertificate)         | Download certificate of completion for an envelope |
+| [getEnvelopeDocument](#getenvelopedocument)                         | Get envelope document                              |
+| [getEnvelopeDocuments](#getenvelopedocuments)                       | Get envelope documents                             |
+| [addEnvelopeDocument](#addenvelopedocument)                         | Add envelope document                              |
+| [setEnvelopeDynamicFields](#setenvelopedynamicfields)               | Set envelope dynamic fields                        |
+| [addEnvelopeSigningSteps](#addenvelopesigningsteps)                 | Add envelope signing steps                         |
+| [sendEnvelope](#sendenvelope)                                       | Send envelope for signature                        |
+| [duplicateEnvelope](#duplicateenvelope)                             | Duplicate envelope                                 |
+| [voidEnvelope](#voidenvelope)                                       | Void envelope                                      |
+| [renameEnvelope](#renameenvelope)                                   | Rename envelope                                    |
+| [setEnvelopeComment](#setenvelopecomment)                           | Set envelope comment                               |
+| [setEnvelopeNotification](#setenvelopenotification)                 | Set envelope notification                          |
+| [setEnvelopeExpirationDate](#setenvelopeexpirationdate)             | Set envelope expiration date                       |
+| [setEnvelopeLegalityLevel](#setenvelopelegalitylevel)               | Set envelope legality level                        |
+| [getEnvelopeAnnotations](#getenvelopeannotations)                   | Get envelope annotations                           |
+| [getEnvelopeDocumentAnnotations](#getenvelopedocumentannotations)   | Get envelope document annotations                  |
+| [addEnvelopeAnnotation](#addenvelopeannotation)                     | Add envelope annotation                            |
+| [deleteEnvelopeAnnotation](#deleteenvelopeannotation)               | Delete envelope annotation                         |
+| [createTemplate](#createtemplate)                                   | Create new template                                |
+| [listTemplates](#listtemplates)                                     | List templates                                     |
+| [getTemplate](#gettemplate)                                         | Get template                                       |
+| [deleteTemplate](#deletetemplate)                                   | Delete template                                    |
+| [duplicateTemplate](#duplicatetemplate)                             | Duplicate template                                 |
+| [addTemplateDocument](#addtemplatedocument)                         | Add template document                              |
+| [getTemplateDocument](#gettemplatedocument)                         | Get template document                              |
+| [getTemplateDocuments](#gettemplatedocuments)                       | Get template documents                             |
+| [addTemplateSigningSteps](#addtemplatesigningsteps)                 | Add template signing steps                         |
+| [renameTemplate](#renametemplate)                                   | Rename template                                    |
+| [setTemplateComment](#settemplatecomment)                           | Set template comment                               |
+| [setTemplateNotification](#settemplatenotification)                 | Set template notification                          |
+| [getTemplateAnnotations](#gettemplateannotations)                   | Get template annotations                           |
+| [getDocumentTemplateAnnotations](#getdocumenttemplateannotations)   | Get document template annotations                  |
+| [addTemplateAnnotation](#addtemplateannotation)                     | Add template annotation                            |
+| [deleteTemplateAnnotation](#deletetemplateannotation)               | Delete template annotation                         |
+| [createWebhook](#createwebhook)                                     | Create webhook                                     |
+| [listWebhooks](#listwebhooks)                                       | List webhooks                                      |
+| [deleteWebhook](#deletewebhook)                                     | Delete webhook                                     |
 
 ## createEnvelope
 
@@ -78,7 +80,7 @@ import { CreateEnvelopeRequest, EnvelopeLegalityLevel, Signplus } from '@alohi/s
   const createEnvelopeRequest: CreateEnvelopeRequest = {
     name: 'name',
     legalityLevel: envelopeLegalityLevel,
-    expiresAt: 1,
+    expiresAt: 10,
     comment: 'comment',
     sandbox: true,
   };
@@ -168,11 +170,11 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 6,
-    dateTo: 5,
+    dateFrom: 3,
+    dateTo: 10,
     uid: 'uid',
-    first: 6,
-    last: 5,
+    first: 4,
+    last: 6,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -243,6 +245,75 @@ import { Signplus } from '@alohi/signplus-typescript';
   });
 
   const { data } = await signplus.signplus.deleteEnvelope('envelope_id');
+
+  console.log(data);
+})();
+```
+
+## downloadEnvelopeSignedDocuments
+
+Download signed documents for an envelope
+
+- HTTP Method: `GET`
+- Endpoint: `/envelope/{envelope_id}/signed_documents`
+
+**Parameters**
+
+| Name                    | Type    | Required | Description                                                             |
+| :---------------------- | :------ | :------- | :---------------------------------------------------------------------- |
+| envelopeId              | string  | ✅       | ID of the envelope                                                      |
+| certificateOfCompletion | boolean | ❌       | Whether to include the certificate of completion in the downloaded file |
+
+**Return Type**
+
+`ArrayBuffer`
+
+**Example Usage Code Snippet**
+
+```typescript
+import { Signplus } from '@alohi/signplus-typescript';
+
+(async () => {
+  const signplus = new Signplus({
+    token: 'YOUR_TOKEN',
+  });
+
+  const { data } = await signplus.signplus.downloadEnvelopeSignedDocuments('envelope_id', {
+    certificateOfCompletion: true,
+  });
+
+  console.log(data);
+})();
+```
+
+## downloadEnvelopeCertificate
+
+Download certificate of completion for an envelope
+
+- HTTP Method: `GET`
+- Endpoint: `/envelope/{envelope_id}/certificate`
+
+**Parameters**
+
+| Name       | Type   | Required | Description        |
+| :--------- | :----- | :------- | :----------------- |
+| envelopeId | string | ✅       | ID of the envelope |
+
+**Return Type**
+
+`ArrayBuffer`
+
+**Example Usage Code Snippet**
+
+```typescript
+import { Signplus } from '@alohi/signplus-typescript';
+
+(async () => {
+  const signplus = new Signplus({
+    token: 'YOUR_TOKEN',
+  });
+
+  const { data } = await signplus.signplus.downloadEnvelopeCertificate('envelope_id');
 
   console.log(data);
 })();
@@ -662,7 +733,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 10,
+    reminderInterval: 4,
   };
 
   const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', envelopeNotification);
@@ -872,8 +943,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 4.75,
-    color: 6.85,
+    size: 8.54,
+    color: 2.58,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -883,12 +954,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 0.27,
+    size: 7.66,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 8,
+    timestamp: 123,
     format: annotationDateTimeFormat,
   };
 
@@ -902,11 +973,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 123,
-    x: 6.35,
-    y: 5.61,
-    width: 2.3,
-    height: 3.29,
+    page: 10,
+    x: 1.01,
+    y: 5.72,
+    width: 0.07,
+    height: 0.94,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1022,8 +1093,8 @@ import { ListTemplatesRequest, Signplus, TemplateOrderField } from '@alohi/signp
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 8,
-    last: 8,
+    first: 10,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
@@ -1395,7 +1466,7 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 10,
+    reminderInterval: 4,
   };
 
   const { data } = await signplus.signplus.setTemplateNotification('template_id', envelopeNotification);
@@ -1527,8 +1598,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 4.75,
-    color: 6.85,
+    size: 8.54,
+    color: 2.58,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1538,12 +1609,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 0.27,
+    size: 7.66,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 8,
+    timestamp: 123,
     format: annotationDateTimeFormat,
   };
 
@@ -1557,11 +1628,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 123,
-    x: 6.35,
-    y: 5.61,
-    width: 2.3,
-    height: 3.29,
+    page: 10,
+    x: 1.01,
+    y: 5.72,
+    width: 0.07,
+    height: 0.94,
     required: true,
     type: annotationType,
     signature: annotationSignature,

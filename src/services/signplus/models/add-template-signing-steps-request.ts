@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { templateSigningStep, templateSigningStepRequest, templateSigningStepResponse } from './template-signing-step';
+import {
+  TemplateSigningStep,
+  templateSigningStep,
+  templateSigningStepRequest,
+  templateSigningStepResponse,
+} from './template-signing-step';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +41,11 @@ export const addTemplateSigningStepsRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const addTemplateSigningStepsRequestRequest = z.lazy(() => {
-  return z.object({ signingSteps: z.array(templateSigningStepRequest).nullish() }).transform((data) => ({
-    signing_steps: data['signingSteps'],
-  }));
+  return z
+    .object({
+      signingSteps: z.array(templateSigningStepRequest),
+    })
+    .transform((data) => ({
+      signing_steps: data['signingSteps'],
+    }));
 });

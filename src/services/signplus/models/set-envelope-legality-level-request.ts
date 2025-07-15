@@ -35,7 +35,11 @@ export const setEnvelopeLegalityLevelRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const setEnvelopeLegalityLevelRequestRequest = z.lazy(() => {
-  return z.object({ legalityLevel: z.string().nullish() }).transform((data) => ({
-    legality_level: data['legalityLevel'],
-  }));
+  return z
+    .object({
+      legalityLevel: z.string().optional(),
+    })
+    .transform((data) => ({
+      legality_level: data['legalityLevel'],
+    }));
 });

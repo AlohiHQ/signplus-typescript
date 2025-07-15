@@ -39,8 +39,13 @@ export const pageResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const pageRequest = z.lazy(() => {
-  return z.object({ width: z.number().nullish(), height: z.number().nullish() }).transform((data) => ({
-    width: data['width'],
-    height: data['height'],
-  }));
+  return z
+    .object({
+      width: z.number().optional(),
+      height: z.number().optional(),
+    })
+    .transform((data) => ({
+      width: data['width'],
+      height: data['height'],
+    }));
 });

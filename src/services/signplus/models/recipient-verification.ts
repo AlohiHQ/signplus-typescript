@@ -11,10 +11,18 @@ export const recipientVerification = z.lazy(() => {
 });
 
 /**
- *
- * @typedef  {RecipientVerification} recipientVerification
- * @property {RecipientVerificationType} - Type of signature verification (SMS sends a code via SMS, PASSCODE requires a code to be entered)
- * @property {string}
+ * 
+ * @typedef  {RecipientVerification} recipientVerification   
+ * @property {RecipientVerificationType} - Type of verification the recipient must complete before accessing the envelope.
+
+- `PASSCODE`: requires a code to be entered.  
+- `SMS`: sends a code via SMS.  
+- `ID_VERIFICATION`: prompts the recipient to complete an automated ID and selfie check.
+ * @property {string} - Required for `PASSCODE` and `SMS` verification.
+
+- `PASSCODE`: code required by the recipient to sign the document.
+- `SMS`: recipient's phone number.
+- `ID_VERIFICATION`: leave empty.
  */
 export type RecipientVerification = z.infer<typeof recipientVerification>;
 
@@ -39,8 +47,13 @@ export const recipientVerificationResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const recipientVerificationRequest = z.lazy(() => {
-  return z.object({ type: z.string().nullish(), value: z.string().nullish() }).transform((data) => ({
-    type: data['type'],
-    value: data['value'],
-  }));
+  return z
+    .object({
+      type: z.string().optional(),
+      value: z.string().optional(),
+    })
+    .transform((data) => ({
+      type: data['type'],
+      value: data['value'],
+    }));
 });

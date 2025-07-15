@@ -5,7 +5,11 @@ import { z } from 'zod';
  */
 export const createEnvelopeRequest = z.lazy(() => {
   return z.object({
-    name: z.string(),
+    name: z
+      .string()
+      .min(2)
+      .max(256)
+      .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
     legalityLevel: z.string(),
     expiresAt: z.number().optional(),
     comment: z.string().optional(),
@@ -31,7 +35,11 @@ export type CreateEnvelopeRequest = z.infer<typeof createEnvelopeRequest>;
 export const createEnvelopeRequestResponse = z.lazy(() => {
   return z
     .object({
-      name: z.string(),
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
       legality_level: z.string(),
       expires_at: z.number().optional(),
       comment: z.string().optional(),
@@ -53,11 +61,15 @@ export const createEnvelopeRequestResponse = z.lazy(() => {
 export const createEnvelopeRequestRequest = z.lazy(() => {
   return z
     .object({
-      name: z.string().nullish(),
-      legalityLevel: z.string().nullish(),
-      expiresAt: z.number().nullish(),
-      comment: z.string().nullish(),
-      sandbox: z.boolean().nullish(),
+      name: z
+        .string()
+        .min(2)
+        .max(256)
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9 ]*[a-zA-Z0-9]$/),
+      legalityLevel: z.string(),
+      expiresAt: z.number().optional(),
+      comment: z.string().optional(),
+      sandbox: z.boolean().optional(),
     })
     .transform((data) => ({
       name: data['name'],

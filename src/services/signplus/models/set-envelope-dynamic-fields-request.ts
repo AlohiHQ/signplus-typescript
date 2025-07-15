@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { dynamicField, dynamicFieldRequest, dynamicFieldResponse } from './dynamic-field';
+import { DynamicField, dynamicField, dynamicFieldRequest, dynamicFieldResponse } from './dynamic-field';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -36,7 +36,11 @@ export const setEnvelopeDynamicFieldsRequestResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const setEnvelopeDynamicFieldsRequestRequest = z.lazy(() => {
-  return z.object({ dynamicFields: z.array(dynamicFieldRequest).nullish() }).transform((data) => ({
-    dynamic_fields: data['dynamicFields'],
-  }));
+  return z
+    .object({
+      dynamicFields: z.array(dynamicFieldRequest),
+    })
+    .transform((data) => ({
+      dynamic_fields: data['dynamicFields'],
+    }));
 });

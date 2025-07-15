@@ -39,8 +39,13 @@ export const annotationCheckboxResponse = z.lazy(() => {
  * Is equal to application shape if all property names match the api schema
  */
 export const annotationCheckboxRequest = z.lazy(() => {
-  return z.object({ checked: z.boolean().nullish(), style: z.string().nullish() }).transform((data) => ({
-    checked: data['checked'],
-    style: data['style'],
-  }));
+  return z
+    .object({
+      checked: z.boolean().optional(),
+      style: z.string().optional(),
+    })
+    .transform((data) => ({
+      checked: data['checked'],
+      style: data['style'],
+    }));
 });
