@@ -19,3 +19,4 @@
 | signingSteps  | SigningStep[]         | ❌       |                                                                                                                                                                         |
 | documents     | Document[]            | ❌       |                                                                                                                                                                         |
 | notification  | EnvelopeNotification  | ❌       |                                                                                                                                                                         |
+| attachments   | EnvelopeAttachments   | ❌       |                                                                                                                                                                         |

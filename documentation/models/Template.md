@@ -17,3 +17,4 @@
 | documents       | Document[]            | ❌       |                                                                                                                                                                         |
 | notification    | EnvelopeNotification  | ❌       |                                                                                                                                                                         |
 | dynamicFields   | string[]              | ❌       | List of dynamic fields                                                                                                                                                  |
+| attachments     | EnvelopeAttachments   | ❌       |                                                                                                                                                                         |

@@ -44,6 +44,10 @@ export class Request<PageSchema = unknown[]> {
 
   public pagination?: RequestPagination<PageSchema>;
 
+  public filename?: string;
+
+  public filenames?: string[];
+
   private readonly pathPattern: string;
 
   constructor(params: CreateRequestParameters<PageSchema>) {
@@ -63,6 +67,8 @@ export class Request<PageSchema = unknown[]> {
     this.retry = params.retry;
     this.validation = params.validation;
     this.pagination = params.pagination;
+    this.filename = params.filename;
+    this.filenames = params.filenames;
   }
 
   addHeaderParam(key: string, param: RequestParameter): void {
@@ -164,6 +170,8 @@ export class Request<PageSchema = unknown[]> {
       requestContentType: overrides?.requestContentType ?? this.requestContentType,
       retry: overrides?.retry ?? this.retry,
       validation: overrides?.validation ?? this.validation,
+      filename: overrides?.filename ?? this.filename,
+      filenames: overrides?.filenames ?? this.filenames,
     };
     return new Request({
       ...createRequestParams,
