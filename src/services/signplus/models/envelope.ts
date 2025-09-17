@@ -7,6 +7,12 @@ import {
   envelopeNotificationRequest,
   envelopeNotificationResponse,
 } from './envelope-notification';
+import {
+  EnvelopeAttachments,
+  envelopeAttachments,
+  envelopeAttachmentsRequest,
+  envelopeAttachmentsResponse,
+} from './envelope-attachments';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -28,6 +34,7 @@ export const envelope = z.lazy(() => {
     signingSteps: z.array(signingStep).optional(),
     documents: z.array(document).optional(),
     notification: envelopeNotification.optional(),
+    attachments: envelopeAttachments.optional(),
   });
 });
 
@@ -49,6 +56,7 @@ export const envelope = z.lazy(() => {
  * @property {SigningStep[]}
  * @property {Document[]}
  * @property {EnvelopeNotification}
+ * @property {EnvelopeAttachments}
  */
 export type Envelope = z.infer<typeof envelope>;
 
@@ -74,6 +82,7 @@ export const envelopeResponse = z.lazy(() => {
       signing_steps: z.array(signingStepResponse).optional(),
       documents: z.array(documentResponse).optional(),
       notification: envelopeNotificationResponse.optional(),
+      attachments: envelopeAttachmentsResponse.optional(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -91,6 +100,7 @@ export const envelopeResponse = z.lazy(() => {
       signingSteps: data['signing_steps'],
       documents: data['documents'],
       notification: data['notification'],
+      attachments: data['attachments'],
     }));
 });
 
@@ -116,6 +126,7 @@ export const envelopeRequest = z.lazy(() => {
       signingSteps: z.array(signingStepRequest).optional(),
       documents: z.array(documentRequest).optional(),
       notification: envelopeNotificationRequest.optional(),
+      attachments: envelopeAttachmentsRequest.optional(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -133,5 +144,6 @@ export const envelopeRequest = z.lazy(() => {
       signing_steps: data['signingSteps'],
       documents: data['documents'],
       notification: data['notification'],
+      attachments: data['attachments'],
     }));
 });

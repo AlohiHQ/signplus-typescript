@@ -12,6 +12,12 @@ import {
   envelopeNotificationRequest,
   envelopeNotificationResponse,
 } from './envelope-notification';
+import {
+  EnvelopeAttachments,
+  envelopeAttachments,
+  envelopeAttachmentsRequest,
+  envelopeAttachmentsResponse,
+} from './envelope-attachments';
 
 /**
  * The shape of the model inside the application code - what the users use
@@ -31,6 +37,7 @@ export const template = z.lazy(() => {
     documents: z.array(document).optional(),
     notification: envelopeNotification.optional(),
     dynamicFields: z.array(z.string()).optional(),
+    attachments: envelopeAttachments.optional(),
   });
 });
 
@@ -50,6 +57,7 @@ export const template = z.lazy(() => {
  * @property {Document[]}
  * @property {EnvelopeNotification}
  * @property {string[]} - List of dynamic fields
+ * @property {EnvelopeAttachments}
  */
 export type Template = z.infer<typeof template>;
 
@@ -73,6 +81,7 @@ export const templateResponse = z.lazy(() => {
       documents: z.array(documentResponse).optional(),
       notification: envelopeNotificationResponse.optional(),
       dynamic_fields: z.array(z.string()).optional(),
+      attachments: envelopeAttachmentsResponse.optional(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -88,6 +97,7 @@ export const templateResponse = z.lazy(() => {
       documents: data['documents'],
       notification: data['notification'],
       dynamicFields: data['dynamic_fields'],
+      attachments: data['attachments'],
     }));
 });
 
@@ -111,6 +121,7 @@ export const templateRequest = z.lazy(() => {
       documents: z.array(documentRequest).optional(),
       notification: envelopeNotificationRequest.optional(),
       dynamicFields: z.array(z.string()).optional(),
+      attachments: envelopeAttachmentsRequest.optional(),
     })
     .transform((data) => ({
       id: data['id'],
@@ -126,5 +137,6 @@ export const templateRequest = z.lazy(() => {
       documents: data['documents'],
       notification: data['notification'],
       dynamic_fields: data['dynamicFields'],
+      attachments: data['attachments'],
     }));
 });

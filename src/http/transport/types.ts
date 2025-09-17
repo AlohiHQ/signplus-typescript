@@ -31,6 +31,8 @@ export interface CreateRequestParameters<Page = unknown[]> {
   validation: ValidationOptions;
   retry: RetryOptions;
   pagination?: RequestPagination<Page>;
+  filename?: string;
+  filenames?: string[];
 }
 
 export interface RequestParameter {

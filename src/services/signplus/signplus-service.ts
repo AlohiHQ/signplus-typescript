@@ -28,6 +28,15 @@ import {
   AddEnvelopeSigningStepsRequest,
   addEnvelopeSigningStepsRequestRequest,
 } from './models/add-envelope-signing-steps-request';
+import {
+  SetEnvelopeAttachmentsSettingsRequest,
+  setEnvelopeAttachmentsSettingsRequestRequest,
+} from './models/set-envelope-attachments-settings-request';
+import { EnvelopeAttachments, envelopeAttachmentsResponse } from './models/envelope-attachments';
+import {
+  SetEnvelopeAttachmentsPlaceholdersRequest,
+  setEnvelopeAttachmentsPlaceholdersRequestRequest,
+} from './models/set-envelope-attachments-placeholders-request';
 import { RenameEnvelopeRequest, renameEnvelopeRequestRequest } from './models/rename-envelope-request';
 import { SetEnvelopeCommentRequest, setEnvelopeCommentRequestRequest } from './models/set-envelope-comment-request';
 import { EnvelopeNotification, envelopeNotificationRequest } from './models/envelope-notification';
@@ -254,7 +263,7 @@ export class SignplusService extends BaseService {
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.instanceof(ArrayBuffer),
-        contentType: ContentType.Json,
+        contentType: ContentType.Binary,
         status: 200,
       })
       .setRetryAttempts(this.config, requestConfig)
@@ -292,7 +301,7 @@ export class SignplusService extends BaseService {
       .setRequestContentType(ContentType.Json)
       .addResponse({
         schema: z.instanceof(ArrayBuffer),
-        contentType: ContentType.Json,
+        contentType: ContentType.Binary,
         status: 200,
       })
       .setRetryAttempts(this.config, requestConfig)
@@ -389,6 +398,7 @@ export class SignplusService extends BaseService {
   async addEnvelopeDocument(
     envelopeId: string,
     body: AddEnvelopeDocumentRequest,
+    filename?: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
@@ -411,8 +421,8 @@ export class SignplusService extends BaseService {
         key: 'envelope_id',
         value: envelopeId,
       })
-      .addHeaderParam({ key: 'Content-Type', value: 'multipart/form-data' })
       .addBody(body)
+      .setFilename(filename)
       .build();
     return this.client.call<Document>(request);
   }
@@ -489,6 +499,120 @@ export class SignplusService extends BaseService {
       .addBody(body)
       .build();
     return this.client.call<Envelope>(request);
+  }
+
+  /**
+   * Set envelope attachment settings
+   * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<EnvelopeAttachments>>} Attachment settings set successfully
+   */
+  async setEnvelopeAttachmentsSettings(
+    envelopeId: string,
+    body: SetEnvelopeAttachmentsSettingsRequest,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<EnvelopeAttachments>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('PUT')
+      .setPath('/envelope/{envelope_id}/attachments/settings')
+      .setRequestSchema(setEnvelopeAttachmentsSettingsRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeAttachmentsResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
+      .addBody(body)
+      .build();
+    return this.client.call<EnvelopeAttachments>(request);
+  }
+
+  /**
+   * Placeholders to be set, completely replacing the existing ones.
+   * @param {string} envelopeId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<EnvelopeAttachments>>} Placeholders set
+   */
+  async setEnvelopeAttachmentsPlaceholders(
+    envelopeId: string,
+    body: SetEnvelopeAttachmentsPlaceholdersRequest,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<EnvelopeAttachments>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('PUT')
+      .setPath('/envelope/{envelope_id}/attachments/placeholders')
+      .setRequestSchema(setEnvelopeAttachmentsPlaceholdersRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeAttachmentsResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
+      .addBody(body)
+      .build();
+    return this.client.call<EnvelopeAttachments>(request);
+  }
+
+  /**
+   * Get envelope attachment file
+   * @param {string} envelopeId -
+   * @param {string} fileId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<ArrayBuffer>>} Attachment file retrieved successfully
+   */
+  async getAttachmentFile(
+    envelopeId: string,
+    fileId: string,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<ArrayBuffer>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('GET')
+      .setPath('/envelope/{envelope_id}/attachments/{file_id}')
+      .setRequestSchema(z.any())
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: z.any(),
+        contentType: ContentType.Binary,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'envelope_id',
+        value: envelopeId,
+      })
+      .addPathParam({
+        key: 'file_id',
+        value: fileId,
+      })
+      .build();
+    return this.client.call<ArrayBuffer>(request);
   }
 
   /**
@@ -1078,6 +1202,7 @@ export class SignplusService extends BaseService {
   async addTemplateDocument(
     templateId: string,
     body: AddTemplateDocumentRequest,
+    filename?: string,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<Document>> {
     const request = new RequestBuilder()
@@ -1100,8 +1225,8 @@ export class SignplusService extends BaseService {
         key: 'template_id',
         value: templateId,
       })
-      .addHeaderParam({ key: 'Content-Type', value: 'multipart/form-data' })
       .addBody(body)
+      .setFilename(filename)
       .build();
     return this.client.call<Document>(request);
   }
@@ -1477,6 +1602,80 @@ export class SignplusService extends BaseService {
       })
       .build();
     return this.client.call<void>(request);
+  }
+
+  /**
+   * Set template attachment settings
+   * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<EnvelopeAttachments>>} Attachment settings set successfully
+   */
+  async setTemplateAttachmentsSettings(
+    templateId: string,
+    body: SetEnvelopeAttachmentsSettingsRequest,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<EnvelopeAttachments>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('PUT')
+      .setPath('/template/{template_id}/attachments/settings')
+      .setRequestSchema(setEnvelopeAttachmentsSettingsRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeAttachmentsResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
+      .addBody(body)
+      .build();
+    return this.client.call<EnvelopeAttachments>(request);
+  }
+
+  /**
+   * Placeholders to be set, completely replacing the existing ones.
+   * @param {string} templateId -
+   * @param {RequestConfig} requestConfig - (Optional) The request configuration for retry and validation.
+   * @returns {Promise<HttpResponse<EnvelopeAttachments>>} Placeholders set
+   */
+  async setTemplateAttachmentsPlaceholders(
+    templateId: string,
+    body: SetEnvelopeAttachmentsPlaceholdersRequest,
+    requestConfig?: RequestConfig,
+  ): Promise<HttpResponse<EnvelopeAttachments>> {
+    const request = new RequestBuilder()
+      .setBaseUrl(requestConfig?.baseUrl || this.config.baseUrl || this.config.environment || Environment.DEFAULT)
+      .setConfig(this.config)
+      .setMethod('PUT')
+      .setPath('/template/{template_id}/attachments/placeholders')
+      .setRequestSchema(setEnvelopeAttachmentsPlaceholdersRequestRequest)
+      .addAccessTokenAuth(this.config.token, 'Bearer')
+      .setRequestContentType(ContentType.Json)
+      .addResponse({
+        schema: envelopeAttachmentsResponse,
+        contentType: ContentType.Json,
+        status: 200,
+      })
+      .setRetryAttempts(this.config, requestConfig)
+      .setRetryDelayMs(this.config, requestConfig)
+      .setResponseValidation(this.config, requestConfig)
+      .addPathParam({
+        key: 'template_id',
+        value: templateId,
+      })
+      .addHeaderParam({ key: 'Content-Type', value: 'application/json' })
+      .addBody(body)
+      .build();
+    return this.client.call<EnvelopeAttachments>(request);
   }
 
   /**
