@@ -1,0 +1,9 @@
+# TextFont2
+
+**Properties**
+
+| Name   | Type   | Required | Description |
+| :----- | :----- | :------- | :---------- |
+| family | string | ❌       |             |
+| italic | string | ❌       |             |
+| bold   | string | ❌       |             |
