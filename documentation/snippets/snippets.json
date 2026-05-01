@@ -1,0 +1,151 @@
+{
+  "endpoints": {
+    "/envelope/from_template/{template_id}": {
+      "post": "import { CreateEnvelopeFromTemplateRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const createEnvelopeFromTemplateRequest: CreateEnvelopeFromTemplateRequest = {\t\n    name: \"dwL1t\",\n    comment: \"string\",\n    sandbox: true\n  };\n\n  const data = await signplus.templateId.createEnvelopeFromTemplate(\n  \"template_id\",\n  createEnvelopeFromTemplateRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/signed_documents": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.signedDocuments.downloadEnvelopeSignedDocuments(\n  \"envelope_id\",\n  {\n      certificateOfCompletion: \"true\",\n      accept: \"application/pdf\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/certificate": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.certificate.downloadEnvelopeCertificate(\n  \"envelope_id\",\n  {\n      accept: \"application/pdf\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/document/{document_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.documentId.getEnvelopeDocument(\n  \"envelope_id\",\n  \"document_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/document": {
+      "post": "import { AddEnvelopeDocumentRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const addEnvelopeDocumentRequest: AddEnvelopeDocumentRequest = {\t\n    file: new ArrayBuffer(0)\n  };\n\n  const data = await signplus.document.addEnvelopeDocument(\n  \"envelope_id\",\n  addEnvelopeDocumentRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/documents": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.documents.getEnvelopeDocuments(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/dynamic_fields": {
+      "put": "import { DynamicFields, SetEnvelopeDynamicFieldsRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const dynamicFields: DynamicFields = {\t\n    name: \"string\",\n    value: \"string\"\n  };\n  \n  const setEnvelopeDynamicFieldsRequest: SetEnvelopeDynamicFieldsRequest = {\t\n    dynamicFields: [dynamicFields]\n  };\n\n  const data = await signplus.dynamicFields.setEnvelopeDynamicFields(\n  \"envelope_id\",\n  setEnvelopeDynamicFieldsRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/signing_steps": {
+      "post": "import { AddEnvelopeSigningStepsRequest, AddEnvelopeSigningStepsRequestSigningSteps, SigningStepsRecipients1, Signplus, Verification } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const verification: Verification = {\t\n    type: \"SMS\",\n    value: \"string\"\n  };\n  \n  const signingStepsRecipients1: SigningStepsRecipients1 = {\t\n    name: \"string\",\n    email: \"string\",\n    role: \"IN_PERSON_SIGNER\",\n    id: \"string\",\n    uid: \"string\",\n    verification: verification\n  };\n  \n  const addEnvelopeSigningStepsRequestSigningSteps: AddEnvelopeSigningStepsRequestSigningSteps = {\t\n    recipients: [signingStepsRecipients1]\n  };\n  \n  const addEnvelopeSigningStepsRequest: AddEnvelopeSigningStepsRequest = {\t\n    signingSteps: [addEnvelopeSigningStepsRequestSigningSteps]\n  };\n\n  const data = await signplus.signingSteps.addEnvelopeSigningSteps(\n  \"envelope_id\",\n  addEnvelopeSigningStepsRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/attachments/settings": {
+      "put": "import { SetEnvelopeAttachmentsSettingsRequest, SetEnvelopeAttachmentsSettingsRequestSettings, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeAttachmentsSettingsRequestSettings: SetEnvelopeAttachmentsSettingsRequestSettings = {\t\n    visibleToRecipients: true\n  };\n  \n  const setEnvelopeAttachmentsSettingsRequest: SetEnvelopeAttachmentsSettingsRequest = {\t\n    settings: setEnvelopeAttachmentsSettingsRequestSettings\n  };\n\n  const data = await signplus.settings.setEnvelopeAttachmentsSettings(\n  \"envelope_id\",\n  setEnvelopeAttachmentsSettingsRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/attachments/placeholders": {
+      "put": "import { SetEnvelopeAttachmentsPlaceholdersRequest, SetEnvelopeAttachmentsPlaceholdersRequestPlaceholders, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeAttachmentsPlaceholdersRequestPlaceholders: SetEnvelopeAttachmentsPlaceholdersRequestPlaceholders = {\t\n    recipientId: \"string\",\n    name: \"string\",\n    required: true,\n    multiple: true,\n    id: \"string\",\n    hint: \"string\"\n  };\n  \n  const setEnvelopeAttachmentsPlaceholdersRequest: SetEnvelopeAttachmentsPlaceholdersRequest = {\t\n    placeholders: [setEnvelopeAttachmentsPlaceholdersRequestPlaceholders]\n  };\n\n  const data = await signplus.placeholders.setEnvelopeAttachmentsPlaceholders(\n  \"envelope_id\",\n  setEnvelopeAttachmentsPlaceholdersRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/attachments/{file_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.fileId.getAttachmentFile(\n  \"envelope_id\",\n  \"file_id\",\n  {\n      accept: \"application/octet-stream\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/send": {
+      "post": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.send.sendEnvelope(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/duplicate": {
+      "post": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.duplicate.duplicateEnvelope(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/void": {
+      "put": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.void_.voidEnvelope(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/rename": {
+      "put": "import { RenameEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const renameEnvelopeRequest: RenameEnvelopeRequest = {\t\n    name: \"string\"\n  };\n\n  const data = await signplus.rename.renameEnvelope(\n  \"envelope_id\",\n  renameEnvelopeRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/set_comment": {
+      "put": "import { SetEnvelopeCommentRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeCommentRequest: SetEnvelopeCommentRequest = {\t\n    comment: \"string\"\n  };\n\n  const data = await signplus.setComment.setEnvelopeComment(\n  \"envelope_id\",\n  setEnvelopeCommentRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/set_notification": {
+      "put": "import { SetEnvelopeNotificationRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeNotificationRequest: SetEnvelopeNotificationRequest = {\t\n    subject: \"string\",\n    message: \"string\",\n    reminderInterval: 4732\n  };\n\n  const data = await signplus.setNotification.setEnvelopeNotification(\n  \"envelope_id\",\n  setEnvelopeNotificationRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/set_expiration_date": {
+      "put": "import { SetEnvelopeExpirationDateRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeExpirationDateRequest: SetEnvelopeExpirationDateRequest = {\t\n    expiresAt: 5958\n  };\n\n  const data = await signplus.setExpirationDate.setEnvelopeExpirationDate(\n  \"envelope_id\",\n  setEnvelopeExpirationDateRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/set_legality_level": {
+      "put": "import { SetEnvelopeLegalityLevelRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setEnvelopeLegalityLevelRequest: SetEnvelopeLegalityLevelRequest = {\t\n    legalityLevel: \"SES\"\n  };\n\n  const data = await signplus.setLegalityLevel.setEnvelopeLegalityLevel(\n  \"envelope_id\",\n  setEnvelopeLegalityLevelRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/annotations/{document_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.envelopeEnvelopeIdAnnotationsDocumentId.getEnvelopeDocumentAnnotations(\n  \"envelope_id\",\n  \"document_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/annotations": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.annotations.getEnvelopeAnnotations(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/annotation/{annotation_id}": {
+      "delete": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.annotationId.deleteEnvelopeAnnotation(\n  \"envelope_id\",\n  \"annotation_id\"\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}/annotation": {
+      "post": "import { AddEnvelopeAnnotationRequest, AddEnvelopeAnnotationRequestCheckbox, AddEnvelopeAnnotationRequestDatetime, AddEnvelopeAnnotationRequestInitials, AddEnvelopeAnnotationRequestSignature, AddEnvelopeAnnotationRequestText, DatetimeFont1, Signplus, TextFont1 } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const addEnvelopeAnnotationRequestSignature: AddEnvelopeAnnotationRequestSignature = {\t\n    id: \"string\"\n  };\n  \n  \n  const addEnvelopeAnnotationRequestInitials: AddEnvelopeAnnotationRequestInitials = {\t\n    id: \"string\"\n  };\n  \n  \n  const textFont1: TextFont1 = {\t\n    family: \"SANS\",\n    italic: true,\n    bold: true\n  };\n  \n  const addEnvelopeAnnotationRequestText: AddEnvelopeAnnotationRequestText = {\t\n    size: 6190.822136605691,\n    color: 6489.781325519173,\n    value: \"string\",\n    tooltip: \"string\",\n    dynamicFieldName: \"string\",\n    font: textFont1\n  };\n  \n  \n  const datetimeFont1: DatetimeFont1 = {\t\n    family: \"SERIF\",\n    italic: true,\n    bold: true\n  };\n  \n  const addEnvelopeAnnotationRequestDatetime: AddEnvelopeAnnotationRequestDatetime = {\t\n    size: 3773.1065479576364,\n    font: datetimeFont1,\n    color: \"string\",\n    autoFill: true,\n    timezone: \"string\",\n    timestamp: 6868,\n    format: \"MDY_TEXT_SPACE_SHORT\"\n  };\n  \n  \n  const addEnvelopeAnnotationRequestCheckbox: AddEnvelopeAnnotationRequestCheckbox = {\t\n    checked: true,\n    style: \"SQUARE_CHECK\"\n  };\n  \n  const addEnvelopeAnnotationRequest: AddEnvelopeAnnotationRequest = {\t\n    documentId: \"string\",\n    page: 6387,\n    x: 4410.13346533615,\n    y: 5148.888749329143,\n    width: 3756.0248729763225,\n    height: 4178.76189579703,\n    type: \"INITIALS\",\n    recipientId: \"string\",\n    required: true,\n    signature: addEnvelopeAnnotationRequestSignature,\n    initials: addEnvelopeAnnotationRequestInitials,\n    text: addEnvelopeAnnotationRequestText,\n    datetime: addEnvelopeAnnotationRequestDatetime,\n    checkbox: addEnvelopeAnnotationRequestCheckbox\n  };\n\n  const data = await signplus.annotation.addEnvelopeAnnotation(\n  \"envelope_id\",\n  addEnvelopeAnnotationRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope/{envelope_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.envelopeId.getEnvelope(\n  \"envelope_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n",
+      "delete": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.envelopeId.deleteEnvelope(\"envelope_id\");\n\n  console.log(data);\n})();\n"
+    },
+    "/envelope": {
+      "post": "import { CreateEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const createEnvelopeRequest: CreateEnvelopeRequest = {\t\n    name: \"7ox22\",\n    legalityLevel: \"SES\",\n    expiresAt: 5681,\n    comment: \"string\",\n    sandbox: true\n  };\n\n  const data = await signplus.envelope.createEnvelope(\n  createEnvelopeRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/envelopes": {
+      "post": "import { ListEnvelopesRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const listEnvelopesRequest: ListEnvelopesRequest = {\t\n    name: \"string\",\n    tags: [\"string\"],\n    comment: \"string\",\n    ids: [\"string\"],\n    statuses: [\"DRAFT\"],\n    folderIds: [\"string\"],\n    onlyRootFolder: true,\n    dateFrom: 6508,\n    dateTo: 690,\n    uid: \"string\",\n    first: 6875,\n    last: 4384,\n    after: \"string\",\n    before: \"string\",\n    orderField: \"LAST_DOCUMENT_CHANGE\",\n    ascending: true,\n    includeTrash: true\n  };\n\n  const data = await signplus.envelopes.listEnvelopes(\n  listEnvelopesRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/duplicate": {
+      "post": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdDuplicate.duplicateTemplate(\n  \"template_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/document/{document_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdDocumentDocumentId.getTemplateDocument(\n  \"template_id\",\n  \"document_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/document": {
+      "post": "import { AddTemplateDocumentRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const addTemplateDocumentRequest: AddTemplateDocumentRequest = {\t\n    file: new ArrayBuffer(0)\n  };\n\n  const data = await signplus.templateTemplateIdDocument.addTemplateDocument(\n  \"template_id\",\n  addTemplateDocumentRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/documents": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdDocuments.getTemplateDocuments(\n  \"template_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/signing_steps": {
+      "post": "import { AddTemplateSigningStepsRequest, AddTemplateSigningStepsRequestSigningSteps, SigningStepsRecipients2, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const signingStepsRecipients2: SigningStepsRecipients2 = {\t\n    id: \"string\",\n    uid: \"string\",\n    name: \"string\",\n    email: \"string\",\n    role: \"RECEIVES_COPY\"\n  };\n  \n  const addTemplateSigningStepsRequestSigningSteps: AddTemplateSigningStepsRequestSigningSteps = {\t\n    recipients: [signingStepsRecipients2]\n  };\n  \n  const addTemplateSigningStepsRequest: AddTemplateSigningStepsRequest = {\t\n    signingSteps: [addTemplateSigningStepsRequestSigningSteps]\n  };\n\n  const data = await signplus.templateTemplateIdSigningSteps.addTemplateSigningSteps(\n  \"template_id\",\n  addTemplateSigningStepsRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/rename": {
+      "put": "import { RenameTemplateRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const renameTemplateRequest: RenameTemplateRequest = {\t\n    name: \"string\"\n  };\n\n  const data = await signplus.templateTemplateIdRename.renameTemplate(\n  \"template_id\",\n  renameTemplateRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/set_comment": {
+      "put": "import { SetTemplateCommentRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setTemplateCommentRequest: SetTemplateCommentRequest = {\t\n    comment: \"string\"\n  };\n\n  const data = await signplus.templateTemplateIdSetComment.setTemplateComment(\n  \"template_id\",\n  setTemplateCommentRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/set_notification": {
+      "put": "import { SetTemplateNotificationRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setTemplateNotificationRequest: SetTemplateNotificationRequest = {\t\n    subject: \"string\",\n    message: \"string\",\n    reminderInterval: 4732\n  };\n\n  const data = await signplus.templateTemplateIdSetNotification.setTemplateNotification(\n  \"template_id\",\n  setTemplateNotificationRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/annotations/{document_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdAnnotationsDocumentId.getDocumentTemplateAnnotations(\n  \"template_id\",\n  \"document_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/annotations": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdAnnotations.getTemplateAnnotations(\n  \"template_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/annotation/{annotation_id}": {
+      "delete": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateIdAnnotationAnnotationId.deleteTemplateAnnotation(\n  \"template_id\",\n  \"annotation_id\"\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/annotation": {
+      "post": "import { AddTemplateAnnotationRequest, AddTemplateAnnotationRequestCheckbox, AddTemplateAnnotationRequestDatetime, AddTemplateAnnotationRequestInitials, AddTemplateAnnotationRequestSignature, AddTemplateAnnotationRequestText, DatetimeFont2, Signplus, TextFont2 } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const addTemplateAnnotationRequestSignature: AddTemplateAnnotationRequestSignature = {\t\n    id: \"string\"\n  };\n  \n  \n  const addTemplateAnnotationRequestInitials: AddTemplateAnnotationRequestInitials = {\t\n    id: \"string\"\n  };\n  \n  \n  const textFont2: TextFont2 = {\t\n    family: \"SANS\",\n    italic: true,\n    bold: true\n  };\n  \n  const addTemplateAnnotationRequestText: AddTemplateAnnotationRequestText = {\t\n    size: 6190.822136605691,\n    color: 6489.781325519173,\n    value: \"string\",\n    tooltip: \"string\",\n    dynamicFieldName: \"string\",\n    font: textFont2\n  };\n  \n  \n  const datetimeFont2: DatetimeFont2 = {\t\n    family: \"SERIF\",\n    italic: true,\n    bold: true\n  };\n  \n  const addTemplateAnnotationRequestDatetime: AddTemplateAnnotationRequestDatetime = {\t\n    size: 3773.1065479576364,\n    font: datetimeFont2,\n    color: \"string\",\n    autoFill: true,\n    timezone: \"string\",\n    timestamp: 6868,\n    format: \"MDY_TEXT_SPACE_SHORT\"\n  };\n  \n  \n  const addTemplateAnnotationRequestCheckbox: AddTemplateAnnotationRequestCheckbox = {\t\n    checked: true,\n    style: \"SQUARE_CHECK\"\n  };\n  \n  const addTemplateAnnotationRequest: AddTemplateAnnotationRequest = {\t\n    documentId: \"string\",\n    page: 6387,\n    x: 4410.13346533615,\n    y: 5148.888749329143,\n    width: 3756.0248729763225,\n    height: 4178.76189579703,\n    type: \"INITIALS\",\n    recipientId: \"string\",\n    required: true,\n    signature: addTemplateAnnotationRequestSignature,\n    initials: addTemplateAnnotationRequestInitials,\n    text: addTemplateAnnotationRequestText,\n    datetime: addTemplateAnnotationRequestDatetime,\n    checkbox: addTemplateAnnotationRequestCheckbox\n  };\n\n  const data = await signplus.templateTemplateIdAnnotation.addTemplateAnnotation(\n  \"template_id\",\n  addTemplateAnnotationRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/attachments/settings": {
+      "put": "import { SetTemplateAttachmentsSettingsRequest, SetTemplateAttachmentsSettingsRequestSettings, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setTemplateAttachmentsSettingsRequestSettings: SetTemplateAttachmentsSettingsRequestSettings = {\t\n    visibleToRecipients: true\n  };\n  \n  const setTemplateAttachmentsSettingsRequest: SetTemplateAttachmentsSettingsRequest = {\t\n    settings: setTemplateAttachmentsSettingsRequestSettings\n  };\n\n  const data = await signplus.templateTemplateIdAttachmentsSettings.setTemplateAttachmentsSettings(\n  \"template_id\",\n  setTemplateAttachmentsSettingsRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}/attachments/placeholders": {
+      "put": "import { SetTemplateAttachmentsPlaceholdersRequest, SetTemplateAttachmentsPlaceholdersRequestPlaceholders, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const setTemplateAttachmentsPlaceholdersRequestPlaceholders: SetTemplateAttachmentsPlaceholdersRequestPlaceholders = {\t\n    recipientId: \"string\",\n    name: \"string\",\n    required: true,\n    multiple: true,\n    id: \"string\",\n    hint: \"string\"\n  };\n  \n  const setTemplateAttachmentsPlaceholdersRequest: SetTemplateAttachmentsPlaceholdersRequest = {\t\n    placeholders: [setTemplateAttachmentsPlaceholdersRequestPlaceholders]\n  };\n\n  const data = await signplus.templateTemplateIdAttachmentsPlaceholders.setTemplateAttachmentsPlaceholders(\n  \"template_id\",\n  setTemplateAttachmentsPlaceholdersRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/template/{template_id}": {
+      "get": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateId.getTemplate(\n  \"template_id\",\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n",
+      "delete": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.templateTemplateId.deleteTemplate(\"template_id\");\n\n  console.log(data);\n})();\n"
+    },
+    "/template": {
+      "post": "import { CreateTemplateRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const createTemplateRequest: CreateTemplateRequest = {\t\n    name: \"rEATXel\"\n  };\n\n  const data = await signplus.template.createTemplate(\n  createTemplateRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/templates": {
+      "post": "import { ListTemplatesRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const listTemplatesRequest: ListTemplatesRequest = {\t\n    name: \"string\",\n    tags: [\"string\"],\n    ids: [\"string\"],\n    first: 7297,\n    last: 8379,\n    after: \"string\",\n    before: \"string\",\n    orderField: \"TEMPLATE_NAME\",\n    ascending: true\n  };\n\n  const data = await signplus.templates.listTemplates(\n  listTemplatesRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/webhook/{webhook_id}": {
+      "delete": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.webhookId.deleteWebhook(\"webhook_id\");\n\n  console.log(data);\n})();\n"
+    },
+    "/webhook": {
+      "post": "import { CreateWebhookRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const createWebhookRequest: CreateWebhookRequest = {\t\n    event: \"ENVELOPE_AUDIT_TRAIL\",\n    target: \"string\"\n  };\n\n  const data = await signplus.webhook.createWebhook(\n  createWebhookRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    },
+    "/webhooks": {
+      "post": "import { ListWebhooksRequest, Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  \n  const listWebhooksRequest: ListWebhooksRequest = {\t\n    webhookId: \"string\",\n    event: \"ENVELOPE_COMPLETED\"\n  };\n\n  const data = await signplus.webhooks.listWebhooks(\n  listWebhooksRequest,\n  {\n      accept: \"application/json\",\n  }\n);\n\n  console.log(data);\n})();\n"
+    }
+  },
+  "example": "import { Signplus } from '@alohi/signplus-typescript';\n\n(async () => {\n  const signplus = new Signplus({\n\ttoken: 'YOUR_TOKEN',\n});\n\n  const data = await signplus.envelopeId.deleteEnvelope(\"envelope_id\");\n\n  console.log(data);\n})();\n",
+  "authentication": {
+    "bearer": {
+      "constructor": "const sdk = new Signplus({ token: 'YOUR_TOKEN' });",
+      "setter": "const sdk = new Signplus();\nsdk.token = 'YOUR_TOKEN';"
+    }
+  }
+}
