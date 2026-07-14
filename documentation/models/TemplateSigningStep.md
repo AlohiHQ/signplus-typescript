@@ -2,6 +2,6 @@
 
 **Properties**
 
-| Name       | Type                | Required | Description        |
-| :--------- | :------------------ | :------- | :----------------- |
-| recipients | TemplateRecipient[] | ❌       | List of recipients |
+| Name       | Type                                        | Required | Description        |
+| :--------- | :------------------------------------------ | :------- | :----------------- |
+| recipients | [TemplateRecipient](TemplateRecipient.md)[] | ❌       | List of recipients |

@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the AttachmentPlaceholderRequest1 model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const attachmentPlaceholderRequest1 = z.lazy(() => {
   return z.object({
@@ -27,8 +29,9 @@ export const attachmentPlaceholderRequest1 = z.lazy(() => {
 export type AttachmentPlaceholderRequest1 = z.infer<typeof attachmentPlaceholderRequest1>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the AttachmentPlaceholderRequest1 application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const attachmentPlaceholderRequest1Response = z.lazy(() => {
   return z
@@ -51,8 +54,9 @@ export const attachmentPlaceholderRequest1Response = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the AttachmentPlaceholderRequest1 application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const attachmentPlaceholderRequest1Request = z.lazy(() => {
   return z

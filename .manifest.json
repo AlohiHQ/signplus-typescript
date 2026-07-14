@@ -1,24 +1,27 @@
 {
-  "liblabVersion": "2.25.46",
-  "date": "2025-09-17T12:01:31.244Z",
+  "sdkGenVersion": "1.6.0",
+  "date": "2026-07-14T05:00:09.007Z",
   "config": {
-    "apiId": 2744,
-    "sdkName": "signplus",
-    "sdkVersion": "2.4.0",
-    "languages": ["typescript"],
-    "auth": ["bearer"],
-    "docs": [],
-    "liblabVersion": "2",
-    "deliveryMethods": ["zip"],
-    "rawConfig": {
-      "sdkName": "signplus",
-      "apiVersion": "2.5.0",
-      "apiName": "signplus-api",
-      "specFilePath": "openapi.yaml",
-      "languages": ["csharp", "go", "python", "typescript", "java", "php"],
-      "auth": ["bearer"],
-      "customizations": {
-        "includeOptionalSnippetParameters": true,
+    "sdkVersion": "1.0.0",
+    "auth": [
+      "bearer"
+    ],
+    "apiVersion": "2.5.0",
+    "publishing": {
+      "githubOrg": "alohihq",
+      "releaseBranch": "main"
+    },
+    "languageOptions": {
+      "java": {
+        "githubRepoName": "signplus-java",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
         "authentication": {
           "access": {
             "prefix": "Bearer"
@@ -26,116 +29,12 @@
         },
         "devContainer": false,
         "generateEnv": true,
-        "inferServiceNames": false,
-        "injectedModels": [],
-        "license": {
-          "type": "MIT"
-        },
         "responseHeaders": false,
-        "retry": {
-          "enabled": true,
-          "maxAttempts": 3,
-          "retryDelay": 150
-        }
-      },
-      "languageOptions": {
-        "python": {
-          "alwaysInitializeOptionals": false,
-          "pypiPackageName": "signplus-python",
-          "githubRepoName": "signplus-python",
-          "ignoreFiles": [],
-          "sdkVersion": "1.4.0",
-          "liblabVersion": "2",
-          "additionalConstructorParameters": []
-        },
-        "java": {
-          "githubRepoName": "signplus-java",
-          "groupId": "com.alohi",
-          "artifactId": "signplus",
-          "sdkVersion": "2.4.0",
-          "liblabVersion": "2",
-          "developers": [
-            {
-              "name": "Alohi SA",
-              "email": "support@alohi.com",
-              "organization": "Alohi SA",
-              "organizationUrl": "https://www.alohi.com"
-            }
-          ],
-          "additionalConstructorParameters": []
-        },
-        "typescript": {
-          "bundle": false,
-          "exportClassDefault": false,
-          "httpClient": "axios",
-          "npmName": "signplus-typescript",
-          "npmOrg": "alohi",
-          "githubRepoName": "signplus-typescript",
-          "ignoreFiles": [],
-          "sdkVersion": "2.4.0",
-          "liblabVersion": "2",
-          "additionalConstructorParameters": []
-        },
-        "go": {
-          "goModuleName": "github.com/alohihq/signplus-go",
-          "githubRepoName": "signplus-go",
-          "ignoreFiles": [],
-          "sdkVersion": "1.4.0",
-          "liblabVersion": "2",
-          "additionalConstructorParameters": []
-        },
-        "php": {
-          "packageName": "alohi/signplus",
-          "githubRepoName": "signplus-php",
-          "ignoreFiles": [],
-          "sdkVersion": "2.4.0",
-          "liblabVersion": "2",
-          "additionalConstructorParameters": []
-        },
-        "csharp": {
-          "packageId": "Alohi.Signplus",
-          "githubRepoName": "signplus-sharp",
-          "ignoreFiles": [],
-          "sdkVersion": "1.4.0",
-          "liblabVersion": "2"
-        }
-      },
-      "publishing": {
-        "githubOrg": "alohihq"
-      }
-    },
-    "liblabConfigVersion": "1.0.0",
-    "apiVersion": "2.5.0",
-    "apiName": "signplus-api",
-    "specFilePath": "openapi.yaml",
-    "createDocs": false,
-    "languageOptions": {
-      "csharp": {
-        "githubRepoName": "signplus-sharp",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.4.0",
-        "packageId": "Alohi.Signplus"
-      },
-      "go": {
-        "githubRepoName": "signplus-go",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.4.0",
-        "goModuleName": "github.com/alohihq/signplus-go",
-        "additionalConstructorParameters": []
-      },
-      "java": {
-        "githubRepoName": "signplus-java",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "2.4.0",
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
         "groupId": "com.alohi",
         "artifactId": "signplus",
-        "includeKotlinSnippets": false,
         "developers": [
           {
             "name": "Alohi SA",
@@ -143,52 +42,243 @@
             "organization": "Alohi SA",
             "organizationUrl": "https://www.alohi.com"
           }
-        ],
-        "additionalConstructorParameters": []
-      },
-      "python": {
-        "githubRepoName": "signplus-python",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "1.4.0",
-        "alwaysInitializeOptionals": false,
-        "additionalConstructorParameters": [],
-        "pypiPackageName": "signplus-python"
-      },
-      "php": {
-        "githubRepoName": "signplus-php",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "2.4.0",
-        "additionalConstructorParameters": [],
-        "packageName": "alohi/signplus"
+        ]
       },
       "typescript": {
         "githubRepoName": "signplus-typescript",
-        "ignoreFiles": [],
-        "liblabVersion": "2",
-        "renameIllegalModelProperties": true,
-        "sdkVersion": "2.4.0",
-        "additionalConstructorParameters": [],
-        "bundle": false,
-        "denoteCommon": false,
-        "exportClassDefault": false,
-        "generateEnumAs": "enum",
-        "httpClient": "axios",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "npmOrg": "alohi",
         "npmName": "signplus-typescript",
-        "npmOrg": "alohi"
+        "httpClient": "axios",
+        "bundle": false,
+        "exportClassDefault": false
+      },
+      "python": {
+        "githubRepoName": "signplus-python",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "pypiPackageName": "signplus-python",
+        "classifiers": [
+          "Development Status :: 5 - Production/Stable",
+          "License :: OSI Approved :: MIT License",
+          "Topic :: Software Development"
+        ]
+      },
+      "kotlin": {
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false
+      },
+      "ruby": {
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false
+      },
+      "go": {
+        "githubRepoName": "signplus-sharp",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "goModuleName": "github.com/alohihq/signplus-go"
+      },
+      "csharp": {
+        "githubRepoName": "signplus-sharp",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "packageId": "Alohi.Signplus"
+      },
+      "php": {
+        "githubRepoName": "signplus-php",
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false,
+        "packageName": "alohi/signplus"
+      },
+      "cli": {
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false
+      },
+      "rust": {
+        "retry": {
+          "enabled": true,
+          "maxAttempts": 3,
+          "retryDelay": 150
+        },
+        "license": {
+          "type": "MIT"
+        },
+        "authentication": {
+          "access": {
+            "prefix": "Bearer"
+          }
+        },
+        "devContainer": false,
+        "generateEnv": true,
+        "responseHeaders": false,
+        "includeOptionalSnippetParameters": true,
+        "injectedModels": [],
+        "inferServiceNames": false
       }
     },
-    "validationsToIgnore": [],
-    "publishing": {
-      "githubOrg": "alohihq",
-      "platform": "github"
+    "customCode": {
+      "trackChanges": true,
+      "conflictStrategy": "mark"
     },
-    "analytics": {
-      "streaming": false,
-      "pagination": false
+    "retry": {
+      "enabled": true,
+      "maxAttempts": 3,
+      "retryDelay": 150,
+      "maxDelay": 5000,
+      "retryDelayJitter": 50,
+      "backOffFactor": 2,
+      "httpMethodsToRetry": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ]
+    },
+    "license": {
+      "type": "MIT",
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT",
+      "path": "MIT.ejs"
     },
     "authentication": {
       "access": {
@@ -197,63 +287,53 @@
     },
     "devContainer": false,
     "generateEnv": true,
-    "includeOptionalSnippetParameters": true,
-    "license": {
-      "type": "MIT",
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT",
-      "path": "MIT.ejs"
-    },
     "responseHeaders": false,
-    "buildAllModels": false,
-    "retry": {
-      "enabled": true,
-      "maxAttempts": 3,
-      "retryDelay": 150,
-      "maxDelay": 5000,
-      "retryDelayJitter": 50,
-      "backOffFactor": 2,
-      "httpCodesToRetry": [408, 429, 500, 502, 503, 504],
-      "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
-    },
-    "multiTenant": true,
-    "includeWatermark": false,
+    "includeOptionalSnippetParameters": true,
+    "injectedModels": [],
+    "inferServiceNames": false,
+    "languages": [
+      "typescript"
+    ],
+    "deliveryMethods": [
+      "zip"
+    ],
+    "sdkName": "signplus",
+    "httpClient": "axios",
+    "githubRepoName": "signplus-typescript",
+    "npmOrg": "alohi",
+    "npmName": "signplus-typescript",
+    "bundle": false,
+    "exportClassDefault": false,
     "language": "typescript",
     "deliveryMethod": "zip",
     "hooks": {
       "enabled": false,
       "sourceDir": ""
     },
-    "httpClient": "axios",
-    "githubRepoName": "signplus-typescript",
-    "ignoreFiles": [],
-    "renameIllegalModelProperties": true,
-    "additionalConstructorParameters": [],
-    "bundle": false,
-    "denoteCommon": false,
-    "exportClassDefault": false,
-    "generateEnumAs": "enum",
-    "npmName": "signplus-typescript",
-    "npmOrg": "alohi",
     "typescriptVersion": "5.3.3",
-    "zodVersion": "3.22.0",
+    "zodVersion": "3.22.3",
     "compilerOptions": {
       "target": "es6",
       "module": "Node16",
-      "lib": ["es2018", "dom"]
+      "lib": [
+        "es2018",
+        "dom",
+        "DOM.Iterable"
+      ]
     },
+    "generateEnumAs": "enum",
     "namingStrategy": "base",
     "usesFormData": false,
     "environmentVariables": [],
     "fileOutput": "/tmp",
-    "inferServiceNames": false,
     "httpLibrary": {
       "name": "axios",
-      "packages": {
-        "axios": "^1.9.0"
-      },
-      "languages": ["typescript"]
+      "packages": {},
+      "languages": [
+        "typescript"
+      ]
     },
+    "multiTenant": false,
     "customQueries": {
       "paths": [],
       "rawQueries": [],
@@ -263,17 +343,35 @@
     "specType": "openapi",
     "deprecatedOperations": {
       "include": true
+    },
+    "multipleResponses": {
+      "enabled": false
     }
   },
   "files": [
     "package.json",
     "tsconfig.json",
     "examples/tsconfig.json",
+    ".gitignore",
+    "LICENSE",
+    "scripts/prepublish.sh",
+    ".github/workflows/release.yml",
+    ".env.example",
     "examples/package.json",
     "examples/README.md",
     "examples/src/index.ts",
     "src/http/client.ts",
-    "src/services/signplus/models/create-envelope-request.ts",
+    "src/http/types.ts",
+    "src/http/error.ts",
+    "src/http/handlers/terminating-handler.ts",
+    "src/http/handlers/response-validation-handler.ts",
+    "src/http/handlers/request-validation-handler.ts",
+    "src/http/transport/request.ts",
+    "src/http/transport/request-builder.ts",
+    "src/http/transport/request-axios-adapter.ts",
+    "src/http/transport/transport-hook-adapter.ts",
+    "src/http/errors/throwable-error.ts",
+    "src/http/handlers/retry-handler.ts",
     "src/services/signplus/models/envelope.ts",
     "src/services/signplus/models/signing-step.ts",
     "src/services/signplus/models/recipient.ts",
@@ -286,9 +384,10 @@
     "src/services/signplus/models/attachment-placeholders-per-recipient.ts",
     "src/services/signplus/models/attachment-placeholder.ts",
     "src/services/signplus/models/attachment-placeholder-file.ts",
+    "src/services/signplus/models/create-envelope-request.ts",
     "src/services/signplus/models/create-envelope-from-template-request.ts",
-    "src/services/signplus/models/list-envelopes-request.ts",
     "src/services/signplus/models/list-envelopes-response.ts",
+    "src/services/signplus/models/list-envelopes-request.ts",
     "src/services/signplus/models/list-envelope-documents-response.ts",
     "src/services/signplus/models/add-envelope-document-request.ts",
     "src/services/signplus/models/set-envelope-dynamic-fields-request.ts",
@@ -310,12 +409,12 @@
     "src/services/signplus/models/annotation-checkbox.ts",
     "src/services/signplus/models/list-envelope-document-annotations-response.ts",
     "src/services/signplus/models/add-annotation-request.ts",
-    "src/services/signplus/models/create-template-request.ts",
     "src/services/signplus/models/template.ts",
     "src/services/signplus/models/template-signing-step.ts",
     "src/services/signplus/models/template-recipient.ts",
-    "src/services/signplus/models/list-templates-request.ts",
+    "src/services/signplus/models/create-template-request.ts",
     "src/services/signplus/models/list-templates-response.ts",
+    "src/services/signplus/models/list-templates-request.ts",
     "src/services/signplus/models/add-template-document-request.ts",
     "src/services/signplus/models/list-template-documents-response.ts",
     "src/services/signplus/models/add-template-signing-steps-request.ts",
@@ -323,33 +422,26 @@
     "src/services/signplus/models/set-template-comment-request.ts",
     "src/services/signplus/models/list-template-annotations-response.ts",
     "src/services/signplus/models/list-template-document-annotations-response.ts",
-    "src/services/signplus/models/create-webhook-request.ts",
     "src/services/signplus/models/webhook.ts",
-    "src/services/signplus/models/list-webhooks-request.ts",
+    "src/services/signplus/models/create-webhook-request.ts",
     "src/services/signplus/models/list-webhooks-response.ts",
-    ".gitignore",
-    "src/services/base-service.ts",
-    "src/services/signplus/signplus-service.ts",
-    "src/index.ts",
-    "src/services/signplus/models/index.ts",
-    "src/services/signplus/index.ts",
-    "src/http/index.ts",
-    "src/http/handlers/handler-chain.ts",
-    "src/http/types.ts",
-    "src/http/error.ts",
-    "src/http/handlers/terminating-handler.ts",
-    "src/http/handlers/hook-handler.ts",
-    "src/http/hooks/custom-hook.ts",
-    "src/http/hooks/hook.ts",
-    "src/http/handlers/retry-handler.ts",
-    "src/http/environment.ts",
-    "src/http/handlers/response-validation-handler.ts",
-    "LICENSE",
-    "src/services/signplus/request-params.ts",
-    "documentation/models/CreateEnvelopeRequest.md",
-    "documentation/models/EnvelopeLegalityLevel.md",
+    "src/services/signplus/models/list-webhooks-request.ts",
+    "src/services/signplus/models/envelope-flow-type.ts",
+    "src/services/signplus/models/envelope-legality-level.ts",
+    "src/services/signplus/models/envelope-status.ts",
+    "src/services/signplus/models/recipient-role.ts",
+    "src/services/signplus/models/recipient-verification-type.ts",
+    "src/services/signplus/models/envelope-order-field.ts",
+    "src/services/signplus/models/annotation-type.ts",
+    "src/services/signplus/models/annotation-font-family.ts",
+    "src/services/signplus/models/annotation-date-time-format.ts",
+    "src/services/signplus/models/annotation-checkbox-style.ts",
+    "src/services/signplus/models/template-recipient-role.ts",
+    "src/services/signplus/models/template-order-field.ts",
+    "src/services/signplus/models/webhook-event.ts",
     "documentation/models/Envelope.md",
     "documentation/models/EnvelopeFlowType.md",
+    "documentation/models/EnvelopeLegalityLevel.md",
     "documentation/models/EnvelopeStatus.md",
     "documentation/models/SigningStep.md",
     "documentation/models/Recipient.md",
@@ -364,10 +456,11 @@
     "documentation/models/AttachmentPlaceholdersPerRecipient.md",
     "documentation/models/AttachmentPlaceholder.md",
     "documentation/models/AttachmentPlaceholderFile.md",
+    "documentation/models/CreateEnvelopeRequest.md",
     "documentation/models/CreateEnvelopeFromTemplateRequest.md",
+    "documentation/models/ListEnvelopesResponse.md",
     "documentation/models/ListEnvelopesRequest.md",
     "documentation/models/EnvelopeOrderField.md",
-    "documentation/models/ListEnvelopesResponse.md",
     "documentation/models/ListEnvelopeDocumentsResponse.md",
     "documentation/models/AddEnvelopeDocumentRequest.md",
     "documentation/models/SetEnvelopeDynamicFieldsRequest.md",
@@ -393,14 +486,14 @@
     "documentation/models/AnnotationCheckboxStyle.md",
     "documentation/models/ListEnvelopeDocumentAnnotationsResponse.md",
     "documentation/models/AddAnnotationRequest.md",
-    "documentation/models/CreateTemplateRequest.md",
     "documentation/models/Template.md",
     "documentation/models/TemplateSigningStep.md",
     "documentation/models/TemplateRecipient.md",
     "documentation/models/TemplateRecipientRole.md",
+    "documentation/models/CreateTemplateRequest.md",
+    "documentation/models/ListTemplatesResponse.md",
     "documentation/models/ListTemplatesRequest.md",
     "documentation/models/TemplateOrderField.md",
-    "documentation/models/ListTemplatesResponse.md",
     "documentation/models/AddTemplateDocumentRequest.md",
     "documentation/models/ListTemplateDocumentsResponse.md",
     "documentation/models/AddTemplateSigningStepsRequest.md",
@@ -408,41 +501,220 @@
     "documentation/models/SetTemplateCommentRequest.md",
     "documentation/models/ListTemplateAnnotationsResponse.md",
     "documentation/models/ListTemplateDocumentAnnotationsResponse.md",
-    "documentation/models/CreateWebhookRequest.md",
-    "documentation/models/WebhookEvent.md",
     "documentation/models/Webhook.md",
-    "documentation/models/ListWebhooksRequest.md",
+    "documentation/models/WebhookEvent.md",
+    "documentation/models/CreateWebhookRequest.md",
     "documentation/models/ListWebhooksResponse.md",
-    "src/http/handlers/request-validation-handler.ts",
-    "src/http/transport/request.ts",
-    "src/http/transport/request-builder.ts",
+    "documentation/models/ListWebhooksRequest.md",
+    "src/services/base-service.ts",
+    "src/services/signplus/signplus-service.ts",
+    "src/index.ts",
+    "src/services/signplus/models/index.ts",
+    "src/services/signplus/index.ts",
+    "src/http/index.ts",
+    "src/http/handlers/handler-chain.ts",
+    "documentation/snippets/snippets.json",
+    "src/services/signplus/request-params.ts",
+    "src/http/handlers/hook-handler.ts",
+    "src/http/hooks/custom-hook.ts",
+    "src/http/hooks/hook.ts",
+    "src/http/environment.ts",
     "src/http/serialization/base-serializer.ts",
     "src/http/serialization/query-serializer.ts",
     "src/http/serialization/path-serializer.ts",
     "src/http/serialization/header-serializer.ts",
-    "src/http/transport/request-axios-adapter.ts",
-    "src/http/transport/transport-hook-adapter.ts",
+    "src/http/serialization/cookie-serializer.ts",
+    "src/http/transport/types.ts",
     "src/http/utils/line-decoder.ts",
     "src/http/utils/response-matcher.ts",
     "src/http/utils/content-type.ts",
     "src/http/errors/validation-error.ts",
-    "src/http/transport/types.ts",
-    "src/services/signplus/models/envelope-legality-level.ts",
-    "src/services/signplus/models/envelope-flow-type.ts",
-    "src/services/signplus/models/envelope-status.ts",
-    "src/services/signplus/models/recipient-role.ts",
-    "src/services/signplus/models/recipient-verification-type.ts",
-    "src/services/signplus/models/envelope-order-field.ts",
-    "src/services/signplus/models/annotation-type.ts",
-    "src/services/signplus/models/annotation-font-family.ts",
-    "src/services/signplus/models/annotation-date-time-format.ts",
-    "src/services/signplus/models/annotation-checkbox-style.ts",
-    "src/services/signplus/models/template-recipient-role.ts",
-    "src/services/signplus/models/template-order-field.ts",
-    "src/services/signplus/models/webhook-event.ts",
-    "src/http/errors/throwable-error.ts",
-    ".env.example",
     "README.md",
     "documentation/services/SignplusService.md"
-  ]
+  ],
+  "fileHashes": {
+    ".env.example": "deba3e289e64ed2ccb9169d2739d4db6bf8383b6cdfa5f98abd6f76010df80fd",
+    ".github/workflows/release.yml": "f9b8c1cd45395cd824006cf1489225163feef0b99e03b229ed6e0d38d04b657f",
+    ".gitignore": "5f515684cbf8243009414e638b28e93a70a884b81e3e16c38bb01124419e44b2",
+    "LICENSE": "3ec558dc6e9c9355ab4b28c942caa92bf90b0b82c12d7838d2ef92467ad135c1",
+    "README.md": "41538064a9f2b063cc82e7d02fa7743041f58e3c4bb762ea1678c4077e5a0496",
+    "documentation/models/AddAnnotationRequest.md": "4837440d641f4e92ddc51fba01467dde26c2d5761a0314100fbe1688b5a55ea1",
+    "documentation/models/AddEnvelopeDocumentRequest.md": "076754cd8af758d8638d43c44b0d6b555302328fc2462fbe34751469d4934e51",
+    "documentation/models/AddEnvelopeSigningStepsRequest.md": "4fdb6a33f077a369f93f2ba499f83733567b1430be251b778bd831a8925055ee",
+    "documentation/models/AddTemplateDocumentRequest.md": "d12499ad5123f7dab2d68c1336cf3438f0f07646a1036444234267889170284b",
+    "documentation/models/AddTemplateSigningStepsRequest.md": "cc0cc0ac435f6ab7ec4e5cd18135fcc7842c204b0b5d9c40e56baad2fb9e2744",
+    "documentation/models/Annotation.md": "95644b6fb825760b8698ca0369450a388b62e0078b65c9e4185a064808dae696",
+    "documentation/models/AnnotationCheckbox.md": "dcb14f086d95c854165e16f9844a16ae00fbb479122bab6b17a0e0be6c14c356",
+    "documentation/models/AnnotationCheckboxStyle.md": "5505f70ceac628cdc2b93902b6345a6f0f2f2f89b8abc8c752162d18f4a48bcd",
+    "documentation/models/AnnotationDateTime.md": "5019a63a45635ba01d977bd11460f6344856bfbfbaf1d18cb6088acb4f755f12",
+    "documentation/models/AnnotationDateTimeFormat.md": "edcaaa97cbb16e264fb2eb99b6e90853f72cb7360bc89e4d3ba3875cec258907",
+    "documentation/models/AnnotationFont.md": "6c61ffe2c3652d4607664c60c4ae293d21c534ebad0d6ed521ad15f9bb34848c",
+    "documentation/models/AnnotationFontFamily.md": "f7d601ac9bdf95af83095600a19f1beecc001426d809cb4606828863a0d4b62e",
+    "documentation/models/AnnotationInitials.md": "97771c7fb0421aa96844a19e5b422ca1eb140c84073112d01c8c991c791eb003",
+    "documentation/models/AnnotationSignature.md": "5a2c601625795fcd483f2de31724c21610cc6234c4b3d392fc80951a72196ed5",
+    "documentation/models/AnnotationText.md": "4d5e7cae2db52dcb93d64f9f942f5658124fcd5a455c360410a5874c16587c4e",
+    "documentation/models/AnnotationType.md": "86c610f0c6b3f951730220f7694f2ab3e2ca95d627048126ea5633feff6930c6",
+    "documentation/models/AttachmentPlaceholder.md": "010440ceb2ad15f9eb349f0bdb58b854bd2b656bbad8bf2ce55993912473d60b",
+    "documentation/models/AttachmentPlaceholderFile.md": "af7d90eab94d76a55fd5ce36564e8e3a0f94291fd1eb9415b7bff81bced79721",
+    "documentation/models/AttachmentPlaceholderRequest1.md": "de8a1000449ed91c99aa693a626782f813620692a44a0cd6db4f4519da7a8b48",
+    "documentation/models/AttachmentPlaceholdersPerRecipient.md": "23873109b85bb20010a0e7c0eb02d0154d1172c7cfe299ff4052b2c687f5b739",
+    "documentation/models/AttachmentSettings.md": "eaefdbcb75092ea4378cb0a3259c8e1bc3e5d25c208428f84219c73ad8c77523",
+    "documentation/models/CreateEnvelopeFromTemplateRequest.md": "5a7e049e9f6a9865a0ab30111d9daa31cdd718d66d6c8da17cbeb65840906c62",
+    "documentation/models/CreateEnvelopeRequest.md": "8ae25a50adff5d02ececd1ccbae988888076c95594dc61d5cbb15510ab0d535d",
+    "documentation/models/CreateTemplateRequest.md": "2065ab31026d1a46d9988bc822afe42453f87cb6763210778b252287de5bea99",
+    "documentation/models/CreateWebhookRequest.md": "2c902b74bc1761dbc6304a62b6dffed1d800a929b779da06eb169312e56dafad",
+    "documentation/models/Document.md": "3b02f5d4d34062a7970d9b98e79423fc23ab366cee5f06c0e6b3284315a287cb",
+    "documentation/models/DynamicField.md": "4d867129873c3ea3f82acfadfb296deb8f5a5bd7d6a31415f49c42cbb8d7f1b7",
+    "documentation/models/Envelope.md": "c9e2436d04516ed9b66a4774a8217d266e4f1b27754c9ee0ed241275927b3ee0",
+    "documentation/models/EnvelopeAttachments.md": "c9617e34d6df86ad5d1aacf30679ca8bafffb2c17d6172cdf910526b58b9327e",
+    "documentation/models/EnvelopeFlowType.md": "1960ca41b32f9a36330d90238b78044b22ed84890ebd172c571c268c112ffff2",
+    "documentation/models/EnvelopeLegalityLevel.md": "1914d23bd711021eacd1f24eac58d200c9f8c47e085cb6bd323f6dbfdf65de97",
+    "documentation/models/EnvelopeNotification.md": "98f83e7195f54994abc7b0064c6e79234c57e2f20d77b2998d0f87d291f6312b",
+    "documentation/models/EnvelopeOrderField.md": "592d9c97c3b5030549d5d8e0ecd024d83883292ef71766485664832dbe5bf25f",
+    "documentation/models/EnvelopeStatus.md": "bbfca87668cf151454523695792aff7637dba77bb312c2b21e9f4e2f113068d0",
+    "documentation/models/ListEnvelopeDocumentAnnotationsResponse.md": "4571aaf5c96df37ce20624cb4d99e3be89ef8d4a8b82afa3728532ba4cf03bf2",
+    "documentation/models/ListEnvelopeDocumentsResponse.md": "43c5a9b740a3780aaccef9a91447dd9a9492529756b812d64f0b23bfdd12d33d",
+    "documentation/models/ListEnvelopesRequest.md": "91475570caaf888f9c53cb10f04fde50a39b8c357e21968096c5812fcff8ca9c",
+    "documentation/models/ListEnvelopesResponse.md": "8c3bb078e37049cbde876d8d786908d132c7c374bbb1de941bf5da894786f312",
+    "documentation/models/ListTemplateAnnotationsResponse.md": "3f59c7a525b51d4a0af21e3df36712e5dbc6e2d7915aec31069b48f782617a17",
+    "documentation/models/ListTemplateDocumentAnnotationsResponse.md": "f627572d8dda96387622e594b41440ecb169d500a0767dd31b9e1df2f4b03016",
+    "documentation/models/ListTemplateDocumentsResponse.md": "f5460f25a211ac6d82bbbdb10d45ba496709c968ea59c39826b8e73f8c8031c8",
+    "documentation/models/ListTemplatesRequest.md": "919d0d35f95a6cb33e0c42ac5d0d9469bc285288abcbf113f70286e2ac529611",
+    "documentation/models/ListTemplatesResponse.md": "89521ccee41972e054aea1051b9989f485aabe83fd86726747357cc90d21ad29",
+    "documentation/models/ListWebhooksRequest.md": "949c5540bdc46a5aba1765cc7b505c25faceb643a83923986071ab975b49236c",
+    "documentation/models/ListWebhooksResponse.md": "63638432608e482bd41bc55887c097b6ae39dd300aca1791f2f1bb26b9e193c2",
+    "documentation/models/Page.md": "0877a5cc759a5dcbfd9b792ad7e11a54d7da9e743a693ffe1286a3f45b4d7aab",
+    "documentation/models/Recipient.md": "77e11bd1e82ee3058edabe1a6e3ea8bec24cfd364cf3f9de80afd035553ac8bb",
+    "documentation/models/RecipientRole.md": "7502794ffece6692d1b0f00f04610367abb9c284c76fb60821d10ec69f6474f4",
+    "documentation/models/RecipientVerification.md": "fac5f15764599fd4bd0e81da926d933fd61ed0ae0d6fb615bd68bd0af9d85525",
+    "documentation/models/RecipientVerificationType.md": "e408535755343d73c7863a14cb89b66abd78bfb991c977cff8513c60bc6bb44b",
+    "documentation/models/RenameEnvelopeRequest.md": "fa0a26f8fa0a5e0ae5f882c26d97c23e9ca960850f78db5c56494cb98531fe68",
+    "documentation/models/RenameTemplateRequest.md": "d4cac049b60122c850e0ca81cbae1b9600efb061fa3c0a7d3b5b9210fd5435f0",
+    "documentation/models/SetEnvelopeAttachmentsPlaceholdersRequest.md": "b14ae48e7629c1b14e29aa6ae441e223bae609602dcb7128b114019f453a1607",
+    "documentation/models/SetEnvelopeAttachmentsSettingsRequest.md": "fd716156384b28055ce14bb303fc1b9e1811985d9ae13a8ddb0aec44059920e6",
+    "documentation/models/SetEnvelopeCommentRequest.md": "544efb9f4c95ef3ac65aca1660ab76f36e8f8167584ee38740bc6655f6804db5",
+    "documentation/models/SetEnvelopeDynamicFieldsRequest.md": "c1d15fe6af7590de8ed37f2a8e68f798ae57601915cf6d91b3f7199cdd537613",
+    "documentation/models/SetEnvelopeExpirationRequest.md": "a358e8580a0e19cb688ce4728667f8691a3e6fb73fa6b4f5d50f4eae3042d1ef",
+    "documentation/models/SetEnvelopeLegalityLevelRequest.md": "949dd28d1dad27580e65819beedd5977d2d2bec3ceef2760f44d41138aada1f7",
+    "documentation/models/SetTemplateCommentRequest.md": "1770f70d4aef196d7aa96d033f7ec9cc1a2698d238e758054d1760423a80e517",
+    "documentation/models/SigningStep.md": "adbafdfad0eec4944ee52fd59412d3d6f977347840d6692b4477ed8a53e25354",
+    "documentation/models/Template.md": "a040d1a2ee6b6f8fcec24d2418618397e0be8a6c9f71ba5662344248cbe97b20",
+    "documentation/models/TemplateOrderField.md": "3e75f66129ccc3a0f9b517a15bb50f4bbf446de6b575d295e8101221fe2fd343",
+    "documentation/models/TemplateRecipient.md": "7c8915b432a260c3b528984bb3dcbcbe1243a8067c751165d65f2afec2204a8a",
+    "documentation/models/TemplateRecipientRole.md": "dca48b474ecc6e0faa27dc50e0ae0d6e95a92594a8d0af150fecb42918c6b7fa",
+    "documentation/models/TemplateSigningStep.md": "40d6016dcc5425f78d105e2a583abcaf364723ed3b2d27d9998cf694a54883d7",
+    "documentation/models/Webhook.md": "25144b07d3d393b70bad54978d3b4aa80e06f91b25b5cd818b93f2c06a6b25da",
+    "documentation/models/WebhookEvent.md": "ad7924a1c35f676e604542861c36630cb646f2382dbaa6f9da71233a71081fa8",
+    "documentation/services/SignplusService.md": "515332089b4c9a61b5e3216b6e1dbac3ae846bc0f9819cab64c5e94dda799728",
+    "documentation/snippets/snippets.json": "67eaa16ca53340c5e37e5d610554974b2820bc466afa99f14ae1e9ae24c9fe41",
+    "examples/README.md": "6e93ef79e046a832d08f1b7ba627b08223adaa4a48091776e3951ba582005219",
+    "examples/package.json": "33336f970c16befdd9edd5ab75e12ab98580883992ee13f6a7ba809db3086196",
+    "examples/src/index.ts": "3b0035a12feeb09fa4f0ef33fa9d23cc1ccbe1e32cada1dc3e85ee184e3ea7db",
+    "examples/tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63",
+    "package.json": "16dc0078a12147a622c0214fadf057b9e56cde593f1d2e87842e80884f49adae",
+    "prettier.config.js": "2fe33fda52344779fcf235afa8152cfd356880dc3161da09403dc26231bc72d9",
+    "scripts/prepublish.sh": "651cd87546cc25d69210f55dc4310d47007c53b719da1da8b3bd9acb098defcf",
+    "src/http/client.ts": "349c2725fbbeac67a4479fe1be2b8c0c3788ac8368ef722e3d1fdcd686f68717",
+    "src/http/environment.ts": "df663f21d8bba23b79f9b973926041b7a9c7c9c19db7227137959a60ed95ea67",
+    "src/http/error.ts": "095eb2f095a7868a5a1fcb4cf543560e143c06766c9693f9efb67b0601c242a5",
+    "src/http/errors/throwable-error.ts": "9d57355a464ea142f9ae090918cf2a4c13e0f719027fabf890e3274ea1140db6",
+    "src/http/errors/validation-error.ts": "8835718fafeca5327ada4e6cbb7859f40d7460b98973812f2a012017bde8e2c8",
+    "src/http/handlers/handler-chain.ts": "7963ae4f81949a07b9265abd5c9aeef8f7b6d99260874f9e8d6f82a916d85699",
+    "src/http/handlers/hook-handler.ts": "512ab328695e199c2b9136a83e5cce4d9cfc94a8ead6f748385dc8e46cbc2638",
+    "src/http/handlers/request-validation-handler.ts": "bd1876f4ec4775443a3dfec45a4a46a19c6bfb00d4d5bcab4076bf424ef700d8",
+    "src/http/handlers/response-validation-handler.ts": "398e1eab415272fc6c061cd13d76c58d7517a5d18f0d54b4c4648ad15595a5f7",
+    "src/http/handlers/retry-handler.ts": "eb8df536acbb0e603e6f39014fc73c5df2ca50b9796a6b948a4050bffa4693e4",
+    "src/http/handlers/terminating-handler.ts": "dbdf6a050deca8b54344b53c6a252e04d4872aee45e08a3f70f19e01f27199a6",
+    "src/http/hooks/custom-hook.ts": "906e418d5f24ae314500dea157f0b101a179ff3c16ef8dbb158cce51ed306ee7",
+    "src/http/hooks/hook.ts": "6548e301970d9e7927540b554548d22a9bd5fd47c2bfd7136e9efcc186f8ffff",
+    "src/http/index.ts": "3cfa49aaef43876f9663305a24262d67b223d0327924e513d5eb584a67e448ee",
+    "src/http/serialization/base-serializer.ts": "91fb56323ba2f45af568ee4a02f7657bb7aac29112db52aa3ca71080d8837dce",
+    "src/http/serialization/cookie-serializer.ts": "c1dbf938f2071615638fa4e833b740948b16e28f98f475d38cf6701fa27bafb6",
+    "src/http/serialization/header-serializer.ts": "7409385d6841c188c50e08082d661111e89ed843f2954de973d291c95e948a38",
+    "src/http/serialization/path-serializer.ts": "e6f269f8d87aa3e3119e300899b118a7b03a3fe22c738b19a8ecfca2e750c91d",
+    "src/http/serialization/query-serializer.ts": "3a17740986421462d63a55e3b869ef5bb571a96e7077aec965b63f9a19705d47",
+    "src/http/transport/request-axios-adapter.ts": "5b8b967b797a7999f2b4de0a40c0b43c81d30201591d795d8a919b096b592fd6",
+    "src/http/transport/request-builder.ts": "88afc6354e98d1361a0bed378120ac2e848951c60bb56849d5f64942aa11cdf0",
+    "src/http/transport/request.ts": "988ac664271ccc17eb327250f9e001291d9e8bce484ee958b666c1ebca6573e7",
+    "src/http/transport/transport-hook-adapter.ts": "97e375180a5ffe6328cbea3d84fce1f21b418ca8fbf81dcdb4a01579ca968ee1",
+    "src/http/transport/types.ts": "cdd29e13f1a80dd274254fe0efe9809bdf1987a0f8ea716d2f09534718d14e18",
+    "src/http/types.ts": "2462ac29c4ae77188ff57b75f6c3c36eb16f8f0cbad5236afa4f8e609db3d504",
+    "src/http/utils/content-type.ts": "992a513126a88ddd0243b83bd72e35e5d8c34afa0fcc47344f382631019d83ed",
+    "src/http/utils/line-decoder.ts": "69064c7c0be06a3dc8862a915667342a8f54ecb2d3be08566b7d2ae83c64e16b",
+    "src/http/utils/response-matcher.ts": "7870d29287e4f887348a25bf7bb2c0c6cce076baa6442c1787278bc883dd5a4c",
+    "src/index.ts": "6287659920d8966f6b30dcbe9c9d7ba5f752dc540bee491782603636cd94e274",
+    "src/services/base-service.ts": "02a0d2f8aff6315941712dc1d9b2dfb0242d9a67ba2140010adfacc9dbeedf22",
+    "src/services/signplus/index.ts": "54565067f29c60f99fc8fffd64c43a78b03568323de6bb06534720135dab96eb",
+    "src/services/signplus/models/add-annotation-request.ts": "97d4c0cab90ecd1d21db3d92edb6c8364de30cafc4413bff5d536587e98d8c22",
+    "src/services/signplus/models/add-envelope-document-request.ts": "9c7987006b5b4da640bbe55a8f03fd799664e4fb0009de27ea388f2798e63704",
+    "src/services/signplus/models/add-envelope-signing-steps-request.ts": "2204e484db9c124e6f6505087b54026d601d60cc351820b6a207bf9ae20eb8ec",
+    "src/services/signplus/models/add-template-document-request.ts": "0cce585bf7ff5580271cec546016878ac074a7d6b32be7dca67f1b48ae75af00",
+    "src/services/signplus/models/add-template-signing-steps-request.ts": "b8ea15490e65ff060a1999a05c21adf81ab213b044a0fd757185f1b84c452f8d",
+    "src/services/signplus/models/annotation-checkbox-style.ts": "48492ae7c9eaa0d2ddf0e3de364bc19ee82e52f7e65fcc0af8719a29d37ee478",
+    "src/services/signplus/models/annotation-checkbox.ts": "d55815bca7ae8c7c4096b4be6c747bb178cf1e5a640ac5436a729d11839af229",
+    "src/services/signplus/models/annotation-date-time-format.ts": "243f667b4059d5d4f1f1e1d63ab1101f93f44ca95c777dc9d2e2a04c83b83dbf",
+    "src/services/signplus/models/annotation-date-time.ts": "dfdf2e49d92fa0f95f50e74710be588799c6f7439a53dad616c0e45cd6b411dd",
+    "src/services/signplus/models/annotation-font-family.ts": "08a16df354c33c79bd63a1de2f4a82da9cc44a6fc65766be14b25525a0fdb1b8",
+    "src/services/signplus/models/annotation-font.ts": "884c5c83609b31c3ff926fad16f538bb91d21bf03432dbd895a3dc4ea02e9733",
+    "src/services/signplus/models/annotation-initials.ts": "f711a300ba8c0c147c5f059a7b2c2500813a66d19ff542210fd9a92d3e4d5c92",
+    "src/services/signplus/models/annotation-signature.ts": "443a36aaa9c64b30dd5b47be57ffccf5c081d8e9bb9226372a9ed37827d74c5f",
+    "src/services/signplus/models/annotation-text.ts": "097d93b6a3468a50cb0ee8e35d2612915ea64bceb4cec5d14af2a205551af2b7",
+    "src/services/signplus/models/annotation-type.ts": "6b5b9d106dd38d4e872036092cb5b6cd22c536b21ec0a4b1f92ac3b2fc73b1b3",
+    "src/services/signplus/models/annotation.ts": "a3b3a28f1ff07c5074675970b9ca2087c04eae7e77b313e8009e7a77587f0184",
+    "src/services/signplus/models/attachment-placeholder-file.ts": "9025a3e9e35c68c1e548f8873826558f34548db2f23eb4dd4a16bd5c6bcc33c9",
+    "src/services/signplus/models/attachment-placeholder-request-1.ts": "7bc97ce9081144808bdbbccc9ef5324ea416cdd618484daccc9ba6884f6c8173",
+    "src/services/signplus/models/attachment-placeholder.ts": "64fad3140a3bdfb089b7620582cc7cad73aa63c2c06d7303d37de5137aa00c91",
+    "src/services/signplus/models/attachment-placeholders-per-recipient.ts": "a722917b1d789670362673a5a4c787e9a255a3f24572472142d12c44d73d3788",
+    "src/services/signplus/models/attachment-settings.ts": "5da8d345ff10c8a43ce2cee03722d8bbff9bba7f2ee635698644fb148b021161",
+    "src/services/signplus/models/create-envelope-from-template-request.ts": "73cf3a9145faac2ed93b112c81b9b24f62ad6511a6799da695de7921d5315bb1",
+    "src/services/signplus/models/create-envelope-request.ts": "1879dd573f63c5dc2acecc173d738aabbd1e726c2a04df6214d1680e62002c4e",
+    "src/services/signplus/models/create-template-request.ts": "63fbc64f699d2efa2f6d401c530e253adf9053b3a2d9f1d42be1dbef18f2a66a",
+    "src/services/signplus/models/create-webhook-request.ts": "9e9a7173667c7eb08b32b8d1bcdf93fce258ec30a06ceecba0f20121f870d16d",
+    "src/services/signplus/models/document.ts": "eb256eaee6632bc5e7ccf0632b3ad19edbfb88690f3570ebad01ecf1caeb96b8",
+    "src/services/signplus/models/dynamic-field.ts": "b5d16b18559757e7eeaa2d21b73c17ab03d67e455e918e5601f6363ff7830ccc",
+    "src/services/signplus/models/envelope-attachments.ts": "bf4fce36a59eb54d015c5241460159fb0a759d6d28cee12a02537f8907d5d4e9",
+    "src/services/signplus/models/envelope-flow-type.ts": "fdacb7cfdaf6e14a4391831c7d095f16dae88d785ae8eecb26cee64ce5b30c44",
+    "src/services/signplus/models/envelope-legality-level.ts": "bd189234a88e86d348cf9d127d007b58d1a0ae8d2872f924dcfb39c4ee4a139a",
+    "src/services/signplus/models/envelope-notification.ts": "bcf300ba5673a3f8328b551d6f19994e2d0ab924b14b00e2aa0280f4db6ac212",
+    "src/services/signplus/models/envelope-order-field.ts": "2e59d8a6b8d182cfb15f8df48af1cb939d250108c050e05e27b431c12ba6d2ca",
+    "src/services/signplus/models/envelope-status.ts": "744b61adc7dfe256ad8bf8eb9dcdec6e2aff9e25079f6143460aae95e389275c",
+    "src/services/signplus/models/envelope.ts": "f1c826f3aca90f0ad9b97337364728af546116dca8569afcadecfc018cae86ab",
+    "src/services/signplus/models/index.ts": "ce4941b1ea39a1eb3daf1efbe6d6344d7cc2e7af9d37af031f713567043b4c60",
+    "src/services/signplus/models/list-envelope-document-annotations-response.ts": "114ae1dcc9e68806d579be837092fd7c5faba2cd373f6328780195216a00ffaa",
+    "src/services/signplus/models/list-envelope-documents-response.ts": "4c1006884e00fc190a05a5ce334e343de1878413805d2db0274d0f9fc75633e1",
+    "src/services/signplus/models/list-envelopes-request.ts": "0d94027642c37a659ac61e29e87ca9018b4c52cb9968c4999a70df25e34458e0",
+    "src/services/signplus/models/list-envelopes-response.ts": "b57afe23cc70ed6b2afc69f73b6ff4061d0f97f4eb41bcfc6113c592ec5f26ae",
+    "src/services/signplus/models/list-template-annotations-response.ts": "81f840584888810a125f94d93b6af95bff104a55dfafd76fb4f050be8315140f",
+    "src/services/signplus/models/list-template-document-annotations-response.ts": "14e003681ced8160b7dbde5ad2ecf39e446723bb4dcf6d9b900beb819263962b",
+    "src/services/signplus/models/list-template-documents-response.ts": "8c8c7fdd67629bac0d338970896bbdd2abc3c20d4b86b45eade27b83f605bb53",
+    "src/services/signplus/models/list-templates-request.ts": "91029f0cca455c779ccfe35352a0c575d7f81e2e240125d35c00c6527e2038ae",
+    "src/services/signplus/models/list-templates-response.ts": "0d94736383b17a19498224be98eea77ece5394138a0662f6321f66cd31d25751",
+    "src/services/signplus/models/list-webhooks-request.ts": "9f6d782e052ebaf782ac57db07ca2adb4e448fe8f34d0fe40434bd1adab88016",
+    "src/services/signplus/models/list-webhooks-response.ts": "db846fc99e7c38cbb361841856378206e5e869a9e20a39b620f4345d4188279e",
+    "src/services/signplus/models/page.ts": "6b0d92a56211cb020ad0d5def6f99f40cd98441896f2d5a788a3a0359e63a442",
+    "src/services/signplus/models/recipient-role.ts": "f09d078d0f133c368a8cef1cdb1f62efa774fd86942323ee0c0100a568c89220",
+    "src/services/signplus/models/recipient-verification-type.ts": "b457f3ba34625197f2c32c07a491d363fe7c0b386c3dd4ef523437ca6d6d8a3b",
+    "src/services/signplus/models/recipient-verification.ts": "a9236cf350da85de59e5483d2bd5d5432649da1a41f2dcb1bbbd398c4fbf37c3",
+    "src/services/signplus/models/recipient.ts": "08bd92a9e62d0baeaa3991f746fceb9140f4ea70e4de672edc90dbdab1c8608e",
+    "src/services/signplus/models/rename-envelope-request.ts": "8f20ea32f25fe360bf7fb73ebba2e97c9377a9befffa960ac90d9bfe0eb59830",
+    "src/services/signplus/models/rename-template-request.ts": "483f259ef5ba55ab325f46c1e4444d9aabce617f7d0e4d364f17fac87cf86bb1",
+    "src/services/signplus/models/set-envelope-attachments-placeholders-request.ts": "5da15e0a315e719fac6595444bf9487be3056b5a67da6de84abeb01b4e992c4d",
+    "src/services/signplus/models/set-envelope-attachments-settings-request.ts": "c8fbd034929c184002fc2da755b4ca1e152e66078fb9c3878bfc89c6fc75e2d8",
+    "src/services/signplus/models/set-envelope-comment-request.ts": "39518e9335191762453a07615ba60e9c0e0d7ab8c6da8782cb4a781536125286",
+    "src/services/signplus/models/set-envelope-dynamic-fields-request.ts": "631c1a6f555ee6bd117c757c7efc2ede36d52b4494633e0947ee5a8265fa4564",
+    "src/services/signplus/models/set-envelope-expiration-request.ts": "0186a569b17fc5b0bb6c703783799b994f97724cddf23615d609cad9f682b70b",
+    "src/services/signplus/models/set-envelope-legality-level-request.ts": "fdbc9b4950905e5ad024a2adbc7ef06750ed72c668a77d940b00d7289d0c369d",
+    "src/services/signplus/models/set-template-comment-request.ts": "e65b93391ef355c0cac5e793d170164db8cf6ef0b8da7d37adcad209ca409734",
+    "src/services/signplus/models/signing-step.ts": "f3d1e8dadec6cfe9d90b511478b5168c2c02637582c1af0008f1cf7796101183",
+    "src/services/signplus/models/template-order-field.ts": "9085b4333204c5fb06e53c07ba7bf54fa3beb4f047db78677176642043820b2f",
+    "src/services/signplus/models/template-recipient-role.ts": "76e1348ab71ecebec3a4d60a05089733d4323bfd4482e1db23a657b764704c0a",
+    "src/services/signplus/models/template-recipient.ts": "78b65e1cd258e309440058d877547744e8b2ce97cfaed0554c2d5c186898bbae",
+    "src/services/signplus/models/template-signing-step.ts": "5547af53d782d9e8b47e04c0677d29d31f4569fa373cf24fb17a91eedd21dd6c",
+    "src/services/signplus/models/template.ts": "6ff21b0eab34f9e64a53cacd93a455a89215958fab53b4c90da37236b38dd4ac",
+    "src/services/signplus/models/webhook-event.ts": "447fe1485624efcaee131b252ce6595e4a12826baff1b396947a2ce6c4e8cdc7",
+    "src/services/signplus/models/webhook.ts": "353c68741c92edada15c86bff50071320dc8a65c2fea895ef1c0ba446222a5e7",
+    "src/services/signplus/request-params.ts": "4b3c26ac52795f1a2c4044097713c4d0fa5b0b78a02624d06e7a899ccea39fbe",
+    "src/services/signplus/signplus-service.ts": "788b499b7710b68df3080d13e9def490db9ca41f4306ef9f536f8b67184a1abd",
+    "tsconfig.json": "e579a7e4376879a28f9efc87311e036b44acef879d2851690d26526509856d63"
+  }
 }

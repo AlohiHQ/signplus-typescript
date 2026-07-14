@@ -4,18 +4,36 @@ import { LineDecoder } from '../utils/line-decoder';
 import { Request } from './request';
 import axios, { AxiosRequestConfig, AxiosResponse, isAxiosError } from 'axios';
 
+/**
+ * Interface for HTTP client adapters.
+ * Defines the contract for sending HTTP requests and optionally streaming responses.
+ */
 export interface HttpAdapter {
   send(): Promise<HttpResponse>;
 }
 
+/**
+ * Axios-based HTTP adapter for executing requests.
+ * Wraps the Axios library to provide a consistent interface for both regular and streaming requests.
+ * Handles headers, cookies, timeouts, and error responses according to Axios conventions.
+ *
+ * @template T - The expected response type
+ */
 export class RequestAxiosAdapter<T> implements HttpAdapter {
   private config: AxiosRequestConfig = {};
 
   constructor(private request: Request) {
     this.setHeaders();
+    this.setCookies();
     this.setTimeout();
   }
 
+  /**
+   * Executes the HTTP request and returns the response.
+   * Fetches the full response body as an ArrayBuffer.
+   *
+   * @returns A promise resolving to the HTTP response with metadata and body
+   */
   public async send(): Promise<HttpResponse<T>> {
     const response = await this.executeCall({
       responseType: 'arraybuffer',
@@ -34,10 +52,20 @@ export class RequestAxiosAdapter<T> implements HttpAdapter {
 
     return {
       metadata,
-      raw: response.data.buffer.slice(response.data.byteOffset, response.data.byteOffset + response.data.byteLength),
+      raw: response.data.buffer.slice(
+        response.data.byteOffset,
+        response.data.byteOffset + response.data.byteLength,
+      ),
     };
   }
 
+  /**
+   * Executes the HTTP request as a stream, yielding chunks as they arrive.
+   * Uses LineDecoder to split the stream into lines for server-sent events or similar protocols.
+   *
+   * @returns An async generator yielding HTTP response chunks
+   * @throws Error if responseHeaders is enabled (streaming not supported with responseHeaders)
+   */
   public async *stream(): AsyncGenerator<HttpResponse<T>> {
     const response = await this.executeCall({
       responseType: 'stream',
@@ -87,7 +115,11 @@ export class RequestAxiosAdapter<T> implements HttpAdapter {
     };
 
     try {
-      if (this.request.method === 'POST' || this.request.method === 'PUT' || this.request.method === 'PATCH') {
+      if (
+        this.request.method === 'POST' ||
+        this.request.method === 'PUT' ||
+        this.request.method === 'PATCH'
+      ) {
         return await method(this.request.constructFullUrl(), body, finalConfig);
       } else {
         return await method(this.request.constructFullUrl(), finalConfig);
@@ -101,7 +133,11 @@ export class RequestAxiosAdapter<T> implements HttpAdapter {
     }
   }
 
-  private getMethod(): (url: string, data?: any, config?: AxiosRequestConfig) => Promise<AxiosResponse> {
+  private getMethod(): (
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig,
+  ) => Promise<AxiosResponse> {
     if (this.request.method === 'POST') {
       return axios.post;
     } else if (this.request.method === 'GET') {
@@ -114,6 +150,8 @@ export class RequestAxiosAdapter<T> implements HttpAdapter {
       return axios.patch;
     } else if (this.request.method === 'HEAD') {
       return axios.head;
+    } else if (this.request.method === 'OPTIONS') {
+      return axios.options;
     }
     throw new Error('Unsupported HTTP method');
   }
@@ -131,6 +169,26 @@ export class RequestAxiosAdapter<T> implements HttpAdapter {
     this.config = {
       ...this.config,
       headers: headersRecord,
+    };
+  }
+
+  private setCookies(): void {
+    const cookies = this.request.getCookies();
+    if (!cookies || Object.keys(cookies).length === 0) {
+      return;
+    }
+
+    // Serialize cookies as a Cookie header
+    const cookieString = Object.entries(cookies)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('; ');
+
+    this.config = {
+      ...this.config,
+      headers: {
+        ...this.config.headers,
+        Cookie: cookieString,
+      },
     };
   }
 

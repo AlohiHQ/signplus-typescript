@@ -11,7 +11,12 @@ import {
   annotationInitialsRequest,
   annotationInitialsResponse,
 } from './annotation-initials';
-import { AnnotationText, annotationText, annotationTextRequest, annotationTextResponse } from './annotation-text';
+import {
+  AnnotationText,
+  annotationText,
+  annotationTextRequest,
+  annotationTextResponse,
+} from './annotation-text';
 import {
   AnnotationDateTime,
   annotationDateTime,
@@ -26,7 +31,9 @@ import {
 } from './annotation-checkbox';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the Annotation model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const annotation = z.lazy(() => {
   return z.object({
@@ -70,8 +77,9 @@ export const annotation = z.lazy(() => {
 export type Annotation = z.infer<typeof annotation>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the Annotation application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const annotationResponse = z.lazy(() => {
   return z
@@ -112,8 +120,9 @@ export const annotationResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the Annotation application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const annotationRequest = z.lazy(() => {
   return z
