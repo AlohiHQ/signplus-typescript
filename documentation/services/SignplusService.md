@@ -85,12 +85,12 @@ import { CreateEnvelopeRequest, EnvelopeLegalityLevel, Signplus } from '@alohi/s
   const createEnvelopeRequest: CreateEnvelopeRequest = {
     name: 'name',
     legalityLevel: envelopeLegalityLevel,
-    expiresAt: 8,
+    expiresAt: 9,
     comment: 'comment',
     sandbox: true,
   };
 
-  const { data } = await signplus.signplus.createEnvelope(createEnvelopeRequest);
+  const data = await signplus.signplus.createEnvelope(createEnvelopeRequest);
 
   console.log(data);
 })();
@@ -130,7 +130,10 @@ import { CreateEnvelopeFromTemplateRequest, Signplus } from '@alohi/signplus-typ
     sandbox: true,
   };
 
-  const { data } = await signplus.signplus.createEnvelopeFromTemplate('template_id', createEnvelopeFromTemplateRequest);
+  const data = await signplus.signplus.createEnvelopeFromTemplate(
+    'template_id',
+    createEnvelopeFromTemplateRequest,
+  );
 
   console.log(data);
 })();
@@ -156,7 +159,12 @@ List envelopes
 **Example Usage Code Snippet**
 
 ```typescript
-import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } from '@alohi/signplus-typescript';
+import {
+  EnvelopeOrderField,
+  EnvelopeStatus,
+  ListEnvelopesRequest,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -175,11 +183,11 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     statuses: [envelopeStatus],
     folderIds: ['folder_ids'],
     onlyRootFolder: true,
-    dateFrom: 5,
-    dateTo: 9,
+    dateFrom: 3,
+    dateTo: 2,
     uid: 'uid',
-    first: 9,
-    last: 7,
+    first: 6,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: envelopeOrderField,
@@ -187,7 +195,7 @@ import { EnvelopeOrderField, EnvelopeStatus, ListEnvelopesRequest, Signplus } fr
     includeTrash: true,
   };
 
-  const { data } = await signplus.signplus.listEnvelopes(listEnvelopesRequest);
+  const data = await signplus.signplus.listEnvelopes(listEnvelopesRequest);
 
   console.log(data);
 })();
@@ -220,7 +228,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getEnvelope('envelope_id');
+  const data = await signplus.signplus.getEnvelope('envelope_id');
 
   console.log(data);
 })();
@@ -249,7 +257,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.deleteEnvelope('envelope_id');
+  const data = await signplus.signplus.deleteEnvelope('envelope_id');
 
   console.log(data);
 })();
@@ -283,7 +291,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.downloadEnvelopeSignedDocuments('envelope_id', {
+  const data = await signplus.signplus.downloadEnvelopeSignedDocuments('envelope_id', {
     certificateOfCompletion: true,
   });
 
@@ -318,7 +326,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.downloadEnvelopeCertificate('envelope_id');
+  const data = await signplus.signplus.downloadEnvelopeCertificate('envelope_id');
 
   console.log(data);
 })();
@@ -352,7 +360,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getEnvelopeDocument('envelope_id', 'document_id');
+  const data = await signplus.signplus.getEnvelopeDocument('envelope_id', 'document_id');
 
   console.log(data);
 })();
@@ -385,7 +393,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getEnvelopeDocuments('envelope_id');
+  const data = await signplus.signplus.getEnvelopeDocuments('envelope_id');
 
   console.log(data);
 })();
@@ -423,7 +431,10 @@ import { AddEnvelopeDocumentRequest, Signplus } from '@alohi/signplus-typescript
     file: new ArrayBuffer(0),
   };
 
-  const { data } = await signplus.signplus.addEnvelopeDocument('envelope_id', addEnvelopeDocumentRequest);
+  const data = await signplus.signplus.addEnvelopeDocument(
+    'envelope_id',
+    addEnvelopeDocumentRequest,
+  );
 
   console.log(data);
 })();
@@ -450,7 +461,11 @@ Set envelope dynamic fields
 **Example Usage Code Snippet**
 
 ```typescript
-import { DynamicField, SetEnvelopeDynamicFieldsRequest, Signplus } from '@alohi/signplus-typescript';
+import {
+  DynamicField,
+  SetEnvelopeDynamicFieldsRequest,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -466,7 +481,10 @@ import { DynamicField, SetEnvelopeDynamicFieldsRequest, Signplus } from '@alohi/
     dynamicFields: [dynamicField],
   };
 
-  const { data } = await signplus.signplus.setEnvelopeDynamicFields('envelope_id', setEnvelopeDynamicFieldsRequest);
+  const data = await signplus.signplus.setEnvelopeDynamicFields(
+    'envelope_id',
+    setEnvelopeDynamicFieldsRequest,
+  );
 
   console.log(data);
 })();
@@ -493,7 +511,15 @@ Add envelope signing steps
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddEnvelopeSigningStepsRequest, SigningStep, Signplus } from '@alohi/signplus-typescript';
+import {
+  AddEnvelopeSigningStepsRequest,
+  Recipient,
+  RecipientRole,
+  RecipientVerification,
+  RecipientVerificationType,
+  SigningStep,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -526,7 +552,10 @@ import { AddEnvelopeSigningStepsRequest, SigningStep, Signplus } from '@alohi/si
     signingSteps: [signingStep],
   };
 
-  const { data } = await signplus.signplus.addEnvelopeSigningSteps('envelope_id', addEnvelopeSigningStepsRequest);
+  const data = await signplus.signplus.addEnvelopeSigningSteps(
+    'envelope_id',
+    addEnvelopeSigningStepsRequest,
+  );
 
   console.log(data);
 })();
@@ -553,7 +582,11 @@ Set envelope attachment settings
 **Example Usage Code Snippet**
 
 ```typescript
-import { AttachmentSettings, SetEnvelopeAttachmentsSettingsRequest, Signplus } from '@alohi/signplus-typescript';
+import {
+  AttachmentSettings,
+  SetEnvelopeAttachmentsSettingsRequest,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -568,7 +601,7 @@ import { AttachmentSettings, SetEnvelopeAttachmentsSettingsRequest, Signplus } f
     settings: attachmentSettings,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeAttachmentsSettings(
+  const data = await signplus.signplus.setEnvelopeAttachmentsSettings(
     'envelope_id',
     setEnvelopeAttachmentsSettingsRequest,
   );
@@ -622,7 +655,7 @@ import {
     placeholders: [attachmentPlaceholderRequest1],
   };
 
-  const { data } = await signplus.signplus.setEnvelopeAttachmentsPlaceholders(
+  const data = await signplus.signplus.setEnvelopeAttachmentsPlaceholders(
     'envelope_id',
     setEnvelopeAttachmentsPlaceholdersRequest,
   );
@@ -659,7 +692,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getAttachmentFile('envelope_id', 'file_id');
+  const data = await signplus.signplus.getAttachmentFile('envelope_id', 'file_id');
 
   console.log(data);
 })();
@@ -692,7 +725,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.sendEnvelope('envelope_id');
+  const data = await signplus.signplus.sendEnvelope('envelope_id');
 
   console.log(data);
 })();
@@ -725,7 +758,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.duplicateEnvelope('envelope_id');
+  const data = await signplus.signplus.duplicateEnvelope('envelope_id');
 
   console.log(data);
 })();
@@ -758,7 +791,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.voidEnvelope('envelope_id');
+  const data = await signplus.signplus.voidEnvelope('envelope_id');
 
   console.log(data);
 })();
@@ -796,7 +829,7 @@ import { RenameEnvelopeRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.renameEnvelope('envelope_id', renameEnvelopeRequest);
+  const data = await signplus.signplus.renameEnvelope('envelope_id', renameEnvelopeRequest);
 
   console.log(data);
 })();
@@ -834,7 +867,7 @@ import { SetEnvelopeCommentRequest, Signplus } from '@alohi/signplus-typescript'
     comment: 'comment',
   };
 
-  const { data } = await signplus.signplus.setEnvelopeComment('envelope_id', setEnvelopeCommentRequest);
+  const data = await signplus.signplus.setEnvelopeComment('envelope_id', setEnvelopeCommentRequest);
 
   console.log(data);
 })();
@@ -871,10 +904,10 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 3,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeNotification('envelope_id', envelopeNotification);
+  const data = await signplus.signplus.setEnvelopeNotification('envelope_id', envelopeNotification);
 
   console.log(data);
 })();
@@ -909,10 +942,13 @@ import { SetEnvelopeExpirationRequest, Signplus } from '@alohi/signplus-typescri
   });
 
   const setEnvelopeExpirationRequest: SetEnvelopeExpirationRequest = {
-    expiresAt: 123,
+    expiresAt: 10,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeExpirationDate('envelope_id', setEnvelopeExpirationRequest);
+  const data = await signplus.signplus.setEnvelopeExpirationDate(
+    'envelope_id',
+    setEnvelopeExpirationRequest,
+  );
 
   console.log(data);
 })();
@@ -939,7 +975,11 @@ Set envelope legality level
 **Example Usage Code Snippet**
 
 ```typescript
-import { EnvelopeLegalityLevel, SetEnvelopeLegalityLevelRequest, Signplus } from '@alohi/signplus-typescript';
+import {
+  EnvelopeLegalityLevel,
+  SetEnvelopeLegalityLevelRequest,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -952,7 +992,10 @@ import { EnvelopeLegalityLevel, SetEnvelopeLegalityLevelRequest, Signplus } from
     legalityLevel: envelopeLegalityLevel,
   };
 
-  const { data } = await signplus.signplus.setEnvelopeLegalityLevel('envelope_id', setEnvelopeLegalityLevelRequest);
+  const data = await signplus.signplus.setEnvelopeLegalityLevel(
+    'envelope_id',
+    setEnvelopeLegalityLevelRequest,
+  );
 
   console.log(data);
 })();
@@ -985,7 +1028,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getEnvelopeAnnotations('envelope_id');
+  const data = await signplus.signplus.getEnvelopeAnnotations('envelope_id');
 
   console.log(data);
 })();
@@ -1019,7 +1062,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getEnvelopeDocumentAnnotations('envelope_id', 'document_id');
+  const data = await signplus.signplus.getEnvelopeDocumentAnnotations('envelope_id', 'document_id');
 
   console.log(data);
 })();
@@ -1049,7 +1092,11 @@ Add envelope annotation
 import {
   AddAnnotationRequest,
   AnnotationCheckbox,
+  AnnotationCheckboxStyle,
   AnnotationDateTime,
+  AnnotationDateTimeFormat,
+  AnnotationFont,
+  AnnotationFontFamily,
   AnnotationInitials,
   AnnotationSignature,
   AnnotationText,
@@ -1081,8 +1128,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 5.96,
-    color: 8.73,
+    size: 4.09,
+    color: 7.73,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1092,12 +1139,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 0.26,
+    size: 0.76,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 1,
+    timestamp: 5,
     format: annotationDateTimeFormat,
   };
 
@@ -1111,11 +1158,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 2,
-    x: 1.99,
-    y: 8.2,
-    width: 4.89,
-    height: 9.43,
+    page: 10,
+    x: 0.03,
+    y: 8.22,
+    width: 3.95,
+    height: 9.1,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1125,7 +1172,7 @@ import {
     checkbox: annotationCheckbox,
   };
 
-  const { data } = await signplus.signplus.addEnvelopeAnnotation('envelope_id', addAnnotationRequest);
+  const data = await signplus.signplus.addEnvelopeAnnotation('envelope_id', addAnnotationRequest);
 
   console.log(data);
 })();
@@ -1155,7 +1202,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.deleteEnvelopeAnnotation('envelope_id', 'annotation_id');
+  const data = await signplus.signplus.deleteEnvelopeAnnotation('envelope_id', 'annotation_id');
 
   console.log(data);
 })();
@@ -1192,7 +1239,7 @@ import { CreateTemplateRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.createTemplate(createTemplateRequest);
+  const data = await signplus.signplus.createTemplate(createTemplateRequest);
 
   console.log(data);
 })();
@@ -1231,15 +1278,15 @@ import { ListTemplatesRequest, Signplus, TemplateOrderField } from '@alohi/signp
     name: 'name',
     tags: ['tags'],
     ids: ['ids'],
-    first: 1,
-    last: 6,
+    first: 8,
+    last: 5,
     after: 'after',
     before: 'before',
     orderField: templateOrderField,
     ascending: true,
   };
 
-  const { data } = await signplus.signplus.listTemplates(listTemplatesRequest);
+  const data = await signplus.signplus.listTemplates(listTemplatesRequest);
 
   console.log(data);
 })();
@@ -1272,7 +1319,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getTemplate('template_id');
+  const data = await signplus.signplus.getTemplate('template_id');
 
   console.log(data);
 })();
@@ -1301,7 +1348,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.deleteTemplate('template_id');
+  const data = await signplus.signplus.deleteTemplate('template_id');
 
   console.log(data);
 })();
@@ -1334,7 +1381,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.duplicateTemplate('template_id');
+  const data = await signplus.signplus.duplicateTemplate('template_id');
 
   console.log(data);
 })();
@@ -1372,7 +1419,10 @@ import { AddTemplateDocumentRequest, Signplus } from '@alohi/signplus-typescript
     file: new ArrayBuffer(0),
   };
 
-  const { data } = await signplus.signplus.addTemplateDocument('template_id', addTemplateDocumentRequest);
+  const data = await signplus.signplus.addTemplateDocument(
+    'template_id',
+    addTemplateDocumentRequest,
+  );
 
   console.log(data);
 })();
@@ -1406,7 +1456,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getTemplateDocument('template_id', 'document_id');
+  const data = await signplus.signplus.getTemplateDocument('template_id', 'document_id');
 
   console.log(data);
 })();
@@ -1439,7 +1489,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getTemplateDocuments('template_id');
+  const data = await signplus.signplus.getTemplateDocuments('template_id');
 
   console.log(data);
 })();
@@ -1466,7 +1516,13 @@ Add template signing steps
 **Example Usage Code Snippet**
 
 ```typescript
-import { AddTemplateSigningStepsRequest, Signplus, TemplateSigningStep } from '@alohi/signplus-typescript';
+import {
+  AddTemplateSigningStepsRequest,
+  Signplus,
+  TemplateRecipient,
+  TemplateRecipientRole,
+  TemplateSigningStep,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -1491,7 +1547,10 @@ import { AddTemplateSigningStepsRequest, Signplus, TemplateSigningStep } from '@
     signingSteps: [templateSigningStep],
   };
 
-  const { data } = await signplus.signplus.addTemplateSigningSteps('template_id', addTemplateSigningStepsRequest);
+  const data = await signplus.signplus.addTemplateSigningSteps(
+    'template_id',
+    addTemplateSigningStepsRequest,
+  );
 
   console.log(data);
 })();
@@ -1529,7 +1588,7 @@ import { RenameTemplateRequest, Signplus } from '@alohi/signplus-typescript';
     name: 'name',
   };
 
-  const { data } = await signplus.signplus.renameTemplate('template_id', renameTemplateRequest);
+  const data = await signplus.signplus.renameTemplate('template_id', renameTemplateRequest);
 
   console.log(data);
 })();
@@ -1567,7 +1626,7 @@ import { SetTemplateCommentRequest, Signplus } from '@alohi/signplus-typescript'
     comment: 'comment',
   };
 
-  const { data } = await signplus.signplus.setTemplateComment('template_id', setTemplateCommentRequest);
+  const data = await signplus.signplus.setTemplateComment('template_id', setTemplateCommentRequest);
 
   console.log(data);
 })();
@@ -1604,10 +1663,10 @@ import { EnvelopeNotification, Signplus } from '@alohi/signplus-typescript';
   const envelopeNotification: EnvelopeNotification = {
     subject: 'subject',
     message: 'message',
-    reminderInterval: 1,
+    reminderInterval: 3,
   };
 
-  const { data } = await signplus.signplus.setTemplateNotification('template_id', envelopeNotification);
+  const data = await signplus.signplus.setTemplateNotification('template_id', envelopeNotification);
 
   console.log(data);
 })();
@@ -1640,7 +1699,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getTemplateAnnotations('template_id');
+  const data = await signplus.signplus.getTemplateAnnotations('template_id');
 
   console.log(data);
 })();
@@ -1674,7 +1733,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.getDocumentTemplateAnnotations('template_id', 'document_id');
+  const data = await signplus.signplus.getDocumentTemplateAnnotations('template_id', 'document_id');
 
   console.log(data);
 })();
@@ -1704,7 +1763,11 @@ Add template annotation
 import {
   AddAnnotationRequest,
   AnnotationCheckbox,
+  AnnotationCheckboxStyle,
   AnnotationDateTime,
+  AnnotationDateTimeFormat,
+  AnnotationFont,
+  AnnotationFontFamily,
   AnnotationInitials,
   AnnotationSignature,
   AnnotationText,
@@ -1736,8 +1799,8 @@ import {
   };
 
   const annotationText: AnnotationText = {
-    size: 5.96,
-    color: 8.73,
+    size: 4.09,
+    color: 7.73,
     value: 'value',
     tooltip: 'tooltip',
     dynamicFieldName: 'dynamic_field_name',
@@ -1747,12 +1810,12 @@ import {
   const annotationDateTimeFormat = AnnotationDateTimeFormat.DMY_NUMERIC_SLASH;
 
   const annotationDateTime: AnnotationDateTime = {
-    size: 0.26,
+    size: 0.76,
     font: annotationFont,
     color: 'color',
     autoFill: true,
     timezone: 'timezone',
-    timestamp: 1,
+    timestamp: 5,
     format: annotationDateTimeFormat,
   };
 
@@ -1766,11 +1829,11 @@ import {
   const addAnnotationRequest: AddAnnotationRequest = {
     recipientId: 'recipient_id',
     documentId: 'document_id',
-    page: 2,
-    x: 1.99,
-    y: 8.2,
-    width: 4.89,
-    height: 9.43,
+    page: 10,
+    x: 0.03,
+    y: 8.22,
+    width: 3.95,
+    height: 9.1,
     required: true,
     type: annotationType,
     signature: annotationSignature,
@@ -1780,7 +1843,7 @@ import {
     checkbox: annotationCheckbox,
   };
 
-  const { data } = await signplus.signplus.addTemplateAnnotation('template_id', addAnnotationRequest);
+  const data = await signplus.signplus.addTemplateAnnotation('template_id', addAnnotationRequest);
 
   console.log(data);
 })();
@@ -1810,7 +1873,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.deleteTemplateAnnotation('template_id', 'annotation_id');
+  const data = await signplus.signplus.deleteTemplateAnnotation('template_id', 'annotation_id');
 
   console.log(data);
 })();
@@ -1837,7 +1900,11 @@ Set template attachment settings
 **Example Usage Code Snippet**
 
 ```typescript
-import { AttachmentSettings, SetEnvelopeAttachmentsSettingsRequest, Signplus } from '@alohi/signplus-typescript';
+import {
+  AttachmentSettings,
+  SetEnvelopeAttachmentsSettingsRequest,
+  Signplus,
+} from '@alohi/signplus-typescript';
 
 (async () => {
   const signplus = new Signplus({
@@ -1852,7 +1919,7 @@ import { AttachmentSettings, SetEnvelopeAttachmentsSettingsRequest, Signplus } f
     settings: attachmentSettings,
   };
 
-  const { data } = await signplus.signplus.setTemplateAttachmentsSettings(
+  const data = await signplus.signplus.setTemplateAttachmentsSettings(
     'template_id',
     setEnvelopeAttachmentsSettingsRequest,
   );
@@ -1906,7 +1973,7 @@ import {
     placeholders: [attachmentPlaceholderRequest1],
   };
 
-  const { data } = await signplus.signplus.setTemplateAttachmentsPlaceholders(
+  const data = await signplus.signplus.setTemplateAttachmentsPlaceholders(
     'template_id',
     setEnvelopeAttachmentsPlaceholdersRequest,
   );
@@ -1949,7 +2016,7 @@ import { CreateWebhookRequest, Signplus, WebhookEvent } from '@alohi/signplus-ty
     target: 'target',
   };
 
-  const { data } = await signplus.signplus.createWebhook(createWebhookRequest);
+  const data = await signplus.signplus.createWebhook(createWebhookRequest);
 
   console.log(data);
 })();
@@ -1989,7 +2056,7 @@ import { ListWebhooksRequest, Signplus, WebhookEvent } from '@alohi/signplus-typ
     event: webhookEvent,
   };
 
-  const { data } = await signplus.signplus.listWebhooks(listWebhooksRequest);
+  const data = await signplus.signplus.listWebhooks(listWebhooksRequest);
 
   console.log(data);
 })();
@@ -2018,7 +2085,7 @@ import { Signplus } from '@alohi/signplus-typescript';
     token: 'YOUR_TOKEN',
   });
 
-  const { data } = await signplus.signplus.deleteWebhook('webhook_id');
+  const data = await signplus.signplus.deleteWebhook('webhook_id');
 
   console.log(data);
 })();

@@ -1,13 +1,13 @@
 {
   "name": "signplus",
-  "version": "2.4.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@alohi/signplus-typescript": "file:../",
-    "zod": "3.22.0"
+    "zod": "3.22.3"
   },
   "scripts": {
-    "setup": "npm --prefix ../ install && npm --prefix ../ run build && npm install",
+    "setup": "npm --prefix ../ install && npm --prefix ../ run build && npm install && tsc",
     "start": "tsc && node dist/index.js",
     "dev": "ts-node src/index.ts"
   },

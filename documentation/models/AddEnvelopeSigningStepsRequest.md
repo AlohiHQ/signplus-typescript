@@ -2,6 +2,6 @@
 
 **Properties**
 
-| Name         | Type          | Required | Description           |
-| :----------- | :------------ | :------- | :-------------------- |
-| signingSteps | SigningStep[] | ❌       | List of signing steps |
+| Name         | Type                            | Required | Description           |
+| :----------- | :------------------------------ | :------- | :-------------------- |
+| signingSteps | [SigningStep](SigningStep.md)[] | ❌       | List of signing steps |

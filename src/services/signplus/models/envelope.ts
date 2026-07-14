@@ -15,7 +15,9 @@ import {
 } from './envelope-attachments';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the Envelope model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const envelope = z.lazy(() => {
   return z.object({
@@ -61,8 +63,9 @@ export const envelope = z.lazy(() => {
 export type Envelope = z.infer<typeof envelope>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the Envelope application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const envelopeResponse = z.lazy(() => {
   return z
@@ -105,8 +108,9 @@ export const envelopeResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the Envelope application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const envelopeRequest = z.lazy(() => {
   return z

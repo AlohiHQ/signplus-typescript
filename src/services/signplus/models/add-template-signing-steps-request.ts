@@ -7,7 +7,9 @@ import {
 } from './template-signing-step';
 
 /**
- * The shape of the model inside the application code - what the users use
+ * Zod schema for the AddTemplateSigningStepsRequest model.
+ * Defines the structure and validation rules for this data type.
+ * This is the shape used in application code - what developers interact with.
  */
 export const addTemplateSigningStepsRequest = z.lazy(() => {
   return z.object({
@@ -23,8 +25,9 @@ export const addTemplateSigningStepsRequest = z.lazy(() => {
 export type AddTemplateSigningStepsRequest = z.infer<typeof addTemplateSigningStepsRequest>;
 
 /**
- * The shape of the model mapping from the api schema into the application shape.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping API responses to the AddTemplateSigningStepsRequest application shape.
+ * Handles any property name transformations from the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const addTemplateSigningStepsRequestResponse = z.lazy(() => {
   return z
@@ -37,8 +40,9 @@ export const addTemplateSigningStepsRequestResponse = z.lazy(() => {
 });
 
 /**
- * The shape of the model mapping from the application shape into the api schema.
- * Is equal to application shape if all property names match the api schema
+ * Zod schema for mapping the AddTemplateSigningStepsRequest application shape to API requests.
+ * Handles any property name transformations required by the API schema.
+ * If property names match the API schema exactly, this is identical to the application shape.
  */
 export const addTemplateSigningStepsRequestRequest = z.lazy(() => {
   return z

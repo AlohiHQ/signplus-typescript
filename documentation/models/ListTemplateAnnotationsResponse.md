@@ -2,6 +2,6 @@
 
 **Properties**
 
-| Name        | Type         | Required | Description |
-| :---------- | :----------- | :------- | :---------- |
-| annotations | Annotation[] | ❌       |             |
+| Name        | Type                          | Required | Description |
+| :---------- | :---------------------------- | :------- | :---------- |
+| annotations | [Annotation](Annotation.md)[] | ❌       |             |
